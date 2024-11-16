@@ -150,27 +150,27 @@
         }
       },
       "root": "projects/user",
-      "sourceRoot": "projects/user/src",
+      "sourceRoot": "projects/user/frontend/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/user",
-            "index": "projects/user/src/index.html",
-            "browser": "projects/user/src/main.ts",
+            "index": "projects/user/frontend/src/index.html",
+            "browser": "projects/user/frontend/src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "projects/user/tsconfig.app.json",
+            "tsConfig": "projects/user/frontend/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/user/public"
+                "input": "projects/user/frontend/public"
               }
             ],
             "styles": [
-              "projects/user/src/styles.css"
+              "projects/user/frontend/src/styles.css"
             ],
             "scripts": []
           },
@@ -220,15 +220,15 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "projects/user/tsconfig.spec.json",
+            "tsConfig": "projects/user/frontend/tsconfig.spec.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/user/public"
+                "input": "projects/user/frontend/public"
               }
             ],
             "styles": [
-              "projects/user/src/styles.css"
+              "projects/user/frontend/src/styles.css"
             ],
             "scripts": []
           }
