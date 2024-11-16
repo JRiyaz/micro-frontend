@@ -95,3 +95,17 @@ pnpm add @angular-architects/native-federation
 ```sh
 ng g @angular-architects/native-federation:init --project shell --port 4200 --type dynamic-host
 ```
+
+# Initialize Native Federation in user app as remote
+
+```sh
+ng g @angular-architects/native-federation:init --project user --port 4210 --type remote
+```
+
+change name from `user` to `user-app` under user application in federation.config.js file
+
+```json
+name: 'user-app',
+```
+
+Also move `federation.config.js` file inside frontend folder, if it got created outside while initializing federation.
