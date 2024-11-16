@@ -55,3 +55,21 @@ Check if there are any other files or folders has not moved to frontend director
     2. update extends and outDir property path in (user application) tsconfig.app.json and tsconfig.spec.json files
         "extends": "../../tsconfig.json", ==> "extends": "../../../tsconfig.json",
         "outDir": "../../out-tsc/app", ==> "outDir": "../../../out-tsc/app
+
+# Create start command for individual applications in (package.json)
+
+```sh
+pnpm start:shell
+
+or
+
+ng serve shell
+```
+
+```sh
+pnpm start:user
+
+or
+
+ng serve user
+```
