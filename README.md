@@ -109,3 +109,11 @@ name: 'user-app',
 ```
 
 Also move `federation.config.js` file inside frontend folder, if it got created outside while initializing federation.
+
+# Change the port of user app in shell app in projects\shell\public\federation.manifest.json file
+
+```json
+{
+	"user-app": "http://localhost:4210/remoteEntry.json"
+}
+```
