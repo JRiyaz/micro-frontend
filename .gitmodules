@@ -2,3 +2,7 @@
 	path = projects/shell
 	url = https://github.com/JRiyaz/inventory-shell.git
 	branch = main
+[submodule "projects/user"]
+	path = projects/user
+	url = https://github.com/JRiyaz/inventory-user.git
+	branch = main

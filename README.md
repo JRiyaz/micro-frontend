@@ -26,3 +26,16 @@ cd projects/shell && git init && git add . && git commit -m "Initial commit"
 ```sh
 cd ../.. && git submodule add -b main https://github.com/JRiyaz/inventory-shell.git projects/shell
 ```
+# Create user application
+
+```sh
+ng generate application user --standalone -s -t --skip-tests --style=css --ssr=N
+```
+
+```sh
+cd projects/user && git init && git add . && git commit -m "Initial commit"
+```
+
+```sh
+cd ../.. && git submodule add -b main https://github.com/JRiyaz/inventory-user.git projects/user
+```
