@@ -83,3 +83,9 @@ pnpm add -D concurrently
 ```sh
 pnpm run:all (or) pnpm start:all
 ```
+
+# Add Native Federation
+
+```sh
+pnpm add @angular-architects/native-federation
+```
