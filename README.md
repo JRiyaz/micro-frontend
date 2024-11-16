@@ -117,3 +117,20 @@ Also move `federation.config.js` file inside frontend folder, if it got created 
 	"user-app": "http://localhost:4210/remoteEntry.json"
 }
 ```
+
+# Enable Zone-less
+
+File: src/app/app.config.ts
+```js
+import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideExperimentalZonelessChangeDetection(), provideRouter(routes)]
+};
+```
+
+Remove zone.js in angular.json file and uninstall zone.js
+
+```sh
+pnpm remove zone.js
+```
