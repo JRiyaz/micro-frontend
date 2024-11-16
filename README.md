@@ -73,3 +73,13 @@ or
 
 ng serve user
 ```
+
+# Create Run All command in (package.json) using concurrently
+
+```sh
+pnpm add -D concurrently
+```
+
+```sh
+pnpm run:all (or) pnpm start:all
+```
