@@ -1,0 +1,4 @@
+[submodule "projects/shell"]
+	path = projects/shell
+	url = https://github.com/JRiyaz/inventory-shell.git
+	branch = main
