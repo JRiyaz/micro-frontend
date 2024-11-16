@@ -89,3 +89,9 @@ pnpm run:all (or) pnpm start:all
 ```sh
 pnpm add @angular-architects/native-federation
 ```
+
+# Initialize Native Federation in shell app as dynamic-host
+
+```sh
+ng g @angular-architects/native-federation:init --project shell --port 4200 --type dynamic-host
+```
