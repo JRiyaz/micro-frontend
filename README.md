@@ -203,3 +203,9 @@ Add bootstrap css and js files in angular.json file
 ```sh
 ng g library shared-ui --standalone
 ```
+
+# Upgrade Angular version to 19
+
+```sh
+ng update @angular/core@19 @angular/cli@19
+```
