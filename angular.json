@@ -172,7 +172,7 @@
 					"skipTests": true
 				}
 			},
-			"root": "projects/user",
+			"root": "projects/user/frontend",
 			"sourceRoot": "projects/user/frontend/src",
 			"prefix": "app",
 			"architect": {
