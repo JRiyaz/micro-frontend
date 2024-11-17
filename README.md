@@ -197,3 +197,9 @@ Add bootstrap css and js files in angular.json file
     ]
 }
 ```
+
+# Create a shared library
+
+```sh
+ng g library shared-ui --standalone
+```
