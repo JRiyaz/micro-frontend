@@ -4,6 +4,29 @@
 ng config -g cli.packageManager pnpm
 ```
 
+# Edit .editorconfig file and add the following
+
+```apacheconf
+# Editor configuration, see https://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{js,jsx,ts,tsx,vue}]
+quote_type = single
+ij_typescript_use_double_quotes = false
+ij_typescript_spaces_within_imports = true
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+```
+
 # Angular CLI version used
 
 18.2.12
