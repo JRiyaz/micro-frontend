@@ -177,3 +177,23 @@ Use below command to bypassed husky hook (--no-verify or -n)
 ```sh
 git commit -m "<message>" -n
 ```
+
+# Add Bootstrap
+
+```sh
+pnpm add bootstrap@latest
+```
+
+Add bootstrap css and js files in angular.json file
+
+```json
+"options": {
+    "styles": [
+        "projects/shell/src/styles.css",
+        "node_modules/bootstrap/dist/css/bootstrap.css"
+    ],
+    "scripts": [
+        "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+    ]
+}
+```
