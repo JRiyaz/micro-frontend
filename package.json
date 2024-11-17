@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:shell": "ng serve shell",
-    "start:user": "ng serve user",
-    "start:all": "concurrently \"ng serve shell --port 4200\" \"ng serve user --port 4210\" ",
-    "run:all": "concurrently \"ng serve shell --port 4200\" \"ng serve user --port 4210\" ",
+    "start:shell": "ng serve --project shell",
+    "start:user": "ng serve --project user",
+    "start:all": "concurrently \"ng serve --project shell\" \"ng serve --project user\" ",
+    "run:all": "concurrently \"ng serve --project shell\" \"ng serve --project user\" ",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
