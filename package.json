@@ -10,7 +10,9 @@
     "run:all": "concurrently \"ng serve --project shell\" \"ng serve --project user\" ",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "prepare": "husky install",
+    "postinstall": "sh submodule-husky-hook-path.sh"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +41,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.5.2"
+    "typescript": "~5.5.2",
+    "husky": "^8.0.0"
   }
 }

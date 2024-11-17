@@ -36,6 +36,7 @@ trim_trailing_whitespace = false
 ```sh
 ng new name-of-service --no-create-application
 ```
+
 # Create shell applications
 
 ```sh
@@ -49,6 +50,7 @@ cd projects/shell && git init && git add . && git commit -m "Initial commit"
 ```sh
 cd ../.. && git submodule add -b main https://github.com/JRiyaz/inventory-shell.git projects/shell
 ```
+
 # Create user application
 
 ```sh
@@ -62,16 +64,19 @@ cd projects/user && git init && git add . && git commit -m "Initial commit"
 ```sh
 cd ../.. && git submodule add -b main https://github.com/JRiyaz/inventory-user.git projects/user
 ```
+
 # Change directory structure for required application [user]
 
 ## move user/src directory inside user/frontend/src directory
 
-user/* => user/frontend/*
+user/_ => user/frontend/_
 
 ```sh
 cd projects/user && mkdir frontend && mv public/ src/ tsconfig.* frontend/
 ```
+
 Check if there are any other files or folders has not moved to frontend directory except .git folder. Leave the .git folder in same place., don't move it.
+
 ## Update the location
 
     1. /user/src to /user/frontend/src in angular.json
@@ -137,13 +142,14 @@ Also move `federation.config.js` file inside frontend folder, if it got created 
 
 ```json
 {
-	"user-app": "http://localhost:4210/remoteEntry.json"
+  "user-app": "http://localhost:4210/remoteEntry.json"
 }
 ```
 
 # Enable Zone-less
 
 File: src/app/app.config.ts
+
 ```js
 import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
 
@@ -156,4 +162,18 @@ Remove zone.js in angular.json file and uninstall zone.js
 
 ```sh
 pnpm remove zone.js
+```
+
+# Add Husky (Husky improves your commits and more 🐶 woof!)
+
+```sh
+npx husky-init && pnpm install && pnpm dlx husky-init
+```
+
+Add submodule-husky-hook-path.sh file, .prettierignore and modify .husky/pre-commit file and run below command.
+
+Use below command to bypassed husky hook (--no-verify or -n)
+
+```sh
+git commit -m "<message>" -n
 ```
