@@ -1,8 +1,8 @@
 [submodule "projects/shell"]
 	path = projects/shell
-	url = https://github.com/JRiyaz/inventory-shell.git
+	url = https://github.com/JRiyaz/micro-frontend-shell.git
 	branch = main
 [submodule "projects/user"]
 	path = projects/user
-	url = https://github.com/JRiyaz/inventory-user.git
+	url = https://github.com/JRiyaz/micro-frontend-user.git
 	branch = main
