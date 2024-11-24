@@ -1,0 +1,37 @@
+services:
+#  apache:
+#    depends_on:
+#      - shell
+#    build:
+#      dockerfile: Dockerfile
+#      context: ./apache
+#    ports:
+#      - '1234:1234'
+#    extra_hosts:
+#      - host.docker.internal:host-gateway
+#    profiles:
+#      - init
+  shell:
+    stdin_open: true
+    container_name: inventory-shell
+    image: inventory-shell
+    build:
+      dockerfile: ./projects/shell/Dockerfile
+      context: .
+#    volumes:
+#      - /app/node_modules
+#      - .:/app
+    ports:
+      - '4200:9090'
+  user:
+    stdin_open: true
+    container_name: inventory-user
+    image: inventory-user
+    build:
+      dockerfile: ./projects/user/frontend/Dockerfile
+      context: .
+#    volumes:
+#      - /app/node_modules
+#      - .:/app
+    ports:
+      - '4210:9090'
