@@ -39,7 +39,9 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {},
+          "options": {
+            "baseHref": "/shell/"
+          },
           "configurations": {
             "production": {
               "target": "shell:esbuild:production"
@@ -57,7 +59,8 @@
             "target": "shell:serve-original:development",
             "rebuildDelay": 0,
             "dev": true,
-            "port": 0
+            "port": 0,
+            "baseHref": "/shell/"
           }
         },
         "extract-i18n": {
@@ -74,9 +77,7 @@
                 "input": "projects/shell/public"
               }
             ],
-            "styles": [
-              "projects/shell/src/styles.css"
-            ],
+            "styles": ["projects/shell/src/styles.css"],
             "scripts": []
           }
         },
@@ -84,6 +85,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/shell",
+            "baseHref": "/shell/",
             "index": "projects/shell/src/index.html",
             "browser": "projects/shell/src/main.ts",
             "polyfills": ["es-module-shims"],
@@ -94,9 +96,7 @@
                 "input": "projects/shell/public"
               }
             ],
-            "styles": [
-              "projects/shell/src/styles.css"
-            ],
+            "styles": ["projects/shell/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -176,7 +176,9 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {},
+          "options": {
+            "baseHref": "/user/"
+          },
           "configurations": {
             "production": {
               "target": "user:esbuild:production"
@@ -194,7 +196,8 @@
             "target": "user:serve-original:development",
             "rebuildDelay": 0,
             "dev": true,
-            "port": 0
+            "port": 0,
+            "baseHref": "/user/"
           }
         },
         "extract-i18n": {
@@ -211,9 +214,7 @@
                 "input": "projects/user/frontend/public"
               }
             ],
-            "styles": [
-              "projects/user/frontend/src/styles.css"
-            ],
+            "styles": ["projects/user/frontend/src/styles.css"],
             "scripts": []
           }
         },
@@ -221,6 +222,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/user",
+            "baseHref": "/user/",
             "index": "projects/user/frontend/src/index.html",
             "browser": "projects/user/frontend/src/main.ts",
             "polyfills": ["es-module-shims"],
@@ -231,9 +233,7 @@
                 "input": "projects/user/frontend/public"
               }
             ],
-            "styles": [
-              "projects/user/frontend/src/styles.css"
-            ],
+            "styles": ["projects/user/frontend/src/styles.css"],
             "scripts": []
           },
           "configurations": {

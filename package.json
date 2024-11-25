@@ -11,7 +11,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "sh submodule-husky-hook-path.sh"
   },
   "private": true,
   "dependencies": {

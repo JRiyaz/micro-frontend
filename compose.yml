@@ -1,16 +1,16 @@
 services:
-#  apache:
-#    depends_on:
-#      - shell
-#    build:
-#      dockerfile: Dockerfile
-#      context: ./apache
-#    ports:
-#      - '1234:1234'
-#    extra_hosts:
-#      - host.docker.internal:host-gateway
-#    profiles:
-#      - init
+  apache:
+    depends_on:
+      - shell
+    container_name: inventory-apache
+    image: inventory-apache
+    build:
+      dockerfile: Dockerfile
+      context: ./apache
+    ports:
+      - "1234:1234"
+    extra_hosts:
+      - host.docker.internal:host-gateway
   shell:
     stdin_open: true
     container_name: inventory-shell
@@ -18,11 +18,8 @@ services:
     build:
       dockerfile: ./projects/shell/Dockerfile
       context: .
-#    volumes:
-#      - /app/node_modules
-#      - .:/app
     ports:
-      - '4200:9090'
+      - "4200:4200"
   user:
     stdin_open: true
     container_name: inventory-user
@@ -30,8 +27,5 @@ services:
     build:
       dockerfile: ./projects/user/frontend/Dockerfile
       context: .
-#    volumes:
-#      - /app/node_modules
-#      - .:/app
     ports:
-      - '4210:9090'
+      - "4210:4210"
