@@ -2,6 +2,7 @@ services:
   apache:
     depends_on:
       - shell
+      - user
     container_name: inventory-apache
     image: inventory-apache
     build:
@@ -19,7 +20,7 @@ services:
       dockerfile: ./projects/shell/Dockerfile
       context: .
     ports:
-      - "4200:4200"
+      - "4200:80"
   user:
     stdin_open: true
     container_name: inventory-user
@@ -28,4 +29,4 @@ services:
       dockerfile: ./projects/user/frontend/Dockerfile
       context: .
     ports:
-      - "4210:4210"
+      - "4210:80"
