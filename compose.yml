@@ -8,6 +8,8 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./apache
+    env_file:
+      - .env
     ports:
       - "80:80"
     extra_hosts:
@@ -19,6 +21,8 @@ services:
     build:
       dockerfile: ./projects/shell/Dockerfile
       context: .
+    env_file:
+      - .env
     ports:
       - "4200:80"
   user:
@@ -28,5 +32,7 @@ services:
     build:
       dockerfile: ./projects/user/frontend/Dockerfile
       context: .
+    env_file:
+      - .env
     ports:
       - "4210:80"
