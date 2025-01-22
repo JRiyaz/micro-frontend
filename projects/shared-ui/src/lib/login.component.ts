@@ -2,10 +2,9 @@ import { Component, inject } from '@angular/core';
 import { AppStore } from './store/app.store';
 
 @Component({
-  selector: 'lib-login',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'lib-login',
+    imports: [],
+    template: `
     <div class="bg-gray-100 flex items-center justify-center h-full">
       <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
         <!-- Title -->
@@ -83,7 +82,7 @@ import { AppStore } from './store/app.store';
       </div>
     </div>
   `,
-  styles: ``
+    styles: ``
 })
 export class LoginComponent {
   appStore = inject(AppStore)
