@@ -27,6 +27,17 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./apache
+    profiles:
+      - apache
+  nginx:
+    <<: *shared_service_config
+    container_name: inventory-nginx
+    image: inventory-nginx
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    profiles:
+      - nginx
   shell:
     stdin_open: true
     container_name: inventory-shell
