@@ -1,19 +1,32 @@
-services:
-  apache:
+x-shared_service_config:
+    &shared_service_config
     depends_on:
       - shell
       - user
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+      - "443:443"
+    # extra_hosts:
+    #   - host.docker.internal:host-gateway
+    init: true
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - "${CERT_PATH}:/etc/ssl/certs"
+    # networks:
+    #   - micro-frontend
+
+services:
+  apache:
+    <<: *shared_service_config
     container_name: inventory-apache
     image: inventory-apache
     build:
       dockerfile: Dockerfile
       context: ./apache
-    env_file:
-      - .env
-    ports:
-      - "80:80"
-    extra_hosts:
-      - host.docker.internal:host-gateway
   shell:
     stdin_open: true
     container_name: inventory-shell
