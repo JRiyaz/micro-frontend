@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env 
+
+chmod +x scripts/prepare-json.sh
 
 if [ ! $PREVENT_WEBHOOKS ]
 then

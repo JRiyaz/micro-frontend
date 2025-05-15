@@ -5,6 +5,8 @@ WORKING_PATH=${WORKING_PATH:-"../projects/shell/public"}
 USER_PORT=${USER_PORT:-"4210"}
 USER_HOST=${USER_HOST:-"http://localhost"}
 
+echo "Current directory: $(pwd)"
+
 # Generate env.json
 cat > "$WORKING_PATH/env.json" <<EOF
 {
