@@ -74,11 +74,8 @@
                 "input": "projects/shell/public"
               }
             ],
-            "styles": [
-              "projects/shell/src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
-            ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "styles": ["projects/shell/src/styles.css"],
+            "scripts": []
           }
         },
         "esbuild": {
@@ -95,11 +92,8 @@
                 "input": "projects/shell/public"
               }
             ],
-            "styles": [
-              "projects/shell/src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
-            ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "styles": ["projects/shell/src/styles.css"],
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -213,11 +207,8 @@
                 "input": "projects/user/frontend/public"
               }
             ],
-            "styles": [
-              "projects/user/frontend/src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
-            ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "styles": ["projects/user/frontend/src/styles.css"],
+            "scripts": []
           }
         },
         "esbuild": {
@@ -234,11 +225,8 @@
                 "input": "projects/user/frontend/public"
               }
             ],
-            "styles": [
-              "projects/user/frontend/src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.css"
-            ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "styles": ["projects/user/frontend/src/styles.css"],
+            "scripts": []
           },
           "configurations": {
             "production": {
