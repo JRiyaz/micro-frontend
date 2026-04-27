@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'lib-shared-ui',
+    selector: 'lib-ui-shared',
     imports: [],
     template: `
     <p>
-      shared-ui works!
+      ui-shared works!
     </p>
   `,
     styles: ``
 })
-export class SharedUiComponent {
+export class UiSharedComponent {
 
 }
