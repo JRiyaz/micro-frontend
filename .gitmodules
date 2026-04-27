@@ -1,8 +1,8 @@
 [submodule "projects/shell"]
 	path = projects/shell
-	url = https://github.com/JRiyaz/micro-frontend-shell.git
+	url = git@github.com:JRiyaz/micro-frontend-shell.git
 	branch = main
 [submodule "projects/user-service"]
 	path = projects/user-service
-	url = https://github.com/JRiyaz/micro-frontend-user.git
+	url = git@github.com:JRiyaz/micro-frontend-user.git
 	branch = main
