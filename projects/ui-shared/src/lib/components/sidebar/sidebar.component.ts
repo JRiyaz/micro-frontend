@@ -24,7 +24,7 @@ export interface SubProject {
         'sidebar-mobile-open': mobileOpen(),
         'sidebar-mobile-closed': !mobileOpen()
       }"
-      class="sidebar-aside fixed lg:static inset-y-0 left-0 border-r border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-[#0d0f2b] flex flex-col z-40 lg:z-auto">
+      class="sidebar-aside fixed lg:static inset-y-0 left-0 border-r border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-dark-surface flex flex-col z-40 lg:z-auto">
 
       <!-- Close button (mobile only) -->
       <button (click)="mobileOpen.set(false)" class="lg:hidden absolute top-4 right-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 z-10" id="sidebar-close-btn">
@@ -59,11 +59,11 @@ export interface SubProject {
               </button>
 
               <!-- Project List (expanded dropdown) -->
-              <div *ngIf="projectDropdownOpen()" class="absolute left-0 right-0 top-full mt-1.5 bg-white dark:bg-[#111336] border border-slate-200 dark:border-white/[0.08] rounded-xl overflow-hidden z-20 animate-dropdown shadow-md dark:shadow-xl dark:shadow-black/40">
+              <div *ngIf="projectDropdownOpen()" class="absolute left-0 right-0 top-full mt-1.5 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-xl overflow-hidden z-20 animate-dropdown shadow-md dark:shadow-xl dark:shadow-black/40">
                 <div *ngFor="let project of subProjects(); let i = index"
                      (click)="selectProject(i)"
                      class="flex items-center gap-2.5 px-3.5 py-2.5 text-sm cursor-pointer transition-colors"
-                     [class.bg-[#6d74ff]/10]="i === selectedProjectIndex()"
+                     [class.bg-primary/10]="i === selectedProjectIndex()"
                      [class.text-slate-900]="i === selectedProjectIndex()"
                      [class.dark:text-white]="i === selectedProjectIndex()"
                      [class.text-slate-500]="i !== selectedProjectIndex()"
@@ -113,7 +113,7 @@ export interface SubProject {
                [class.px-3]="!collapsed() || mobileOpen()"
                [class.justify-center]="collapsed() && !mobileOpen()"
                [class.px-0]="collapsed() && !mobileOpen()">
-              <span [innerHTML]="item.icon" class="icon-container w-5 h-5 block group-hover:text-[#6d74ff] transition-colors flex-shrink-0"></span>
+              <span [innerHTML]="item.icon" class="icon-container w-5 h-5 block group-hover:text-primary transition-colors flex-shrink-0"></span>
               <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text">{{ item.label }}</span>
             </a>
           </div>
@@ -126,10 +126,10 @@ export interface SubProject {
             <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] rounded-xl p-3.5 shadow-sm dark:shadow-none">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Sprint 4</span>
-                <span class="text-[10px] font-bold text-[#6d74ff]">65%</span>
+                <span class="text-[10px] font-bold text-primary">65%</span>
               </div>
               <div class="w-full bg-slate-200 dark:bg-white/[0.06] rounded-full h-1.5">
-                <div class="bg-gradient-to-r from-[#6d74ff] to-blue-400 h-1.5 rounded-full transition-all duration-500" style="width: 65%"></div>
+                <div class="bg-gradient-to-r from-primary to-blue-400 h-1.5 rounded-full transition-all duration-500" style="width: 65%"></div>
               </div>
             </div>
             <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] rounded-xl p-3.5 shadow-sm dark:shadow-none">
@@ -180,7 +180,7 @@ export interface SubProject {
          [style.top.px]="navFlyoutTop"
          (mouseenter)="onNavHover($event, navFlyoutIndex(), true)"
          (mouseleave)="onNavHover($event, -1, true)">
-      <div class="bg-white dark:bg-[#111336] border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-1.5 whitespace-nowrap shadow-md dark:shadow-xl dark:shadow-black/40">
+      <div class="bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-1.5 whitespace-nowrap shadow-md dark:shadow-xl dark:shadow-black/40">
         <span class="text-xs font-medium text-slate-900 dark:text-white">{{ navItems[navFlyoutIndex()]?.label }}</span>
       </div>
     </div>
@@ -192,14 +192,14 @@ export interface SubProject {
          [style.top.px]="projectFlyoutTop"
          (mouseenter)="onProjectHover($event, true, true)"
          (mouseleave)="onProjectHover($event, false, true)">
-      <div class="w-56 bg-white dark:bg-[#111336] border border-slate-200 dark:border-white/[0.08] rounded-xl overflow-hidden shadow-md dark:shadow-xl dark:shadow-black/40">
+      <div class="w-56 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-xl overflow-hidden shadow-md dark:shadow-xl dark:shadow-black/40">
         <div class="px-3.5 py-2.5 border-b border-slate-200 dark:border-white/[0.06]">
           <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Workspace</span>
         </div>
         <div *ngFor="let project of subProjects(); let i = index"
              (click)="selectProject(i); projectFlyout.set(false)"
              class="flex items-center gap-2.5 px-3.5 py-2.5 text-sm cursor-pointer transition-colors"
-             [class.bg-[#6d74ff]/10]="i === selectedProjectIndex()"
+             [class.bg-primary/10]="i === selectedProjectIndex()"
              [class.text-slate-900]="i === selectedProjectIndex()"
              [class.dark:text-white]="i === selectedProjectIndex()"
              [class.text-slate-500]="i !== selectedProjectIndex()"

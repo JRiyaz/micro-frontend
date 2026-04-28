@@ -1,24 +1,25 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, output, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthStateService } from '../../services/auth-state.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'ui-topnav',
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <header class="h-16 border-b border-slate-200 dark:border-white/[0.08] flex items-center justify-between px-4 sm:px-6 lg:px-8 bg-white/80 dark:bg-[#0d0f2b]/80 backdrop-blur-xl relative z-30">
+    <header class="h-16 border-b border-slate-200 dark:border-white/[0.08] flex items-center justify-between px-4 sm:px-6 lg:px-8 bg-white/80 dark:bg-dark-surface/80 backdrop-blur-xl relative z-30">
       <!-- Left: Hamburger + Logo -->
       <div class="flex items-center gap-3">
         <button (click)="sidebarToggle.emit()" class="lg:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5" id="topnav-sidebar-toggle">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
         <a routerLink="/" class="flex items-center gap-2.5">
-          <div class="w-9 h-9 bg-gradient-to-br from-[#6d74ff] to-blue-500 rounded-xl flex items-center justify-center">
+          <div class="w-9 h-9 bg-gradient-to-br from-primary to-blue-500 rounded-xl flex items-center justify-center">
             <span class="text-white font-black text-base">I</span>
           </div>
-          <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white hidden sm:inline">Inven<span class="text-[#6d74ff]">tory</span></span>
+          <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white hidden sm:inline">Inven<span class="text-primary">tory</span></span>
         </a>
       </div>
 
@@ -27,7 +28,7 @@ import { AuthStateService } from '../../services/auth-state.service';
         <div class="relative">
           <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           <input type="text" placeholder="Search products, orders, or reports..."
-                 class="w-full bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#6d74ff]/50 focus:border-[#6d74ff]/30 transition-all" id="topnav-search">
+                 class="w-full bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/30 transition-all" id="topnav-search">
           <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 bg-white dark:bg-white/[0.06] border border-slate-200 dark:border-white/[0.08] rounded text-[10px] text-slate-400 dark:text-slate-500 font-mono hidden lg:inline-block">⌘K</kbd>
         </div>
       </div>
@@ -51,7 +52,7 @@ import { AuthStateService } from '../../services/auth-state.service';
             <ng-container *ngIf="auth.isLoggedIn(); else notLoggedIn">
               <div class="text-right hidden sm:block">
                 <p class="text-sm font-bold leading-none text-slate-900 dark:text-white">{{ auth.user()?.name }}</p>
-                <p class="text-[10px] text-[#6d74ff] font-bold uppercase tracking-widest mt-0.5">{{ auth.user()?.role }}</p>
+                <p class="text-[10px] text-primary font-bold uppercase tracking-widest mt-0.5">{{ auth.user()?.role }}</p>
               </div>
               <img [src]="auth.avatarUrl()" [alt]="auth.user()?.name || 'User'"
                    class="w-9 h-9 rounded-xl border border-slate-200 dark:border-white/[0.12] group-hover:border-slate-300 dark:group-hover:border-white/[0.25] transition-colors">
@@ -64,7 +65,7 @@ import { AuthStateService } from '../../services/auth-state.service';
           </button>
 
           <!-- Dropdown Menu -->
-          <div *ngIf="userDropdownOpen()" class="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-[#111336] border border-slate-200 dark:border-white/[0.08] shadow-md dark:shadow-xl rounded-xl overflow-hidden z-50 animate-fade-in" id="topnav-user-dropdown">
+          <div *ngIf="userDropdownOpen()" class="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] shadow-md dark:shadow-xl rounded-xl overflow-hidden z-50 animate-fade-in" id="topnav-user-dropdown">
             <ng-container *ngIf="auth.isLoggedIn(); else guestMenu">
               <!-- Logged In Header -->
               <div class="px-4 py-3 border-b border-slate-200 dark:border-white/[0.06]">
@@ -77,9 +78,9 @@ import { AuthStateService } from '../../services/auth-state.service';
                   Settings
                 </a>
                 <button (click)="toggleTheme()" class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:text-slate-900 dark:hover:text-white transition-colors w-full text-left">
-                  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
                   Theme
-                  <span class="ml-auto text-[10px] bg-[#6d74ff]/20 text-[#6d74ff] px-1.5 py-0.5 rounded font-bold">DARK</span>
+                  <span class="ml-auto text-[10px] bg-primary/20 text-primary px-1.5 py-0.5 rounded font-bold uppercase">{{ themeService.currentTheme() }}</span>
                 </button>
                 <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/[0.04] hover:text-slate-900 dark:hover:text-white transition-colors">
                   <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -132,11 +133,16 @@ export class TopnavComponent {
   sidebarToggle = output<void>();
   userDropdownOpen = signal(false);
 
-  constructor(public auth: AuthStateService) {}
+  constructor(
+    public auth: AuthStateService,
+    public themeService: ThemeService
+  ) {}
 
   toggleTheme(): void {
-    // Theme toggle placeholder
-    this.userDropdownOpen.set(false);
+    const current = this.themeService.currentTheme();
+    const themes = this.themeService.themes;
+    const nextIndex = (themes.indexOf(current) + 1) % themes.length;
+    this.themeService.setTheme(themes[nextIndex]);
   }
 
   handleLogout(): void {

@@ -14,6 +14,7 @@ export * from './lib/components/sidebar/sidebar.component';
 
 // Shared services
 export * from './lib/services/auth-state.service';
+export * from './lib/services/theme.service';
 
 // Shared Utilities
 export * from './lib/utils/drag-drop';

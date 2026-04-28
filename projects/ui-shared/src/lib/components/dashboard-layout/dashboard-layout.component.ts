@@ -9,7 +9,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   standalone: true,
   imports: [CommonModule, RouterModule, TopnavComponent, SidebarComponent],
   template: `
-    <div class="flex h-screen bg-slate-50 dark:bg-[#0a0b1e] text-slate-900 dark:text-slate-200 overflow-hidden">
+    <div class="flex h-screen bg-slate-50 dark:bg-dark-base text-slate-900 dark:text-slate-200 overflow-hidden">
       <!-- Sidebar -->
       <ui-sidebar #sidebar />
 
