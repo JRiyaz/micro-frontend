@@ -1,4 +1,4 @@
-import { Component, signal, inject, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, signal, inject, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -24,10 +24,10 @@ export interface SubProject {
         'sidebar-mobile-open': mobileOpen(),
         'sidebar-mobile-closed': !mobileOpen()
       }"
-      class="sidebar-aside fixed lg:static inset-y-0 left-0 border-r border-white/[0.06] bg-[#0d0f2b] flex flex-col z-40 lg:z-auto">
+      class="sidebar-aside fixed lg:static inset-y-0 left-0 border-r border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-[#0d0f2b] flex flex-col z-40 lg:z-auto">
 
       <!-- Close button (mobile only) -->
-      <button (click)="mobileOpen.set(false)" class="lg:hidden absolute top-4 right-4 text-slate-400 hover:text-white transition-colors p-1 z-10" id="sidebar-close-btn">
+      <button (click)="mobileOpen.set(false)" class="lg:hidden absolute top-4 right-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 z-10" id="sidebar-close-btn">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
 
@@ -45,7 +45,7 @@ export interface SubProject {
             <label class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.15em] block mb-2 px-1">Project Workspace</label>
             <div class="relative">
               <button (click)="projectDropdownOpen.set(!projectDropdownOpen())"
-                      class="w-full bg-white/[0.03] border border-white/[0.08] rounded-xl px-3.5 py-2.5 text-sm text-left flex items-center justify-between hover:border-white/[0.15] transition-colors focus:outline-none"
+                      class="w-full bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] rounded-xl px-3.5 py-2.5 text-sm text-left flex items-center justify-between hover:border-slate-300 dark:hover:border-white/[0.15] transition-colors focus:outline-none"
                       id="sidebar-project-dropdown">
                 <div class="flex items-center gap-2.5 min-w-0">
                   <span class="w-2.5 h-2.5 rounded-full flex-shrink-0"
@@ -53,20 +53,23 @@ export interface SubProject {
                         [class.bg-slate-500]="getSelectedProject()?.status === 'offline'"
                         [class.bg-red-500]="getSelectedProject()?.status === 'error'">
                   </span>
-                  <span class="truncate text-white font-medium">{{ getSelectedProject()?.name || 'Select Project' }}</span>
+                  <span class="truncate text-slate-900 dark:text-white font-medium">{{ getSelectedProject()?.name || 'Select Project' }}</span>
                 </div>
                 <svg class="w-4 h-4 text-slate-500 flex-shrink-0 transition-transform" [class.rotate-180]="projectDropdownOpen()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
               </button>
 
               <!-- Project List (expanded dropdown) -->
-              <div *ngIf="projectDropdownOpen()" class="absolute left-0 right-0 top-full mt-1.5 bg-[#111336] border border-white/[0.08] rounded-xl overflow-hidden z-20 animate-dropdown shadow-xl shadow-black/40">
+              <div *ngIf="projectDropdownOpen()" class="absolute left-0 right-0 top-full mt-1.5 bg-white dark:bg-[#111336] border border-slate-200 dark:border-white/[0.08] rounded-xl overflow-hidden z-20 animate-dropdown shadow-md dark:shadow-xl dark:shadow-black/40">
                 <div *ngFor="let project of subProjects(); let i = index"
                      (click)="selectProject(i)"
                      class="flex items-center gap-2.5 px-3.5 py-2.5 text-sm cursor-pointer transition-colors"
                      [class.bg-[#6d74ff]/10]="i === selectedProjectIndex()"
-                     [class.text-white]="i === selectedProjectIndex()"
-                     [class.text-slate-400]="i !== selectedProjectIndex()"
-                     [class.hover:bg-white/[0.04]]="i !== selectedProjectIndex()">
+                     [class.text-slate-900]="i === selectedProjectIndex()"
+                     [class.dark:text-white]="i === selectedProjectIndex()"
+                     [class.text-slate-500]="i !== selectedProjectIndex()"
+                     [class.dark:text-slate-400]="i !== selectedProjectIndex()"
+                     [class.hover:bg-slate-100]="i !== selectedProjectIndex()"
+                     [class.dark:hover:bg-white/[0.04]]="i !== selectedProjectIndex()">
                     <span class="w-2 h-2 rounded-full flex-shrink-0"
                           [class.bg-green-400]="project.status === 'running'"
                           [class.bg-slate-500]="project.status === 'offline'"
@@ -86,7 +89,7 @@ export interface SubProject {
 
           <!-- Collapsed: Icon button -->
           <div [class.sidebar-show]="collapsed() && !mobileOpen()" [class.sidebar-hide]="!collapsed() || mobileOpen()" class="sidebar-fade flex justify-center">
-            <button class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.08] transition-colors" title="Project Workspace">
+            <button class="w-10 h-10 rounded-xl bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.06] flex items-center justify-center hover:bg-slate-100 dark:hover:bg-white/[0.08] transition-colors shadow-sm dark:shadow-none" title="Project Workspace">
               <span class="w-2.5 h-2.5 rounded-full"
                     [class.bg-green-400]="getSelectedProject()?.status === 'running'"
                     [class.bg-slate-500]="getSelectedProject()?.status === 'offline'"
@@ -106,7 +109,7 @@ export interface SubProject {
                (mouseenter)="onNavHover($event, idx)"
                (mouseleave)="onNavHover($event, -1)">
             <a [routerLink]="item.route" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: item.exact }"
-               class="nav-link flex items-center gap-3 py-2.5 text-slate-400 hover:text-white hover:bg-white/[0.04] rounded-xl transition-all text-sm font-medium group"
+               class="nav-link flex items-center gap-3 py-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-xl transition-all text-sm font-medium group"
                [class.px-3]="!collapsed() || mobileOpen()"
                [class.justify-center]="collapsed() && !mobileOpen()"
                [class.px-0]="collapsed() && !mobileOpen()">
@@ -120,21 +123,21 @@ export interface SubProject {
         <div [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade mt-8">
           <label class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.15em] block mb-3 px-1">Quick Stats</label>
           <div class="space-y-3">
-            <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3.5">
+            <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] rounded-xl p-3.5 shadow-sm dark:shadow-none">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Sprint 4</span>
                 <span class="text-[10px] font-bold text-[#6d74ff]">65%</span>
               </div>
-              <div class="w-full bg-white/[0.06] rounded-full h-1.5">
+              <div class="w-full bg-slate-200 dark:bg-white/[0.06] rounded-full h-1.5">
                 <div class="bg-gradient-to-r from-[#6d74ff] to-blue-400 h-1.5 rounded-full transition-all duration-500" style="width: 65%"></div>
               </div>
             </div>
-            <div class="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3.5">
+            <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] rounded-xl p-3.5 shadow-sm dark:shadow-none">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Stock Level</span>
                 <span class="text-[10px] font-bold text-green-400">82%</span>
               </div>
-              <div class="w-full bg-white/[0.06] rounded-full h-1.5">
+              <div class="w-full bg-slate-200 dark:bg-white/[0.06] rounded-full h-1.5">
                 <div class="bg-gradient-to-r from-green-500 to-emerald-400 h-1.5 rounded-full transition-all duration-500" style="width: 82%"></div>
               </div>
             </div>
@@ -143,7 +146,7 @@ export interface SubProject {
       </div>
 
       <!-- Bottom: Toggle + Version (sticky at bottom) -->
-      <div class="border-t border-white/[0.06] flex-shrink-0">
+      <div class="border-t border-slate-200 dark:border-white/[0.06] flex-shrink-0">
         <!-- Version info (expanded) -->
         <div [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade px-5 py-3">
           <div class="flex items-center gap-2 px-1">
@@ -153,8 +156,15 @@ export interface SubProject {
           </div>
         </div>
 
+        <!-- Dark Mode Toggle -->
+        <button (click)="toggleDarkMode()" class="w-full flex items-center justify-center gap-2 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-dark-mode-toggle">
+          <svg *ngIf="!isDarkMode()" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          <svg *ngIf="isDarkMode()" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text text-[10px] font-bold uppercase tracking-widest">{{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}</span>
+        </button>
+
         <!-- Collapse Toggle (desktop only) -->
-        <button (click)="collapsed.set(!collapsed())" class="hidden lg:flex w-full items-center justify-center gap-2 py-3 text-slate-500 hover:text-white hover:bg-white/[0.03] transition-colors border-t border-white/[0.06]" id="sidebar-collapse-toggle">
+        <button (click)="collapsed.set(!collapsed())" class="hidden lg:flex w-full items-center justify-center gap-2 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-collapse-toggle">
           <svg class="w-4 h-4 transition-transform duration-300" [class.rotate-180]="collapsed()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7"></path></svg>
           <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text text-[10px] font-bold uppercase tracking-widest">Collapse</span>
         </button>
@@ -170,8 +180,8 @@ export interface SubProject {
          [style.top.px]="navFlyoutTop"
          (mouseenter)="onNavHover($event, navFlyoutIndex(), true)"
          (mouseleave)="onNavHover($event, -1, true)">
-      <div class="bg-[#111336] border border-white/[0.08] rounded-lg px-3 py-1.5 whitespace-nowrap shadow-xl shadow-black/40">
-        <span class="text-xs font-medium text-white">{{ navItems[navFlyoutIndex()]?.label }}</span>
+      <div class="bg-white dark:bg-[#111336] border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-1.5 whitespace-nowrap shadow-md dark:shadow-xl dark:shadow-black/40">
+        <span class="text-xs font-medium text-slate-900 dark:text-white">{{ navItems[navFlyoutIndex()]?.label }}</span>
       </div>
     </div>
 
@@ -182,17 +192,20 @@ export interface SubProject {
          [style.top.px]="projectFlyoutTop"
          (mouseenter)="onProjectHover($event, true, true)"
          (mouseleave)="onProjectHover($event, false, true)">
-      <div class="w-56 bg-[#111336] border border-white/[0.08] rounded-xl overflow-hidden shadow-xl shadow-black/40">
-        <div class="px-3.5 py-2.5 border-b border-white/[0.06]">
+      <div class="w-56 bg-white dark:bg-[#111336] border border-slate-200 dark:border-white/[0.08] rounded-xl overflow-hidden shadow-md dark:shadow-xl dark:shadow-black/40">
+        <div class="px-3.5 py-2.5 border-b border-slate-200 dark:border-white/[0.06]">
           <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Workspace</span>
         </div>
         <div *ngFor="let project of subProjects(); let i = index"
              (click)="selectProject(i); projectFlyout.set(false)"
              class="flex items-center gap-2.5 px-3.5 py-2.5 text-sm cursor-pointer transition-colors"
              [class.bg-[#6d74ff]/10]="i === selectedProjectIndex()"
-             [class.text-white]="i === selectedProjectIndex()"
-             [class.text-slate-400]="i !== selectedProjectIndex()"
-             [class.hover:bg-white/[0.04]]="i !== selectedProjectIndex()">
+             [class.text-slate-900]="i === selectedProjectIndex()"
+             [class.dark:text-white]="i === selectedProjectIndex()"
+             [class.text-slate-500]="i !== selectedProjectIndex()"
+             [class.dark:text-slate-400]="i !== selectedProjectIndex()"
+             [class.hover:bg-slate-100]="i !== selectedProjectIndex()"
+             [class.dark:hover:bg-white/[0.04]]="i !== selectedProjectIndex()">
           <span class="w-2 h-2 rounded-full flex-shrink-0"
                 [class.bg-green-400]="project.status === 'running'"
                 [class.bg-slate-500]="project.status === 'offline'"
@@ -346,13 +359,32 @@ export interface SubProject {
     }
   `]
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   mobileOpen = signal(false);
   collapsed = signal(false);
   projectDropdownOpen = signal(false);
   projectFlyout = signal(false);
   selectedProjectIndex = signal(0);
   navFlyoutIndex = signal(-1);
+  isDarkMode = signal(false);
+
+  ngOnInit() {
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      this.isDarkMode.set(document.documentElement.classList.contains('dark'));
+    }
+  }
+
+  toggleDarkMode() {
+    const isDark = !this.isDarkMode();
+    this.isDarkMode.set(isDark);
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }
 
   // Flyout positioning
   flyoutLeft = 76; // 68px sidebar + 8px gap
