@@ -379,6 +379,21 @@ export class TopnavComponent implements OnInit {
     this.userDropdownOpen.set(false);
   }
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (this.showSyncConfirm()) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        event.stopPropagation();
+        this.confirmSync();
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        this.showSyncConfirm.set(false);
+      }
+    }
+  }
+
   confirmSync(): void {
     this.showSyncConfirm.set(false);
     this.loadingService.simulateLoading(2500, 'Synchronizing Platform Data...');
