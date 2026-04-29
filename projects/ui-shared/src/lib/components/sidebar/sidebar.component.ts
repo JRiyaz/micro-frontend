@@ -27,7 +27,7 @@ import { LoadingService } from '../../services/loading.service';
       </button>
 
       <!-- Scrollable content area -->
-      <div class="sidebar-content flex-1 overflow-y-auto overflow-x-hidden sidebar-scroll min-h-0 py-5"
+      <div class="sidebar-content flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar min-h-0 py-5"
            [class.px-5]="!collapsed() || mobileOpen()" [class.px-2]="collapsed() && !mobileOpen()">
 
         <!-- Navigation -->
@@ -76,34 +76,36 @@ import { LoadingService } from '../../services/loading.service';
         </div>
       </div>
 
-      <!-- Bottom: Toggle + Version (sticky at bottom) -->
+      <!-- Bottom: Utilities + Toggles (sticky at bottom) -->
       <div class="border-t border-slate-200 dark:border-white/[0.06] flex-shrink-0">
-        <!-- Version info (expanded) -->
-        <div [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade px-5 py-3">
-          <div class="flex items-center gap-2 px-1">
-            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
-            <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">System Online</span>
-            <span class="ml-auto text-[10px] text-slate-600 font-mono">v1.0.0</span>
-          </div>
-        </div>
-
         <!-- Sync / Reload -->
         <button (click)="loadingService.simulateLoading(3000, 'Synchronizing Platform Data...')" 
-                class="w-full flex items-center justify-center gap-2 py-3 text-slate-500 hover:text-primary dark:hover:text-primary hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-sync-data">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                (mouseenter)="onUtilityHover($event, 'Sync Data')"
+                (mouseleave)="onUtilityHover($event, null)"
+                class="w-full flex items-center justify-center gap-3 py-3 text-slate-500 hover:text-primary dark:hover:text-primary hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-sync-data"
+                [class.px-5]="!collapsed() || mobileOpen()">
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
           <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text text-[10px] font-bold uppercase tracking-widest">Sync Data</span>
         </button>
 
         <!-- Dark Mode Toggle -->
-        <button (click)="toggleDarkMode()" class="w-full flex items-center justify-center gap-2 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-dark-mode-toggle">
-          <svg *ngIf="!isDarkMode()" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-          <svg *ngIf="isDarkMode()" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+        <button (click)="toggleDarkMode()" 
+                (mouseenter)="onUtilityHover($event, isDarkMode() ? 'Light Mode' : 'Dark Mode')"
+                (mouseleave)="onUtilityHover($event, null)"
+                class="w-full flex items-center justify-center gap-3 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-dark-mode-toggle"
+                [class.px-5]="!collapsed() || mobileOpen()">
+          <svg *ngIf="!isDarkMode()" class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          <svg *ngIf="isDarkMode()" class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
           <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text text-[10px] font-bold uppercase tracking-widest">{{ isDarkMode() ? 'Light Mode' : 'Dark Mode' }}</span>
         </button>
 
         <!-- Collapse Toggle (desktop only) -->
-        <button (click)="collapsed.set(!collapsed())" class="hidden lg:flex w-full items-center justify-center gap-2 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-collapse-toggle">
-          <svg class="w-4 h-4 transition-transform duration-300" [class.rotate-180]="collapsed()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7"></path></svg>
+        <button (click)="collapsed.set(!collapsed())" 
+                (mouseenter)="onUtilityHover($event, collapsed() ? 'Expand' : 'Collapse')"
+                (mouseleave)="onUtilityHover($event, null)"
+                class="hidden lg:flex w-full items-center justify-center gap-3 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-collapse-toggle"
+                [class.px-5]="!collapsed() || mobileOpen()">
+          <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" [class.rotate-180]="collapsed()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7"></path></svg>
           <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text text-[10px] font-bold uppercase tracking-widest">Collapse</span>
         </button>
       </div>
@@ -111,15 +113,15 @@ import { LoadingService } from '../../services/loading.service';
 
     <!-- ===== FIXED-POSITION FLYOUTS (outside overflow-hidden) ===== -->
 
-    <!-- Nav tooltip flyout -->
-    <div *ngIf="navFlyoutIndex() >= 0 && collapsed() && !mobileOpen()"
+    <!-- Tooltip flyout -->
+    <div *ngIf="(navFlyoutIndex() >= 0 || utilityFlyoutLabel()) && collapsed() && !mobileOpen()"
          class="fixed z-[9999] animate-flyout"
          [style.left.px]="flyoutLeft"
-         [style.top.px]="navFlyoutTop"
-         (mouseenter)="onNavHover($event, navFlyoutIndex(), true)"
-         (mouseleave)="onNavHover($event, -1, true)">
+         [style.top.px]="navFlyoutTop">
       <div class="bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-1.5 whitespace-nowrap shadow-md dark:shadow-xl dark:shadow-black/40">
-        <span class="text-xs font-medium text-slate-900 dark:text-white">{{ navItems[navFlyoutIndex()]?.label }}</span>
+        <span class="text-xs font-medium text-slate-900 dark:text-white">
+          {{ navFlyoutIndex() >= 0 ? navItems[navFlyoutIndex()]?.label : utilityFlyoutLabel() }}
+        </span>
       </div>
     </div>
   `,
@@ -177,12 +179,15 @@ import { LoadingService } from '../../services/loading.service';
 
     /* ===== Icon rendering ===== */
     .icon-container {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
     }
     .icon-container svg {
       width: 100%;
       height: 100%;
-      display: block;
     }
 
     /* ===== Nav active state ===== */
@@ -207,25 +212,6 @@ import { LoadingService } from '../../services/loading.service';
     }
     .animate-flyout {
       animation: flyout-in 0.15s ease-out forwards;
-    }
-
-    /* ===== Thin scrollbar ===== */
-    .sidebar-scroll::-webkit-scrollbar {
-      width: 4px;
-    }
-    .sidebar-scroll::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .sidebar-scroll::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 4px;
-    }
-    .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-    .sidebar-scroll {
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.08) transparent;
     }
 
     /* ===== Mobile sidebar slide transitions ===== */
@@ -255,6 +241,7 @@ export class SidebarComponent implements OnInit {
   mobileOpen = signal(false);
   collapsed = signal(false);
   navFlyoutIndex = signal(-1);
+  utilityFlyoutLabel = signal<string | null>(null);
   isDarkMode = signal(false);
   loadingService = inject(LoadingService);
 
@@ -337,6 +324,26 @@ export class SidebarComponent implements OnInit {
     } else {
       this.navFlyoutTimeout = setTimeout(() => {
         this.navFlyoutIndex.set(-1);
+      }, 150);
+    }
+  }
+
+  onUtilityHover(event: MouseEvent, label: string | null): void {
+    if (!this.collapsed() || this.mobileOpen()) {
+      this.utilityFlyoutLabel.set(null);
+      return;
+    }
+
+    if (label) {
+      clearTimeout(this.navFlyoutTimeout);
+      const target = event.currentTarget as HTMLElement;
+      const rect = target.getBoundingClientRect();
+      this.navFlyoutTop = rect.top + rect.height / 2 - 14;
+      this.flyoutLeft = this.getSidebarRight();
+      this.utilityFlyoutLabel.set(label);
+    } else {
+      this.navFlyoutTimeout = setTimeout(() => {
+        this.utilityFlyoutLabel.set(null);
       }, 150);
     }
   }
