@@ -1,12 +1,11 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, Renderer2, input, output } from '@angular/core';
 
 @Directive({
   selector: '[uiDraggable]',
   standalone: true
 })
 export class DraggableDirective {
-  @Input('uiDraggable') dragData: any;
-  
+  dragData = input<any>(undefined, { alias: 'uiDraggable' });
   constructor(private el: ElementRef, private renderer: Renderer2) {
     this.renderer.setAttribute(this.el.nativeElement, 'draggable', 'true');
     this.renderer.setStyle(this.el.nativeElement, 'cursor', 'grab');
@@ -15,7 +14,7 @@ export class DraggableDirective {
   @HostListener('dragstart', ['$event'])
   onDragStart(event: DragEvent) {
     if (event.dataTransfer) {
-      event.dataTransfer.setData('application/json', JSON.stringify(this.dragData));
+      event.dataTransfer.setData('application/json', JSON.stringify(this.dragData()));
       event.dataTransfer.effectAllowed = 'move';
       // Adding a class for visual feedback during drag
       setTimeout(() => this.renderer.addClass(this.el.nativeElement, 'opacity-40'), 0);
@@ -33,9 +32,9 @@ export class DraggableDirective {
   standalone: true
 })
 export class DroppableDirective {
-  @Output() dropped = new EventEmitter<any>();
+  dropped = output<any>();
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) { }
 
   @HostListener('dragover', ['$event'])
   onDragOver(event: DragEvent) {
