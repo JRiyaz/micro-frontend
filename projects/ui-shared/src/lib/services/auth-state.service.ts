@@ -11,11 +11,42 @@ export interface UserProfile {
   providedIn: 'root'
 })
 export class AuthStateService {
-  private readonly _isLoggedIn = signal(false);
-  private readonly _user = signal<UserProfile | null>(null);
+  private readonly _isLoggedIn = signal(true);
+  private readonly _roles = signal<string[]>(['Admin', 'User']);
+  private readonly _currentRole = signal<string>('Admin');
+  private readonly _user = signal<UserProfile | null>({
+    name: 'Riyaz Khan',
+    email: 'riyaz@company.com',
+    role: 'Admin',
+    avatarUrl: ''
+  });
 
   readonly isLoggedIn = this._isLoggedIn.asReadonly();
   readonly user = this._user.asReadonly();
+  readonly roles = this._roles.asReadonly();
+  readonly currentRole = this._currentRole.asReadonly();
+  readonly isAdmin = computed(() => this._currentRole() === 'Admin');
+
+  addRole(role: string): void {
+    if (role && !this._roles().includes(role)) {
+      this._roles.update(r => [...r, role]);
+    }
+  }
+
+  deleteRole(role: string): void {
+    this._roles.update(r => r.filter(x => x !== role));
+    if (this._currentRole() === role) {
+      this._currentRole.set(this._roles()[0] || '');
+    }
+  }
+
+  setCurrentRole(role: string): void {
+    if (this._roles().includes(role)) {
+      this._currentRole.set(role);
+      // Update user profile role to stay in sync
+      this._user.update(u => u ? { ...u, role } : null);
+    }
+  }
   readonly userInitials = computed(() => {
     const u = this._user();
     if (!u) return '?';
@@ -31,6 +62,7 @@ export class AuthStateService {
   login(user: UserProfile): void {
     this._user.set(user);
     this._isLoggedIn.set(true);
+    this.setCurrentRole(user.role);
   }
 
   /** Simulate logout */
@@ -47,7 +79,7 @@ export class AuthStateService {
       this.login({
         name: 'Riyaz Khan',
         email: 'riyaz@company.com',
-        role: 'Lead Developer',
+        role: 'Admin',
         avatarUrl: ''
       });
     }
