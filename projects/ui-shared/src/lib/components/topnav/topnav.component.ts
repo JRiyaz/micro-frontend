@@ -21,12 +21,21 @@ import { LoadingService } from '../../services/loading.service';
       </div>
 
       <!-- Center: Search Bar -->
-      <div class="flex-1 max-w-xl mx-4 hidden sm:block">
-        <div class="relative">
-          <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          <input type="text" placeholder="Search products, orders, or reports..."
-                 class="w-full bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/30 transition-all" id="topnav-search">
-          <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 bg-white dark:bg-white/[0.06] border border-slate-200 dark:border-white/[0.08] rounded text-[10px] text-slate-400 dark:text-slate-500 font-mono hidden lg:inline-block">⌘K</kbd>
+      <div class="flex-1 max-w-xl mx-4 hidden sm:block pt-1">
+        <div class="relative group">
+          <input type="text" placeholder=" "
+                 class="peer w-full bg-transparent border-b-2 border-slate-200 dark:border-white/[0.08] py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-slate-200 focus:outline-none focus:border-primary transition-all placeholder-transparent" id="topnav-search">
+          
+          <label for="topnav-search" 
+                 class="absolute left-10 -top-2 text-slate-500 dark:text-slate-400 text-[10px] transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-400 peer-placeholder-shown:top-2.5 peer-focus:-top-2 peer-focus:text-primary peer-focus:text-[10px] pointer-events-none uppercase font-bold tracking-widest">
+            Search products, orders...
+          </label>
+
+          <svg class="w-4 h-4 absolute left-0 top-1/2 -translate-y-1/2 text-slate-500 peer-focus:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+
+          <kbd class="absolute right-0 top-1/2 -translate-y-1/2 px-1.5 py-0.5 bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/[0.08] rounded text-[10px] text-slate-400 dark:text-slate-500 font-mono hidden lg:inline-block">⌘K</kbd>
         </div>
       </div>
 
