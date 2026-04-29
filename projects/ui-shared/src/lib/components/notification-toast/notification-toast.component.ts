@@ -7,10 +7,17 @@ import { NotificationService, Notification } from '../../services/notification.s
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="fixed top-4 right-4 z-[9999] flex flex-col gap-3 w-80 sm:w-96 pointer-events-none">
+    <div 
+      class="fixed z-[9999] flex flex-col gap-3 w-80 sm:w-96 pointer-events-none"
+      [style.top]="notificationService.config().placement.startsWith('top') ? '1rem' : 'auto'"
+      [style.bottom]="notificationService.config().placement.startsWith('bottom') ? '1rem' : 'auto'"
+      [style.left]="notificationService.config().placement.endsWith('left') ? '1rem' : 'auto'"
+      [style.right]="notificationService.config().placement.endsWith('right') ? '1rem' : 'auto'"
+    >
       @for (toast of notificationService.activeToasts(); track toast.id) {
         <div 
-          class="pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border shadow-lg animate-toast-in backdrop-blur-md transition-all duration-300"
+          class="pointer-events-auto flex items-start gap-3 p-4 rounded-2xl border shadow-lg backdrop-blur-md transition-all duration-300 relative group"
+          [style.animation]="(notificationService.config().placement.includes('right') ? 'toast-in-right' : 'toast-in-left') + ' 0.3s cubic-bezier(0.16, 1, 0.3, 1)'"
           [ngClass]="{
             'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400': toast.type === 'success',
             'bg-rose-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400': toast.type === 'error',
@@ -32,7 +39,12 @@ import { NotificationService, Notification } from '../../services/notification.s
           </div>
 
           <div class="flex-1 min-w-0">
-            <h4 class="text-sm font-bold leading-tight mb-0.5">{{ toast.title }}</h4>
+            <div class="flex items-center gap-2 mb-0.5">
+              <h4 class="text-sm font-bold leading-tight">{{ toast.title }}</h4>
+              @if (toast.urgent) {
+                <span class="px-1.5 py-0.5 bg-red-500 text-[8px] text-white font-black uppercase rounded tracking-wider">Urgent</span>
+              }
+            </div>
             <p class="text-xs opacity-90 leading-normal">{{ toast.message }}</p>
           </div>
 
@@ -47,12 +59,13 @@ import { NotificationService, Notification } from '../../services/notification.s
     </div>
   `,
   styles: [`
-    @keyframes toast-in {
+    @keyframes toast-in-right {
       from { transform: translateX(100%); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
-    .animate-toast-in {
-      animation: toast-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    @keyframes toast-in-left {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
     }
   `]
 })

@@ -10,6 +10,16 @@ export interface Notification {
   timestamp: Date;
   read: boolean;
   autoClose?: boolean;
+  urgent?: boolean;
+}
+
+export type NotificationPlacement = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+
+export interface NotificationConfig {
+  duration: number;
+  placement: NotificationPlacement;
+  urgentStick: boolean;
+  dnd: boolean;
 }
 
 @Injectable({
@@ -28,10 +38,36 @@ export class NotificationService {
   // Sidenav state
   sidenavOpen = signal(false);
 
-  constructor() {}
+  // Configuration
+  config = signal<NotificationConfig>({
+    duration: 4000,
+    placement: 'top-right',
+    urgentStick: true,
+    dnd: false
+  });
 
-  notify(type: NotificationType, title: string, message: string, duration: number = 4000) {
+  constructor() {
+    // Load config from localStorage if available
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('notification_config');
+      if (saved) {
+        this.config.set(JSON.parse(saved));
+      }
+    }
+  }
+
+  updateConfig(newConfig: Partial<NotificationConfig>) {
+    this.config.update(prev => {
+      const updated = { ...prev, ...newConfig };
+      localStorage.setItem('notification_config', JSON.stringify(updated));
+      return updated;
+    });
+  }
+
+  notify(type: NotificationType, title: string, message: string, urgent: boolean = false) {
     const id = Math.random().toString(36).substring(2, 9);
+    const config = this.config();
+    
     const notification: Notification = {
       id,
       type,
@@ -39,20 +75,23 @@ export class NotificationService {
       message,
       timestamp: new Date(),
       read: false,
-      autoClose: true
+      autoClose: urgent ? !config.urgentStick : true,
+      urgent
     };
 
     // Add to main list
     this._notifications.update(prev => [notification, ...prev]);
     
-    // Add to toasts
-    this._activeToasts.update(prev => [...prev, notification]);
+    // Add to toasts if DND is off OR if it's urgent
+    if (!config.dnd || urgent) {
+      this._activeToasts.update(prev => [...prev, notification]);
 
-    // Auto-remove from toasts
-    if (duration > 0) {
-      setTimeout(() => {
-        this.removeToast(id);
-      }, duration);
+      // Auto-remove from toasts if not urgent/sticking
+      if (notification.autoClose) {
+        setTimeout(() => {
+          this.removeToast(id);
+        }, config.duration);
+      }
     }
     
     return id;
