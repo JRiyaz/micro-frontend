@@ -1,8 +1,12 @@
 [submodule "projects/shell"]
 	path = projects/shell
 	url = https://github.com/JRiyaz/micro-frontend-shell.git
-	branch = main
+	branch = ai-main
 [submodule "projects/user-service"]
 	path = projects/user-service
 	url = https://github.com/JRiyaz/micro-frontend-user.git
-	branch = main
+	branch = ai-main
+[submodule "projects/inventory-hub"]
+	path = projects/inventory-hub
+	url = git@github.com:JRiyaz/inventory-hub.git
+	branch = ai-main
