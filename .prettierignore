@@ -25,4 +25,3 @@ yarn.lock
 /coverage
 /projects
 **/assets/**/*
-tsconfig.federation.json
