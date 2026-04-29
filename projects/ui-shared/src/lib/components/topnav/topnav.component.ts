@@ -120,8 +120,10 @@ import { SearchService } from '../../services/search.service';
           <button (click)="userDropdownOpen.set(!userDropdownOpen())" class="flex items-center gap-2.5 pl-3 sm:pl-4 border-l border-slate-200 dark:border-white/[0.08] cursor-pointer group" id="topnav-user-menu">
             <ng-container *ngIf="auth.isLoggedIn(); else notLoggedIn">
               <div class="text-right hidden sm:block">
-                <p class="text-sm font-bold leading-none text-slate-900 dark:text-white">{{ auth.user()?.name }}</p>
-                <p class="text-[10px] text-primary font-bold uppercase tracking-widest mt-0.5">{{ auth.user()?.role }}</p>
+                <p class="text-sm font-bold leading-none text-slate-900 dark:text-white truncate">{{ auth.user()?.name }}</p>
+                <p class="text-[10px] text-primary font-bold uppercase tracking-widest mt-0.5">
+                  {{ auth.userRoles()[0] }}{{ auth.userRoles().length > 1 ? '...' : '' }}
+                </p>
               </div>
               <img [src]="auth.avatarUrl()" [alt]="auth.user()?.name || 'User'"
                    class="w-9 h-9 rounded-xl border border-slate-200 dark:border-white/[0.12] group-hover:border-slate-300 dark:group-hover:border-white/[0.25] transition-colors">

@@ -3,7 +3,7 @@ import { Injectable, signal, computed } from '@angular/core';
 export interface UserProfile {
   name: string;
   email: string;
-  role: string;
+  roles: string[];
   avatarUrl: string;
 }
 
@@ -12,40 +12,63 @@ export interface UserProfile {
 })
 export class AuthStateService {
   private readonly _isLoggedIn = signal(true);
-  private readonly _roles = signal<string[]>(['Admin', 'User']);
-  private readonly _currentRole = signal<string>('Admin');
+  private readonly _availableRoles = signal<string[]>(['Admin', 'User']);
   private readonly _user = signal<UserProfile | null>({
     name: 'Riyaz Khan',
     email: 'riyaz@company.com',
-    role: 'Admin',
+    roles: ['Admin'],
     avatarUrl: ''
   });
 
   readonly isLoggedIn = this._isLoggedIn.asReadonly();
   readonly user = this._user.asReadonly();
-  readonly roles = this._roles.asReadonly();
-  readonly currentRole = this._currentRole.asReadonly();
-  readonly isAdmin = computed(() => this._currentRole() === 'Admin');
+  readonly availableRoles = this._availableRoles.asReadonly();
+  
+  /** Current roles assigned to the user */
+  readonly userRoles = computed(() => this._user()?.roles || []);
+  
+  /** True if user has Admin role among their active roles */
+  readonly isAdmin = computed(() => (this._user()?.roles || []).includes('Admin'));
 
-  addRole(role: string): void {
-    if (role && !this._roles().includes(role)) {
-      this._roles.update(r => [...r, role]);
+  /** Roles available in the system that user doesn't have yet */
+  readonly otherRoles = computed(() => {
+    const active = this.userRoles();
+    return this._availableRoles().filter(r => !active.includes(r));
+  });
+
+  addSystemRole(role: string): void {
+    if (role && !this._availableRoles().includes(role)) {
+      this._availableRoles.update(r => [...r, role]);
     }
   }
 
-  deleteRole(role: string): void {
-    this._roles.update(r => r.filter(x => x !== role));
-    if (this._currentRole() === role) {
-      this._currentRole.set(this._roles()[0] || '');
+  deleteSystemRole(role: string): void {
+    this._availableRoles.update(r => r.filter(x => x !== role));
+    // Also remove from user if they had it
+    this.removeRoleFromUser(role);
+  }
+
+  toggleRole(role: string): void {
+    const user = this._user();
+    if (!user) return;
+
+    if (user.roles.includes(role)) {
+      this.removeRoleFromUser(role);
+    } else {
+      this.assignRoleToUser(role);
     }
   }
 
-  setCurrentRole(role: string): void {
-    if (this._roles().includes(role)) {
-      this._currentRole.set(role);
-      // Update user profile role to stay in sync
-      this._user.update(u => u ? { ...u, role } : null);
-    }
+  assignRoleToUser(role: string): void {
+    this._user.update(u => u ? { ...u, roles: [...new Set([...u.roles, role])] } : null);
+  }
+
+  removeRoleFromUser(role: string): void {
+    this._user.update(u => u ? { ...u, roles: u.roles.filter(r => r !== role) } : null);
+  }
+
+  hasRole(role: string): boolean {
+    return (this._user()?.roles || []).includes(role);
   }
   readonly userInitials = computed(() => {
     const u = this._user();
@@ -62,7 +85,6 @@ export class AuthStateService {
   login(user: UserProfile): void {
     this._user.set(user);
     this._isLoggedIn.set(true);
-    this.setCurrentRole(user.role);
   }
 
   /** Simulate logout */
@@ -79,7 +101,7 @@ export class AuthStateService {
       this.login({
         name: 'Riyaz Khan',
         email: 'riyaz@company.com',
-        role: 'Admin',
+        roles: ['Admin'],
         avatarUrl: ''
       });
     }
