@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { AuthStateService } from '../../services/auth-state.service';
 import { ThemeService } from '../../services/theme.service';
 import { NotificationService } from '../../services/notification.service';
+import { DarkModeService } from '../../services/dark-mode.service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'ui-topnav',
@@ -16,12 +18,6 @@ import { NotificationService } from '../../services/notification.service';
         <button (click)="sidebarToggle.emit()" class="lg:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5" id="topnav-sidebar-toggle">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
-        <a routerLink="/" class="flex items-center gap-2.5">
-          <div class="w-9 h-9 bg-gradient-to-br from-primary to-blue-500 rounded-xl flex items-center justify-center">
-            <span class="text-white font-black text-base">I</span>
-          </div>
-          <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white hidden sm:inline">Inven<span class="text-primary">tory</span></span>
-        </a>
       </div>
 
       <!-- Center: Search Bar -->
@@ -39,6 +35,25 @@ import { NotificationService } from '../../services/notification.service';
         <!-- Mobile Search -->
         <button class="sm:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </button>
+
+        <!-- Sync Data -->
+        <button 
+          (click)="showSyncConfirm.set(true)"
+          class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5" 
+          id="topnav-sync-data"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+        </button>
+
+        <!-- Dark Mode Toggle -->
+        <button 
+          (click)="darkModeService.toggle()"
+          class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5" 
+          id="topnav-dark-mode"
+        >
+          <svg *ngIf="!darkModeService.isDarkMode()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          <svg *ngIf="darkModeService.isDarkMode()" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
         </button>
 
         <!-- Notifications -->
@@ -146,21 +161,51 @@ import { NotificationService } from '../../services/notification.service';
 
     <!-- Backdrop to close dropdown -->
     <div *ngIf="userDropdownOpen()" (click)="userDropdownOpen.set(false)" class="fixed inset-0 z-20"></div>
+
+    <!-- Sync Confirmation Popup -->
+    <div *ngIf="showSyncConfirm()" class="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm animate-fade-in" (click)="showSyncConfirm.set(false)"></div>
+      <div class="bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden z-10 animate-scale-in">
+        <div class="p-6">
+          <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Synchronize Data?</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">This will refresh all platform data from the server. Any unsaved local changes might be overwritten.</p>
+          <div class="flex gap-3">
+            <button (click)="showSyncConfirm.set(false)" class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.08] text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">Cancel</button>
+            <button (click)="confirmSync()" class="flex-1 px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary-hover transition-colors shadow-lg shadow-primary/20">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
   `,
   styles: [`
     @keyframes fade-in {
       from { opacity: 0; transform: translateY(-8px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    @keyframes scale-in {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
     .animate-fade-in {
       animation: fade-in 0.15s ease-out forwards;
+    }
+    .animate-scale-in {
+      animation: scale-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
   `]
 })
 export class TopnavComponent {
   sidebarToggle = output<void>();
   userDropdownOpen = signal(false);
+  showSyncConfirm = signal(false);
+
   notificationService = inject(NotificationService);
+  darkModeService = inject(DarkModeService);
+  loadingService = inject(LoadingService);
+
   unreadCount = computed(() => this.notificationService.notifications().filter(n => !n.read).length);
 
   constructor(
@@ -178,5 +223,10 @@ export class TopnavComponent {
   handleLogout(): void {
     this.auth.logout();
     this.userDropdownOpen.set(false);
+  }
+
+  confirmSync(): void {
+    this.showSyncConfirm.set(false);
+    this.loadingService.simulateLoading(2500, 'Synchronizing Platform Data...');
   }
 }

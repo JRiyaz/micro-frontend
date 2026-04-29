@@ -21,6 +21,7 @@ export * from './lib/services/theme.service';
 export * from './lib/services/notification.service';
 export * from './lib/services/workspace.service';
 export * from './lib/services/loading.service';
+export * from './lib/services/dark-mode.service';
 
 // Shared Utilities
 export * from './lib/utils/drag-drop';
