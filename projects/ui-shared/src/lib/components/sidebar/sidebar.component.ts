@@ -398,7 +398,7 @@ export class SidebarComponent implements OnInit {
 
   subProjects = signal<SubProject[]>([
     { name: 'Inventory Shell', status: 'running', port: 4200 },
-    { name: 'User Module', status: 'running', port: 4210 },
+    { name: 'User Service', status: 'running', port: 4210 },
     { name: 'Products Service', status: 'offline' },
     { name: 'Orders Service', status: 'offline' },
     { name: 'Analytics Module', status: 'error' },

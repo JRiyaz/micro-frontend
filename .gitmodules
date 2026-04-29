@@ -2,7 +2,7 @@
 	path = projects/shell
 	url = https://github.com/JRiyaz/micro-frontend-shell.git
 	branch = main
-[submodule "projects/user"]
-	path = projects/user
+[submodule "projects/user-service"]
+	path = projects/user-service
 	url = https://github.com/JRiyaz/micro-frontend-user.git
 	branch = main

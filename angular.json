@@ -136,7 +136,7 @@
         }
       }
     },
-    "user": {
+    "user-service": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -166,8 +166,8 @@
           "skipTests": true
         }
       },
-      "root": "projects/user/frontend",
-      "sourceRoot": "projects/user/frontend/src",
+      "root": "projects/user-service/frontend",
+      "sourceRoot": "projects/user-service/frontend/src",
       "prefix": "app",
       "architect": {
         "build": {
@@ -175,10 +175,10 @@
           "options": {},
           "configurations": {
             "production": {
-              "target": "user:esbuild:production"
+              "target": "user-service:esbuild:production"
             },
             "development": {
-              "target": "user:esbuild:development",
+              "target": "user-service:esbuild:development",
               "dev": true
             }
           },
@@ -187,7 +187,7 @@
         "serve": {
           "builder": "@angular-architects/native-federation:build",
           "options": {
-            "target": "user:serve-original:development",
+            "target": "user-service:serve-original:development",
             "rebuildDelay": 0,
             "dev": true,
             "port": 0
@@ -200,32 +200,32 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "polyfills": [],
-            "tsConfig": "projects/user/frontend/tsconfig.spec.json",
+            "tsConfig": "projects/user-service/frontend/tsconfig.spec.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/user/frontend/public"
+                "input": "projects/user-service/frontend/public"
               }
             ],
-            "styles": ["projects/user/frontend/src/styles.css"],
+            "styles": ["projects/user-service/frontend/src/styles.css"],
             "scripts": []
           }
         },
         "esbuild": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/user",
-            "index": "projects/user/frontend/src/index.html",
-            "browser": "projects/user/frontend/src/main.ts",
+            "outputPath": "dist/user-service",
+            "index": "projects/user-service/frontend/src/index.html",
+            "browser": "projects/user-service/frontend/src/main.ts",
             "polyfills": ["es-module-shims"],
-            "tsConfig": "projects/user/frontend/tsconfig.app.json",
+            "tsConfig": "projects/user-service/frontend/tsconfig.app.json",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/user/frontend/public"
+                "input": "projects/user-service/frontend/public"
               }
             ],
-            "styles": ["projects/user/frontend/src/styles.css"],
+            "styles": ["projects/user-service/frontend/src/styles.css"],
             "scripts": []
           },
           "configurations": {
@@ -256,10 +256,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "user:esbuild:production"
+              "buildTarget": "user-service:esbuild:production"
             },
             "development": {
-              "buildTarget": "user:esbuild:development"
+              "buildTarget": "user-service:esbuild:development"
             }
           },
           "defaultConfiguration": "development",

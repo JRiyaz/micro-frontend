@@ -136,7 +136,7 @@ export class TopnavComponent {
   constructor(
     public auth: AuthStateService,
     public themeService: ThemeService
-  ) {}
+  ) { }
 
   toggleTheme(): void {
     const current = this.themeService.currentTheme();
