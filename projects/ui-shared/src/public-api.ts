@@ -11,6 +11,7 @@ export * from './lib/components/landing/landing.component';
 export * from './lib/components/dashboard-layout/dashboard-layout.component';
 export * from './lib/components/topnav/topnav.component';
 export * from './lib/components/sidebar/sidebar.component';
+export * from './lib/components/loading/loading.component';
 export * from './lib/components/notification-toast/notification-toast.component';
 export * from './lib/components/notification-sidenav/notification-sidenav.component';
 
@@ -19,6 +20,7 @@ export * from './lib/services/auth-state.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/notification.service';
 export * from './lib/services/workspace.service';
+export * from './lib/services/loading.service';
 
 // Shared Utilities
 export * from './lib/utils/drag-drop';

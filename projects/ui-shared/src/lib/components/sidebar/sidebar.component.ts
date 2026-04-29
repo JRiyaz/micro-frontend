@@ -2,6 +2,7 @@ import { Component, signal, inject, ElementRef, ViewChild, OnInit, computed } fr
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'ui-sidebar',
@@ -85,6 +86,13 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
             <span class="ml-auto text-[10px] text-slate-600 font-mono">v1.0.0</span>
           </div>
         </div>
+
+        <!-- Sync / Reload -->
+        <button (click)="loadingService.simulateLoading(3000, 'Synchronizing Platform Data...')" 
+                class="w-full flex items-center justify-center gap-2 py-3 text-slate-500 hover:text-primary dark:hover:text-primary hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-sync-data">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text text-[10px] font-bold uppercase tracking-widest">Sync Data</span>
+        </button>
 
         <!-- Dark Mode Toggle -->
         <button (click)="toggleDarkMode()" class="w-full flex items-center justify-center gap-2 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-dark-mode-toggle">
@@ -248,6 +256,7 @@ export class SidebarComponent implements OnInit {
   collapsed = signal(false);
   navFlyoutIndex = signal(-1);
   isDarkMode = signal(false);
+  loadingService = inject(LoadingService);
 
   ngOnInit() {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
