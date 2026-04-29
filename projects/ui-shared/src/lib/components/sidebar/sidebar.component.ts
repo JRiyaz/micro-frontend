@@ -372,6 +372,38 @@ export class SidebarComponent implements OnInit {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       this.isDarkMode.set(document.documentElement.classList.contains('dark'));
     }
+    this.loadManifestProjects();
+  }
+
+  private async loadManifestProjects() {
+    try {
+      const response = await fetch('/federation.manifest.json');
+      const manifest = await response.json();
+
+      const projects: SubProject[] = [
+        { name: 'Inventory Shell', status: 'running', port: 4200 }
+      ];
+
+      Object.entries(manifest).forEach(([key, value]) => {
+        // Extract port from URL if possible
+        const url = value as string;
+        const portMatch = url.match(/:(\d+)\//);
+        const port = portMatch ? parseInt(portMatch[1], 10) : undefined;
+
+        // Map manifest keys to more readable names
+        const name = key.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+        projects.push({
+          name: name,
+          status: 'running',
+          port: port
+        });
+      });
+
+      this.subProjects.set(projects);
+    } catch (err) {
+      console.error('Error loading manifest projects:', err);
+    }
   }
 
   toggleDarkMode() {
@@ -390,18 +422,14 @@ export class SidebarComponent implements OnInit {
   flyoutLeft = 76; // 68px sidebar + 8px gap
   navFlyoutTop = 0;
   projectFlyoutTop = 0;
-  
+
   private projectFlyoutTimeout: any;
   private navFlyoutTimeout: any;
 
   @ViewChild('sidebarRef') sidebarRef!: ElementRef<HTMLElement>;
 
   subProjects = signal<SubProject[]>([
-    { name: 'Inventory Shell', status: 'running', port: 4200 },
-    { name: 'User Service', status: 'running', port: 4210 },
-    { name: 'Products Service', status: 'offline' },
-    { name: 'Orders Service', status: 'offline' },
-    { name: 'Analytics Module', status: 'error' },
+    { name: 'Inventory Shell', status: 'running', port: 4200 }
   ]);
 
   private sanitizer = inject(DomSanitizer);
@@ -441,7 +469,7 @@ export class SidebarComponent implements OnInit {
 
   onProjectHover(event: MouseEvent, entering: boolean, isFlyout = false): void {
     if (!this.collapsed() || this.mobileOpen()) return;
-    
+
     if (entering) {
       clearTimeout(this.projectFlyoutTimeout);
       if (!isFlyout) {
@@ -459,11 +487,11 @@ export class SidebarComponent implements OnInit {
   }
 
   onNavHover(event: MouseEvent, idx: number, isFlyout = false): void {
-    if (!this.collapsed() || this.mobileOpen()) { 
-      this.navFlyoutIndex.set(-1); 
-      return; 
+    if (!this.collapsed() || this.mobileOpen()) {
+      this.navFlyoutIndex.set(-1);
+      return;
     }
-    
+
     if (idx >= 0) {
       clearTimeout(this.navFlyoutTimeout);
       if (!isFlyout) {
