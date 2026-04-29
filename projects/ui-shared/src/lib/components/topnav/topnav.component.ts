@@ -302,16 +302,18 @@ export class TopnavComponent implements OnInit {
       return;
     }
 
-    // Combine static route index with dynamic items from global registry
-    const globalItems = (window as any).__SEARCH_REGISTRY__ || [];
-    const allSearchable = [...this.routeIndex, ...globalItems];
-    console.log('[TopnavSearch] Searching through items:', allSearchable.length, allSearchable);
-
-    const results = allSearchable.filter(item => 
-      item.title.toLowerCase().includes(query) || 
-      item.path.toLowerCase().includes(query) ||
-      (item.category && item.category.toLowerCase().includes(query))
-    ).slice(0, 5);
+    // Combine static route index with dynamic items from SearchService
+    const dynamicItems = this.searchService.items();
+    const allSearchable = [...this.routeIndex, ...dynamicItems];
+    
+    const results = allSearchable.filter(item => {
+      const matchesTitle = item.title.toLowerCase().includes(query);
+      const matchesPath = item.path.toLowerCase().includes(query);
+      const matchesCategory = item.category && item.category.toLowerCase().includes(query);
+      const matchesKeywords = item.keywords && item.keywords.some((k: string) => k.toLowerCase().includes(query));
+      
+      return matchesTitle || matchesPath || matchesCategory || matchesKeywords;
+    }).slice(0, 5);
 
     this.searchResults.set(results);
     this.showResults.set(results.length > 0);

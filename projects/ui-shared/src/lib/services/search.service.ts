@@ -25,20 +25,28 @@ export class SearchService {
   /**
    * The global index of searchable items
    */
-  items = computed(() => this.registeredItems());
+  items = computed(() => {
+    // Always sync from global to handle multiple service instances across MFEs
+    const globalSearch = (window as any).__SEARCH_REGISTRY__ || [];
+    if (globalSearch.length !== this.registeredItems().length) {
+      this.registeredItems.set(globalSearch);
+    }
+    return this.registeredItems();
+  });
 
   /**
    * Register items to the global search index.
    */
   register(items: SearchableItem[]): void {
-    console.log('[SearchService] Registering items:', items.map(i => i.title));
-    
     const currentGlobal = (window as any).__SEARCH_REGISTRY__ || [];
     const newItems = items.filter(item => !currentGlobal.find((c: any) => c.id === item.id));
     
-    const updated = [...currentGlobal, ...newItems];
-    (window as any).__SEARCH_REGISTRY__ = updated;
-    this.registeredItems.set(updated);
+    if (newItems.length > 0) {
+      const updated = [...currentGlobal, ...newItems];
+      (window as any).__SEARCH_REGISTRY__ = updated;
+      this.registeredItems.set(updated);
+      console.log('[SearchService] Registered items:', newItems.map(i => i.title));
+    }
   }
 
   /**
