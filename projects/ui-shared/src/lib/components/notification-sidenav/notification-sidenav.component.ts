@@ -68,9 +68,6 @@ import { NotificationService } from '../../services/notification.service';
               >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
               </button>
-
-              <!-- Mark as read indicator -->
-              <div *ngIf="!n.read" (click)="notificationService.markAsRead(n.id)" class="absolute top-3 right-3 w-2 h-2 bg-primary rounded-full group-hover:hidden"></div>
             </div>
           } @empty {
             <div class="h-full flex flex-col items-center justify-center text-center p-8 opacity-50">
