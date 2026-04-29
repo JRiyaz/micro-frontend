@@ -2,6 +2,8 @@
  * Public API Surface of ui-shared
  */
 
+export * from './lib/components/form-controls/datepicker.component';
+export * from './lib/components/form-controls/dropdown.component';
 export * from './lib/ui-shared.service';
 export * from './lib/ui-shared.component';
 export * from './lib/http-interceptors/index'
