@@ -7,7 +7,7 @@ import { delay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ThemeService {
-  readonly themes = ['void-blue', 'emerald', 'rose', 'obsidian'];
+  readonly themes = ['void-blue', 'emerald', 'rose', 'obsidian', 'gold'];
   currentTheme = signal<string>('void-blue');
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
