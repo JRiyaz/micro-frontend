@@ -6,6 +6,7 @@ import { ThemeService } from '../../services/theme.service';
 import { NotificationService } from '../../services/notification.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { LoadingService } from '../../services/loading.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'ui-topnav',
@@ -242,12 +243,13 @@ export class TopnavComponent implements OnInit {
   notificationService = inject(NotificationService);
   darkModeService = inject(DarkModeService);
   loadingService = inject(LoadingService);
+  private searchService = inject(SearchService);
   private router = inject(Router);
 
   unreadCount = computed(() => this.notificationService.notifications().filter(n => !n.read).length);
   isMac = false;
 
-  private searchableRoutes: { path: string; title: string; category: string }[] = [];
+  private routeIndex: any[] = [];
 
   constructor(
     public auth: AuthStateService,
@@ -267,10 +269,11 @@ export class TopnavComponent implements OnInit {
           const fullPath = parentPath ? `${parentPath}/${route.path}` : route.path;
           const title = route.data?.title || this.formatPath(route.path);
           
-          this.searchableRoutes.push({
+          this.routeIndex.push({
             path: fullPath.startsWith('/') ? fullPath : `/${fullPath}`,
             title: title,
-            category: parentPath ? 'Section' : 'Page'
+            category: parentPath ? 'Section' : 'Page',
+            queryParams: {}
           });
         }
         if (route.children) {
@@ -280,13 +283,6 @@ export class TopnavComponent implements OnInit {
     };
 
     extractRoutes(this.router.config);
-    
-    // Add context-specific industry-standard "commands"
-    this.searchableRoutes.push(
-      { path: '/user/settings', title: 'Appearance & Theme', category: 'Settings' },
-      { path: '/dashboard', title: 'Pending Orders', category: 'Inventory' },
-      { path: '/dashboard', title: 'In Progress Tasks', category: 'Inventory' }
-    );
   }
 
   private formatPath(path: string): string {
@@ -319,11 +315,15 @@ export class TopnavComponent implements OnInit {
       return;
     }
 
-    // Dynamic filtering across indexed routes
-    const results = this.searchableRoutes.filter(route => 
-      route.title.toLowerCase().includes(query) || 
-      route.path.toLowerCase().includes(query) ||
-      route.category.toLowerCase().includes(query)
+    // Combine static route index with dynamic items from global registry
+    const globalItems = (window as any).__SEARCH_REGISTRY__ || [];
+    const allSearchable = [...this.routeIndex, ...globalItems];
+    console.log('[TopnavSearch] Searching through items:', allSearchable.length, allSearchable);
+
+    const results = allSearchable.filter(item => 
+      item.title.toLowerCase().includes(query) || 
+      item.path.toLowerCase().includes(query) ||
+      (item.category && item.category.toLowerCase().includes(query))
     ).slice(0, 5);
 
     this.searchResults.set(results);
@@ -362,7 +362,7 @@ export class TopnavComponent implements OnInit {
   }
 
   selectResult(result: any): void {
-    this.router.navigate([result.path]);
+    this.router.navigate([result.path], { queryParams: result.queryParams });
     this.closeSearch();
   }
 
