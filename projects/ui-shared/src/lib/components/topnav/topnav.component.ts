@@ -1,6 +1,6 @@
-import { Component, output, signal, OnInit, inject, computed } from '@angular/core';
+import { Component, output, signal, OnInit, inject, computed, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { AuthStateService } from '../../services/auth-state.service';
 import { ThemeService } from '../../services/theme.service';
 import { NotificationService } from '../../services/notification.service';
@@ -23,7 +23,10 @@ import { LoadingService } from '../../services/loading.service';
       <!-- Center: Search Bar -->
       <div class="flex-1 max-w-xl mx-4 hidden sm:block pt-1">
         <div class="relative group">
-          <input type="text" placeholder=" "
+          <input #searchInput type="text" placeholder=" "
+                 (input)="onSearchInput($event)"
+                 (keydown)="handleSearchKeydown($event)"
+                 (blur)="onBlur()"
                  class="peer w-full bg-transparent border-b-2 border-slate-200 dark:border-white/[0.08] py-2.5 pl-10 pr-4 text-sm text-slate-900 dark:text-slate-200 focus:outline-none focus:border-primary transition-all placeholder-transparent" id="topnav-search">
           
           <label for="topnav-search" 
@@ -35,14 +38,34 @@ import { LoadingService } from '../../services/loading.service';
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
           </svg>
 
-          <kbd class="absolute right-0 top-1/2 -translate-y-1/2 px-1.5 py-0.5 bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/[0.08] rounded text-[10px] text-slate-400 dark:text-slate-500 font-mono hidden lg:inline-block">⌘K</kbd>
+          <button (click)="focusSearch()" class="absolute right-0 top-1/2 -translate-y-1/2 px-1.5 py-0.5 bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/[0.08] rounded text-[10px] text-slate-400 dark:text-slate-500 font-mono hidden lg:inline-block hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+            {{ isMac ? '⌘K' : 'Ctrl+K' }}
+          </button>
+
+          <!-- Search Results Dropdown -->
+          <div *ngIf="showResults()" class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] shadow-xl rounded-xl overflow-hidden z-50 animate-fade-in">
+            <div class="p-2">
+              <button *ngFor="let result of searchResults(); let i = index" 
+                      (mousedown)="selectResult(result)"
+                      [class.bg-slate-50]="selectedIndex() === i"
+                      [class.dark:bg-white/[0.06]]="selectedIndex() === i"
+                      class="w-full flex items-center justify-between px-4 py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors group">
+                <div class="flex flex-col items-start">
+                  <span class="text-sm font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors"
+                        [class.text-primary]="selectedIndex() === i">{{ result.title }}</span>
+                  <span class="text-[10px] text-slate-500 uppercase tracking-widest">{{ result.path }}</span>
+                </div>
+                <span class="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded uppercase tracking-wider">{{ result.category }}</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Right: Notifications + User -->
       <div class="flex items-center gap-2 sm:gap-4">
         <!-- Mobile Search -->
-        <button class="sm:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5">
+        <button (click)="focusSearch()" class="sm:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </button>
 
@@ -206,21 +229,156 @@ import { LoadingService } from '../../services/loading.service';
     }
   `]
 })
-export class TopnavComponent {
+export class TopnavComponent implements OnInit {
   sidebarToggle = output<void>();
   userDropdownOpen = signal(false);
   showSyncConfirm = signal(false);
+  searchResults = signal<any[]>([]);
+  showResults = signal(false);
+  selectedIndex = signal(-1);
+
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   notificationService = inject(NotificationService);
   darkModeService = inject(DarkModeService);
   loadingService = inject(LoadingService);
+  private router = inject(Router);
 
   unreadCount = computed(() => this.notificationService.notifications().filter(n => !n.read).length);
+  isMac = false;
+
+  private searchableRoutes: { path: string; title: string; category: string }[] = [];
 
   constructor(
     public auth: AuthStateService,
     public themeService: ThemeService
   ) { }
+
+  ngOnInit(): void {
+    this.isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+    this.indexRoutes();
+  }
+
+  private indexRoutes(): void {
+    // Dynamically build a searchable index from the router configuration
+    const extractRoutes = (routes: any[], parentPath = '') => {
+      routes.forEach(route => {
+        if (route.path && !route.path.includes(':') && !route.path.includes('**')) {
+          const fullPath = parentPath ? `${parentPath}/${route.path}` : route.path;
+          const title = route.data?.title || this.formatPath(route.path);
+          
+          this.searchableRoutes.push({
+            path: fullPath.startsWith('/') ? fullPath : `/${fullPath}`,
+            title: title,
+            category: parentPath ? 'Section' : 'Page'
+          });
+        }
+        if (route.children) {
+          extractRoutes(route.children, parentPath ? `${parentPath}/${route.path}` : route.path);
+        }
+      });
+    };
+
+    extractRoutes(this.router.config);
+    
+    // Add context-specific industry-standard "commands"
+    this.searchableRoutes.push(
+      { path: '/user/settings', title: 'Appearance & Theme', category: 'Settings' },
+      { path: '/dashboard', title: 'Pending Orders', category: 'Inventory' },
+      { path: '/dashboard', title: 'In Progress Tasks', category: 'Inventory' }
+    );
+  }
+
+  private formatPath(path: string): string {
+    return path.split('/').pop()?.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') || 'Page';
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    const isK = event.key.toLowerCase() === 'k';
+    const isModifier = event.ctrlKey || event.metaKey;
+
+    if (isModifier && isK) {
+      event.preventDefault();
+      this.focusSearch();
+    }
+  }
+
+  focusSearch(): void {
+    if (this.searchInput) {
+      this.searchInput.nativeElement.focus();
+    }
+  }
+
+  onSearchInput(event: any): void {
+    const query = event.target.value.toLowerCase().trim();
+    if (!query) {
+      this.searchResults.set([]);
+      this.showResults.set(false);
+      this.selectedIndex.set(-1);
+      return;
+    }
+
+    // Dynamic filtering across indexed routes
+    const results = this.searchableRoutes.filter(route => 
+      route.title.toLowerCase().includes(query) || 
+      route.path.toLowerCase().includes(query) ||
+      route.category.toLowerCase().includes(query)
+    ).slice(0, 5);
+
+    this.searchResults.set(results);
+    this.showResults.set(results.length > 0);
+    this.selectedIndex.set(results.length > 0 ? 0 : -1);
+  }
+
+  handleSearchKeydown(event: KeyboardEvent): void {
+    const results = this.searchResults();
+    if (!results.length) return;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        this.selectedIndex.update(i => (i + 1) % results.length);
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        this.selectedIndex.update(i => (i - 1 + results.length) % results.length);
+        break;
+      case 'Enter':
+        event.preventDefault();
+        if (this.selectedIndex() >= 0) {
+          this.selectResult(results[this.selectedIndex()]);
+        }
+        break;
+      case 'Escape':
+        this.closeSearch();
+        break;
+    }
+  }
+
+  onBlur(): void {
+    // Delay hiding results to allow (mousedown) to trigger first
+    setTimeout(() => this.showResults.set(false), 200);
+  }
+
+  selectResult(result: any): void {
+    this.router.navigate([result.path]);
+    this.closeSearch();
+  }
+
+  closeSearch(): void {
+    if (this.searchInput) {
+      this.searchInput.nativeElement.value = '';
+      this.searchInput.nativeElement.blur();
+    }
+    this.searchResults.set([]);
+    this.showResults.set(false);
+    this.selectedIndex.set(-1);
+  }
+
+  handleSearch(event: any): void {
+    // This is now handled by handleSearchKeydown for Enter key
+  }
 
   toggleTheme(): void {
     const current = this.themeService.currentTheme();
