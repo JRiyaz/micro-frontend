@@ -1,13 +1,7 @@
-import { Component, signal, inject, ElementRef, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { Component, signal, inject, ElementRef, ViewChild, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
-export interface SubProject {
-  name: string;
-  status: 'running' | 'offline' | 'error';
-  port?: number;
-}
 
 @Component({
   selector: 'ui-sidebar',
@@ -34,70 +28,6 @@ export interface SubProject {
       <!-- Scrollable content area -->
       <div class="sidebar-content flex-1 overflow-y-auto overflow-x-hidden sidebar-scroll min-h-0 py-5"
            [class.px-5]="!collapsed() || mobileOpen()" [class.px-2]="collapsed() && !mobileOpen()">
-
-        <!-- Project Workspace Section -->
-        <div class="mb-6"
-             (mouseenter)="onProjectHover($event, true)"
-             (mouseleave)="onProjectHover($event, false)">
-
-          <!-- Expanded: Full dropdown -->
-          <div [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade">
-            <label class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.15em] block mb-2 px-1">Project Workspace</label>
-            <div class="relative">
-              <button (click)="projectDropdownOpen.set(!projectDropdownOpen())"
-                      class="w-full bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] rounded-xl px-3.5 py-2.5 text-sm text-left flex items-center justify-between hover:border-slate-300 dark:hover:border-white/[0.15] transition-colors focus:outline-none"
-                      id="sidebar-project-dropdown">
-                <div class="flex items-center gap-2.5 min-w-0">
-                  <span class="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                        [class.bg-green-400]="getSelectedProject()?.status === 'running'"
-                        [class.bg-slate-500]="getSelectedProject()?.status === 'offline'"
-                        [class.bg-red-500]="getSelectedProject()?.status === 'error'">
-                  </span>
-                  <span class="truncate text-slate-900 dark:text-white font-medium">{{ getSelectedProject()?.name || 'Select Project' }}</span>
-                </div>
-                <svg class="w-4 h-4 text-slate-500 flex-shrink-0 transition-transform" [class.rotate-180]="projectDropdownOpen()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-              </button>
-
-              <!-- Project List (expanded dropdown) -->
-              <div *ngIf="projectDropdownOpen()" class="absolute left-0 right-0 top-full mt-1.5 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-xl overflow-hidden z-20 animate-dropdown shadow-md dark:shadow-xl dark:shadow-black/40">
-                <div *ngFor="let project of subProjects(); let i = index"
-                     (click)="selectProject(i)"
-                     class="flex items-center gap-2.5 px-3.5 py-2.5 text-sm cursor-pointer transition-colors"
-                     [class.bg-primary/10]="i === selectedProjectIndex()"
-                     [class.text-slate-900]="i === selectedProjectIndex()"
-                     [class.dark:text-white]="i === selectedProjectIndex()"
-                     [class.text-slate-500]="i !== selectedProjectIndex()"
-                     [class.dark:text-slate-400]="i !== selectedProjectIndex()"
-                     [class.hover:bg-slate-100]="i !== selectedProjectIndex()"
-                     [class.dark:hover:bg-white/[0.04]]="i !== selectedProjectIndex()">
-                    <span class="w-2 h-2 rounded-full flex-shrink-0"
-                          [class.bg-green-400]="project.status === 'running'"
-                          [class.bg-slate-500]="project.status === 'offline'"
-                          [class.bg-red-500]="project.status === 'error'">
-                    </span>
-                    <span class="truncate flex-1">{{ project.name }}</span>
-                    <span class="text-[10px] font-bold uppercase tracking-wider flex-shrink-0"
-                          [class.text-green-400]="project.status === 'running'"
-                          [class.text-slate-600]="project.status === 'offline'"
-                          [class.text-red-400]="project.status === 'error'">
-                      {{ project.status }}
-                    </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Collapsed: Icon button -->
-          <div [class.sidebar-show]="collapsed() && !mobileOpen()" [class.sidebar-hide]="!collapsed() || mobileOpen()" class="sidebar-fade flex justify-center">
-            <button class="w-10 h-10 rounded-xl bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.06] flex items-center justify-center hover:bg-slate-100 dark:hover:bg-white/[0.08] transition-colors shadow-sm dark:shadow-none" title="Project Workspace">
-              <span class="w-2.5 h-2.5 rounded-full"
-                    [class.bg-green-400]="getSelectedProject()?.status === 'running'"
-                    [class.bg-slate-500]="getSelectedProject()?.status === 'offline'"
-                    [class.bg-red-500]="getSelectedProject()?.status === 'error'">
-              </span>
-            </button>
-          </div>
-        </div>
 
         <!-- Navigation -->
         <nav class="space-y-1">
@@ -182,43 +112,6 @@ export interface SubProject {
          (mouseleave)="onNavHover($event, -1, true)">
       <div class="bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-1.5 whitespace-nowrap shadow-md dark:shadow-xl dark:shadow-black/40">
         <span class="text-xs font-medium text-slate-900 dark:text-white">{{ navItems[navFlyoutIndex()]?.label }}</span>
-      </div>
-    </div>
-
-    <!-- Project services flyout -->
-    <div *ngIf="projectFlyout() && collapsed() && !mobileOpen()"
-         class="fixed z-[9999] animate-flyout"
-         [style.left.px]="flyoutLeft"
-         [style.top.px]="projectFlyoutTop"
-         (mouseenter)="onProjectHover($event, true, true)"
-         (mouseleave)="onProjectHover($event, false, true)">
-      <div class="w-56 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-xl overflow-hidden shadow-md dark:shadow-xl dark:shadow-black/40">
-        <div class="px-3.5 py-2.5 border-b border-slate-200 dark:border-white/[0.06]">
-          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Workspace</span>
-        </div>
-        <div *ngFor="let project of subProjects(); let i = index"
-             (click)="selectProject(i); projectFlyout.set(false)"
-             class="flex items-center gap-2.5 px-3.5 py-2.5 text-sm cursor-pointer transition-colors"
-             [class.bg-primary/10]="i === selectedProjectIndex()"
-             [class.text-slate-900]="i === selectedProjectIndex()"
-             [class.dark:text-white]="i === selectedProjectIndex()"
-             [class.text-slate-500]="i !== selectedProjectIndex()"
-             [class.dark:text-slate-400]="i !== selectedProjectIndex()"
-             [class.hover:bg-slate-100]="i !== selectedProjectIndex()"
-             [class.dark:hover:bg-white/[0.04]]="i !== selectedProjectIndex()">
-          <span class="w-2 h-2 rounded-full flex-shrink-0"
-                [class.bg-green-400]="project.status === 'running'"
-                [class.bg-slate-500]="project.status === 'offline'"
-                [class.bg-red-500]="project.status === 'error'">
-          </span>
-          <span class="truncate flex-1 text-xs">{{ project.name }}</span>
-          <span class="text-[10px] font-bold uppercase tracking-wider flex-shrink-0"
-                [class.text-green-400]="project.status === 'running'"
-                [class.text-slate-600]="project.status === 'offline'"
-                [class.text-red-400]="project.status === 'error'">
-            {{ project.status }}
-          </span>
-        </div>
       </div>
     </div>
   `,
@@ -308,15 +201,6 @@ export interface SubProject {
       animation: flyout-in 0.15s ease-out forwards;
     }
 
-    /* ===== Dropdown animation (expanded mode) ===== */
-    @keyframes dropdown {
-      from { opacity: 0; transform: translateY(-4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-dropdown {
-      animation: dropdown 0.15s ease-out forwards;
-    }
-
     /* ===== Thin scrollbar ===== */
     .sidebar-scroll::-webkit-scrollbar {
       width: 4px;
@@ -362,47 +246,12 @@ export interface SubProject {
 export class SidebarComponent implements OnInit {
   mobileOpen = signal(false);
   collapsed = signal(false);
-  projectDropdownOpen = signal(false);
-  projectFlyout = signal(false);
-  selectedProjectIndex = signal(0);
   navFlyoutIndex = signal(-1);
   isDarkMode = signal(false);
 
   ngOnInit() {
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
       this.isDarkMode.set(document.documentElement.classList.contains('dark'));
-    }
-    this.loadManifestProjects();
-  }
-
-  private async loadManifestProjects() {
-    try {
-      const response = await fetch('/federation.manifest.json');
-      const manifest = await response.json();
-
-      const projects: SubProject[] = [
-        { name: 'Inventory Shell', status: 'running', port: 4200 }
-      ];
-
-      Object.entries(manifest).forEach(([key, value]) => {
-        // Extract port from URL if possible
-        const url = value as string;
-        const portMatch = url.match(/:(\d+)\//);
-        const port = portMatch ? parseInt(portMatch[1], 10) : undefined;
-
-        // Map manifest keys to more readable names
-        const name = key.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-
-        projects.push({
-          name: name,
-          status: 'running',
-          port: port
-        });
-      });
-
-      this.subProjects.set(projects);
-    } catch (err) {
-      console.error('Error loading manifest projects:', err);
     }
   }
 
@@ -421,16 +270,10 @@ export class SidebarComponent implements OnInit {
   // Flyout positioning
   flyoutLeft = 76; // 68px sidebar + 8px gap
   navFlyoutTop = 0;
-  projectFlyoutTop = 0;
 
-  private projectFlyoutTimeout: any;
   private navFlyoutTimeout: any;
 
   @ViewChild('sidebarRef') sidebarRef!: ElementRef<HTMLElement>;
-
-  subProjects = signal<SubProject[]>([
-    { name: 'Inventory Shell', status: 'running', port: 4200 }
-  ]);
 
   private sanitizer = inject(DomSanitizer);
 
@@ -467,25 +310,6 @@ export class SidebarComponent implements OnInit {
     }
   ];
 
-  onProjectHover(event: MouseEvent, entering: boolean, isFlyout = false): void {
-    if (!this.collapsed() || this.mobileOpen()) return;
-
-    if (entering) {
-      clearTimeout(this.projectFlyoutTimeout);
-      if (!isFlyout) {
-        const target = event.currentTarget as HTMLElement;
-        const rect = target.getBoundingClientRect();
-        this.projectFlyoutTop = rect.top;
-        this.flyoutLeft = this.getSidebarRight();
-      }
-      this.projectFlyout.set(true);
-    } else {
-      this.projectFlyoutTimeout = setTimeout(() => {
-        this.projectFlyout.set(false);
-      }, 150); // Small delay to allow mouse to reach the flyout
-    }
-  }
-
   onNavHover(event: MouseEvent, idx: number, isFlyout = false): void {
     if (!this.collapsed() || this.mobileOpen()) {
       this.navFlyoutIndex.set(-1);
@@ -513,15 +337,6 @@ export class SidebarComponent implements OnInit {
       return this.sidebarRef.nativeElement.getBoundingClientRect().right + 4;
     }
     return 76;
-  }
-
-  getSelectedProject(): SubProject | undefined {
-    return this.subProjects()[this.selectedProjectIndex()];
-  }
-
-  selectProject(index: number): void {
-    this.selectedProjectIndex.set(index);
-    this.projectDropdownOpen.set(false);
   }
 
   /** Called from topnav hamburger on mobile */

@@ -18,6 +18,7 @@ export * from './lib/components/notification-sidenav/notification-sidenav.compon
 export * from './lib/services/auth-state.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/notification.service';
+export * from './lib/services/workspace.service';
 
 // Shared Utilities
 export * from './lib/utils/drag-drop';
