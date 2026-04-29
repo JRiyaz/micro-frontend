@@ -213,22 +213,7 @@ import { SearchService } from '../../services/search.service';
       </div>
     </div>
   `,
-  styles: [`
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes scale-in {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .animate-fade-in {
-      animation: fade-in 0.15s ease-out forwards;
-    }
-    .animate-scale-in {
-      animation: scale-in 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-  `]
+  styles: []
 })
 export class TopnavComponent implements OnInit {
   sidebarToggle = output<void>();
