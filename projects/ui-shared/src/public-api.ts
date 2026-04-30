@@ -25,6 +25,7 @@ export * from './lib/services/workspace.service';
 export * from './lib/services/loading.service';
 export * from './lib/services/dark-mode.service';
 export * from './lib/services/search.service';
+export * from './lib/services/inventory-data.service';
 
 // Shared Utilities
 export * from './lib/utils/drag-drop';
