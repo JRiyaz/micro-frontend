@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,9 +7,9 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <div 
-      [ngClass]="classes"
-      [style.width]="width"
-      [style.height]="height"
+      [ngClass]="classes()"
+      [style.width]="width()"
+      [style.height]="height()"
       class="bg-slate-200 dark:bg-white/10 animate-pulse-fast relative overflow-hidden"
     >
       <!-- Shimmer Highlight Layer -->
@@ -50,15 +50,15 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class SkeletonComponent {
-  @Input() width: string = '100%';
-  @Input() height: string = '1rem';
-  @Input() shape: 'rect' | 'circle' | 'rounded' = 'rounded';
-  @Input() customClass: string = '';
+  width = input<string>('100%');
+  height = input<string>('1rem');
+  shape = input<'rect' | 'circle' | 'rounded'>('rounded');
+  customClass = input<string>('');
 
-  get classes(): string {
-    const base = this.customClass;
-    const shapeClass = this.shape === 'circle' ? 'rounded-full' : 
-                       this.shape === 'rounded' ? 'rounded-xl' : 'rounded-none';
+  classes = computed(() => {
+    const base = this.customClass();
+    const shapeClass = this.shape() === 'circle' ? 'rounded-full' : 
+                       this.shape() === 'rounded' ? 'rounded-xl' : 'rounded-none';
     return `${base} ${shapeClass}`;
-  }
+  });
 }

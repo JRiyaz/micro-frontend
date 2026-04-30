@@ -30,11 +30,13 @@ import { RouterModule } from '@angular/router';
             </button>
           </div>
         </div>
-        <div *ngIf="mobileMenu()" class="md:hidden border-t border-slate-200 dark:border-white/[0.06] px-6 py-3 space-y-2 bg-white/95 dark:bg-dark-base/95 backdrop-blur-xl">
-          <a href="#features" class="block text-sm text-slate-500 dark:text-slate-400 py-2">Features</a>
-          <a href="#stats" class="block text-sm text-slate-500 dark:text-slate-400 py-2">Stats</a>
-          <a routerLink="/user/login" class="block text-sm text-slate-500 dark:text-slate-400 py-2 sm:hidden">Sign In</a>
-        </div>
+        @if (mobileMenu()) {
+          <div class="md:hidden border-t border-slate-200 dark:border-white/[0.06] px-6 py-3 space-y-2 bg-white/95 dark:bg-dark-base/95 backdrop-blur-xl">
+            <a href="#features" class="block text-sm text-slate-500 dark:text-slate-400 py-2">Features</a>
+            <a href="#stats" class="block text-sm text-slate-500 dark:text-slate-400 py-2">Stats</a>
+            <a routerLink="/user/login" class="block text-sm text-slate-500 dark:text-slate-400 py-2 sm:hidden">Sign In</a>
+          </div>
+        }
       </nav>
 
       <!-- Hero -->
@@ -65,16 +67,20 @@ import { RouterModule } from '@angular/router';
             </div>
             <div class="p-4 sm:p-8 min-h-[200px] sm:min-h-[350px]">
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                <div *ngFor="let s of previewStats" class="bg-white dark:bg-dark-card shadow-sm dark:shadow-none border border-slate-200 dark:border-transparent rounded-xl p-3 sm:p-4" [class]="'border-l-4 ' + s.border">
-                  <p class="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase">{{s.label}}</p>
-                  <p class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white mt-1">{{s.value}}</p>
-                </div>
+                @for (s of previewStats; track s.label) {
+                  <div class="bg-white dark:bg-dark-card shadow-sm dark:shadow-none border border-slate-200 dark:border-transparent rounded-xl p-3 sm:p-4" [class]="'border-l-4 ' + s.border">
+                    <p class="text-[9px] sm:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase">{{s.label}}</p>
+                    <p class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white mt-1">{{s.value}}</p>
+                  </div>
+                }
               </div>
               <div class="space-y-2">
-                <div *ngFor="let i of [1,2,3]" class="flex items-center gap-3 bg-white dark:bg-dark-card/60 border border-slate-200 dark:border-transparent shadow-sm dark:shadow-none rounded-lg p-3">
-                  <div class="w-8 h-8 rounded-lg bg-primary/10 dark:bg-primary/20 flex-shrink-0"></div>
-                  <div class="flex-1 space-y-1.5"><div class="h-2.5 bg-slate-200 dark:bg-slate-700/60 rounded-full w-1/3"></div><div class="h-2 bg-slate-100 dark:bg-slate-700/30 rounded-full w-2/3"></div></div>
-                </div>
+                @for (i of [1,2,3]; track i) {
+                  <div class="flex items-center gap-3 bg-white dark:bg-dark-card/60 border border-slate-200 dark:border-transparent shadow-sm dark:shadow-none rounded-lg p-3">
+                    <div class="w-8 h-8 rounded-lg bg-primary/10 dark:bg-primary/20 flex-shrink-0"></div>
+                    <div class="flex-1 space-y-1.5"><div class="h-2.5 bg-slate-200 dark:bg-slate-700/60 rounded-full w-1/3"></div><div class="h-2 bg-slate-100 dark:bg-slate-700/30 rounded-full w-2/3"></div></div>
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -84,10 +90,12 @@ import { RouterModule } from '@angular/router';
       <!-- Stats -->
       <section id="stats" class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16 sm:py-24">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div *ngFor="let s of siteStats" class="text-center">
-            <p class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mb-1">{{s.value}}</p>
-            <p class="text-xs sm:text-sm uppercase tracking-widest text-slate-500 dark:text-slate-400 font-bold">{{s.label}}</p>
-          </div>
+          @for (s of siteStats; track s.label) {
+            <div class="text-center">
+              <p class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mb-1">{{s.value}}</p>
+              <p class="text-xs sm:text-sm uppercase tracking-widest text-slate-500 dark:text-slate-400 font-bold">{{s.label}}</p>
+            </div>
+          }
         </div>
       </section>
 
@@ -98,11 +106,13 @@ import { RouterModule } from '@angular/router';
           <p class="text-slate-600 dark:text-slate-300 max-w-xl mx-auto">Every feature designed with precision for modern inventory management.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div *ngFor="let f of features" class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] shadow-md dark:shadow-none backdrop-blur-md rounded-2xl p-6 sm:p-8 hover:border-primary/30 transition-all hover:scale-[1.02] group">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary/10 dark:from-primary/20 to-blue-500/10 dark:to-blue-500/20 rounded-xl flex items-center justify-center mb-5 text-xl">{{f.icon}}</div>
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">{{f.title}}</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{{f.desc}}</p>
-          </div>
+          @for (f of features; track f.title) {
+            <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] shadow-md dark:shadow-none backdrop-blur-md rounded-2xl p-6 sm:p-8 hover:border-primary/30 transition-all hover:scale-[1.02] group">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary/10 dark:from-primary/20 to-blue-500/10 dark:to-blue-500/20 rounded-xl flex items-center justify-center mb-5 text-xl">{{f.icon}}</div>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">{{f.title}}</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{{f.desc}}</p>
+            </div>
+          }
         </div>
       </section>
 

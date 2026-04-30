@@ -1,4 +1,4 @@
-import { Component, signal, inject, ElementRef, ViewChild } from '@angular/core';
+import { Component, signal, inject, ElementRef, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -9,7 +9,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   imports: [CommonModule, RouterModule],
   template: `
     <!-- Overlay for mobile -->
-    <div *ngIf="mobileOpen()" (click)="mobileOpen.set(false)" class="fixed inset-0 bg-black/50 z-30 lg:hidden"></div>
+    @if (mobileOpen()) {
+      <div (click)="mobileOpen.set(false)" class="fixed inset-0 bg-black/50 z-30 lg:hidden"></div>
+    }
 
     <aside #sidebarRef
       [ngClass]="{
@@ -47,18 +49,20 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
           <label [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()"
                  class="sidebar-fade text-[10px] font-bold text-slate-500 uppercase tracking-[0.15em] block mb-2 px-1">Navigation</label>
 
-          <div *ngFor="let item of navItems; let idx = index" class="nav-item-wrapper"
-               (mouseenter)="onNavHover($event, idx)"
-               (mouseleave)="onNavHover($event, -1)">
-            <a [routerLink]="item.route" routerLinkActive="bg-primary/20 dark:bg-primary/20 shadow-sm hover:bg-primary" [routerLinkActiveOptions]="{ exact: item.exact }"
-               class="nav-link flex items-center gap-2.5 py-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-primary/10 dark:hover:bg-white/[0.04] rounded-lg transition-all text-[13px] font-medium group"
-               [class.px-2.5]="!collapsed() || mobileOpen()"
-               [class.justify-center]="collapsed() && !mobileOpen()"
-               [class.px-0]="collapsed() && !mobileOpen()">
-              <span [innerHTML]="item.icon" class="icon-container w-5 h-5 block group-hover:text-primary transition-colors flex-shrink-0"></span>
-              <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text">{{ item.label }}</span>
-            </a>
-          </div>
+          @for (item of navItems; track item.route; let idx = $index) {
+            <div class="nav-item-wrapper"
+                 (mouseenter)="onNavHover($event, idx)"
+                 (mouseleave)="onNavHover($event, -1)">
+              <a [routerLink]="item.route" routerLinkActive="bg-primary/20 dark:bg-primary/20 shadow-sm hover:bg-primary" [routerLinkActiveOptions]="{ exact: item.exact }"
+                 class="nav-link flex items-center gap-2.5 py-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-primary/10 dark:hover:bg-white/[0.04] rounded-lg transition-all text-[13px] font-medium group"
+                 [class.px-2.5]="!collapsed() || mobileOpen()"
+                 [class.justify-center]="collapsed() && !mobileOpen()"
+                 [class.px-0]="collapsed() && !mobileOpen()">
+                <span [innerHTML]="item.icon" class="icon-container w-5 h-5 block group-hover:text-primary transition-colors flex-shrink-0"></span>
+                <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text">{{ item.label }}</span>
+              </a>
+            </div>
+          }
         </nav>
 
         <!-- Quick Stats (expanded only) -->
@@ -104,16 +108,17 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     <!-- ===== FIXED-POSITION FLYOUTS (outside overflow-hidden) ===== -->
 
     <!-- Tooltip flyout -->
-    <div *ngIf="(navFlyoutIndex() >= 0 || utilityFlyoutLabel()) && collapsed() && !mobileOpen()"
-         class="fixed z-[9999] animate-flyout"
-         [style.left.px]="flyoutLeft"
-         [style.top.px]="navFlyoutTop">
-      <div class="bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-1.5 whitespace-nowrap shadow-md dark:shadow-xl dark:shadow-black/40">
-        <span class="text-xs font-medium text-slate-900 dark:text-white">
-          {{ navFlyoutIndex() >= 0 ? navItems[navFlyoutIndex()]?.label : utilityFlyoutLabel() }}
-        </span>
+    @if ((navFlyoutIndex() >= 0 || utilityFlyoutLabel()) && collapsed() && !mobileOpen()) {
+      <div class="fixed z-[9999] animate-flyout"
+           [style.left.px]="flyoutLeft"
+           [style.top.px]="navFlyoutTop">
+        <div class="bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-1.5 whitespace-nowrap shadow-md dark:shadow-xl dark:shadow-black/40">
+          <span class="text-xs font-medium text-slate-900 dark:text-white">
+            {{ navFlyoutIndex() >= 0 ? navItems[navFlyoutIndex()]?.label : utilityFlyoutLabel() }}
+          </span>
+        </div>
       </div>
-    </div>
+    }
   `,
   styles: [`
     :host {
@@ -235,7 +240,7 @@ export class SidebarComponent {
 
   private navFlyoutTimeout: any;
 
-  @ViewChild('sidebarRef') sidebarRef!: ElementRef<HTMLElement>;
+  sidebarRef = viewChild<ElementRef<HTMLElement>>('sidebarRef');
 
   private sanitizer = inject(DomSanitizer);
 
@@ -321,8 +326,9 @@ export class SidebarComponent {
   }
 
   private getSidebarRight(): number {
-    if (this.sidebarRef?.nativeElement) {
-      return this.sidebarRef.nativeElement.getBoundingClientRect().right + 4;
+    const sidebar = this.sidebarRef();
+    if (sidebar) {
+      return sidebar.nativeElement.getBoundingClientRect().right + 4;
     }
     return 76;
   }

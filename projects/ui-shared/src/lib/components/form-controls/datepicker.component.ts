@@ -23,47 +23,52 @@ import { CommonModule } from '@angular/common';
         </svg>
       </button>
 
-      <div *ngIf="isOpen()" 
-           class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl z-[100] p-4 animate-dropdown-in backdrop-blur-xl">
-        
-        <!-- Calendar Header -->
-        <div class="flex items-center justify-between mb-4">
-          <button (click)="prevMonth()" class="p-1 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg text-slate-400 hover:text-primary transition-all">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-          </button>
-          <span class="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">
-            {{ monthNames[viewDate().getMonth()] }} {{ viewDate().getFullYear() }}
-          </span>
-          <button (click)="nextMonth()" class="p-1 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg text-slate-400 hover:text-primary transition-all">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-          </button>
-        </div>
+      @if (isOpen()) {
+        <div 
+             class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl z-[100] p-4 animate-dropdown-in backdrop-blur-xl">
+          
+          <!-- Calendar Header -->
+          <div class="flex items-center justify-between mb-4">
+            <button (click)="prevMonth()" class="p-1 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg text-slate-400 hover:text-primary transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <span class="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">
+              {{ monthNames[viewDate().getMonth()] }} {{ viewDate().getFullYear() }}
+            </span>
+            <button (click)="nextMonth()" class="p-1 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg text-slate-400 hover:text-primary transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
 
-        <!-- Weekdays -->
-        <div class="grid grid-cols-7 mb-2">
-          <div *ngFor="let day of weekDays" class="text-center text-[10px] font-black text-slate-400 uppercase tracking-tighter py-2">
-            {{ day }}
+          <!-- Weekdays -->
+          <div class="grid grid-cols-7 mb-2">
+            @for (day of weekDays; track day) {
+              <div class="text-center text-[10px] font-black text-slate-400 uppercase tracking-tighter py-2">
+                {{ day }}
+              </div>
+            }
+          </div>
+
+          <!-- Days Grid -->
+          <div class="grid grid-cols-7 gap-1">
+            @for (day of calendarDays(); track day.date.getTime()) {
+              <button 
+                (click)="selectDate(day.date)"
+                [disabled]="!day.isCurrentMonth"
+                [class.opacity-20]="!day.isCurrentMonth"
+                [class.bg-primary]="isSelected(day.date)"
+                [class.text-white]="isSelected(day.date)"
+                [class.font-black]="isSelected(day.date)"
+                [class.hover:bg-slate-100]="!isSelected(day.date) && day.isCurrentMonth"
+                [class.dark:hover:bg-white/5]="!isSelected(day.date) && day.isCurrentMonth"
+                class="aspect-square flex items-center justify-center text-[11px] font-bold rounded-lg transition-all"
+              >
+                {{ day.date.getDate() }}
+              </button>
+            }
           </div>
         </div>
-
-        <!-- Days Grid -->
-        <div class="grid grid-cols-7 gap-1">
-          <button 
-            *ngFor="let day of calendarDays()"
-            (click)="selectDate(day.date)"
-            [disabled]="!day.isCurrentMonth"
-            [class.opacity-20]="!day.isCurrentMonth"
-            [class.bg-primary]="isSelected(day.date)"
-            [class.text-white]="isSelected(day.date)"
-            [class.font-black]="isSelected(day.date)"
-            [class.hover:bg-slate-100]="!isSelected(day.date) && day.isCurrentMonth"
-            [class.dark:hover:bg-white/5]="!isSelected(day.date) && day.isCurrentMonth"
-            class="aspect-square flex items-center justify-center text-[11px] font-bold rounded-lg transition-all"
-          >
-            {{ day.date.getDate() }}
-          </button>
-        </div>
-      </div>
+      }
     </div>
   `,
   styles: [`
