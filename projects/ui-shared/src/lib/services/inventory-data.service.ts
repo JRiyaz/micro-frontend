@@ -228,4 +228,8 @@ export class InventoryDataService {
     const searchName = name.trim().toLowerCase();
     return this.customers().find((c) => c.name.trim().toLowerCase() === searchName)?.id;
   }
+
+  addOrder(order: Order): void {
+    this.orders.update(prev => [...prev, order]);
+  }
 }
