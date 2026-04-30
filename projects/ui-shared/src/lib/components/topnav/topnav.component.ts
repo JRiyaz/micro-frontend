@@ -13,7 +13,7 @@ import { SearchService } from '../../services/search.service';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <header class="h-16 border-b border-slate-200 dark:border-white/[0.08] flex items-center justify-between px-4 sm:px-6 lg:px-8 bg-white/80 dark:bg-dark-surface/80 backdrop-blur-xl relative z-30">
+    <header class="h-12 border-b border-slate-200 dark:border-white/[0.08] flex items-center justify-between px-3 sm:px-4 lg:px-6 bg-white/80 dark:bg-dark-surface/80 backdrop-blur-xl relative z-30">
       <!-- Left: Hamburger + Logo -->
       <div class="flex items-center gap-3">
         <button (click)="sidebarToggle.emit()" class="lg:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5" id="topnav-sidebar-toggle">

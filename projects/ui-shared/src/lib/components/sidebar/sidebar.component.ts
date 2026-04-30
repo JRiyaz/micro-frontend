@@ -26,20 +26,20 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
       </button>
 
       <!-- Logo Area -->
-      <div class="h-16 flex items-center border-b border-slate-200 dark:border-white/[0.06] flex-shrink-0 sticky top-0 bg-slate-50 dark:bg-dark-surface z-10"
+      <div class="h-12 flex items-center border-b border-slate-200 dark:border-white/[0.06] flex-shrink-0 sticky top-0 bg-slate-50 dark:bg-dark-surface z-10"
            [class.px-5]="!collapsed() || mobileOpen()" [class.px-0]="collapsed() && !mobileOpen()" [class.justify-center]="collapsed() && !mobileOpen()">
         <a routerLink="/" class="flex items-center gap-2.5">
-          <div class="w-9 h-9 bg-gradient-to-br from-primary to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20">
-            <span class="text-white font-black text-base">I</span>
+          <div class="w-7 h-7 bg-gradient-to-br from-primary to-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20">
+            <span class="text-white font-black text-sm">I</span>
           </div>
           <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" 
-                class="sidebar-fade-text text-xl font-black tracking-tight text-slate-900 dark:text-white">Inven<span class="text-primary">tory</span></span>
+                class="sidebar-fade-text text-base font-black tracking-tight text-slate-900 dark:text-white">Inven<span class="text-primary">tory</span></span>
         </a>
       </div>
 
       <!-- Scrollable content area -->
-      <div class="sidebar-content flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar min-h-0 py-5"
-           [class.px-5]="!collapsed() || mobileOpen()" [class.px-2]="collapsed() && !mobileOpen()">
+      <div class="sidebar-content flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar min-h-0 py-3"
+           [class.px-3]="!collapsed() || mobileOpen()" [class.px-2]="collapsed() && !mobileOpen()">
 
         <!-- Navigation -->
         <nav class="space-y-1">
@@ -50,9 +50,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
           <div *ngFor="let item of navItems; let idx = index" class="nav-item-wrapper"
                (mouseenter)="onNavHover($event, idx)"
                (mouseleave)="onNavHover($event, -1)">
-            <a [routerLink]="item.route" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: item.exact }"
-               class="nav-link flex items-center gap-3 py-2.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.04] rounded-xl transition-all text-sm font-medium group"
-               [class.px-3]="!collapsed() || mobileOpen()"
+            <a [routerLink]="item.route" routerLinkActive="bg-primary/20 dark:bg-primary/20 shadow-sm hover:bg-primary" [routerLinkActiveOptions]="{ exact: item.exact }"
+               class="nav-link flex items-center gap-2.5 py-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-primary/10 dark:hover:bg-white/[0.04] rounded-lg transition-all text-[13px] font-medium group"
+               [class.px-2.5]="!collapsed() || mobileOpen()"
                [class.justify-center]="collapsed() && !mobileOpen()"
                [class.px-0]="collapsed() && !mobileOpen()">
               <span [innerHTML]="item.icon" class="icon-container w-5 h-5 block group-hover:text-primary transition-colors flex-shrink-0"></span>
@@ -62,10 +62,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
         </nav>
 
         <!-- Quick Stats (expanded only) -->
-        <div [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade mt-8">
+        <div [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade mt-5">
           <label class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.15em] block mb-3 px-1">Quick Stats</label>
           <div class="space-y-3">
-            <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] rounded-xl p-3.5 shadow-sm dark:shadow-none">
+            <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] rounded-lg p-2.5 shadow-sm dark:shadow-none">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Sprint 4</span>
                 <span class="text-[10px] font-bold text-primary">65%</span>
@@ -74,7 +74,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
                 <div class="bg-gradient-to-r from-primary to-blue-400 h-1.5 rounded-full transition-all duration-500" style="width: 65%"></div>
               </div>
             </div>
-            <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] rounded-xl p-3.5 shadow-sm dark:shadow-none">
+            <div class="bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] rounded-lg p-2.5 shadow-sm dark:shadow-none">
               <div class="flex justify-between items-center mb-2">
                 <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Stock Level</span>
                 <span class="text-[10px] font-bold text-green-400">82%</span>
@@ -94,7 +94,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
                 (mouseenter)="onUtilityHover($event, collapsed() ? 'Expand' : 'Collapse')"
                 (mouseleave)="onUtilityHover($event, null)"
                 class="hidden lg:flex w-full items-center justify-center gap-3 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-collapse-toggle"
-                [class.px-5]="!collapsed() || mobileOpen()">
+                [class.px-3]="!collapsed() || mobileOpen()">
           <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" [class.rotate-180]="collapsed()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7"></path></svg>
           <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text text-[10px] font-bold uppercase tracking-widest">Collapse</span>
         </button>
@@ -127,10 +127,10 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
       overflow: hidden;
     }
     .sidebar-expanded {
-      width: 256px;
+      width: 220px;
     }
     .sidebar-collapsed {
-      width: 68px;
+      width: 56px;
     }
 
     /* ===== Fade transitions for expanded/collapsed content ===== */
@@ -181,10 +181,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     }
 
     /* ===== Nav active state ===== */
-    .nav-active {
-      background: rgba(109, 116, 255, 0.08);
-      color: #6d74ff;
-    }
     .nav-active span {
       color: #6d74ff;
     }
@@ -210,7 +206,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     }
     .sidebar-mobile-open {
       transform: translateX(0);
-      width: 288px !important;
+      width: 260px !important;
     }
     @media (min-width: 1024px) {
       .sidebar-mobile-closed,
@@ -218,7 +214,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
         transform: none;
       }
       .sidebar-mobile-open {
-        width: 256px !important;
+        width: 220px !important;
       }
       .sidebar-aside {
         height: 100vh;
@@ -234,7 +230,7 @@ export class SidebarComponent {
   utilityFlyoutLabel = signal<string | null>(null);
 
   // Flyout positioning
-  flyoutLeft = 76; // 68px sidebar + 8px gap
+  flyoutLeft = 64; // 56px sidebar + 8px gap
   navFlyoutTop = 0;
 
   private navFlyoutTimeout: any;
