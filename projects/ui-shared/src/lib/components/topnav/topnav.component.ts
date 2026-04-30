@@ -44,7 +44,7 @@ import { SearchService } from '../../services/search.service';
           </button>
     <!-- Search Results Dropdown -->
           @if (showResults()) {
-            <div class="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] shadow-xl rounded-xl overflow-hidden z-50 animate-fade-in">
+            <div class="absolute top-full left-0 right-0 mt-2 card-premium overflow-hidden z-50 animate-fade-in shadow-xl">
               <div class="p-2">
                 @for (result of searchResults(); track result.path; let i = $index) {
                   <button
@@ -142,7 +142,7 @@ import { SearchService } from '../../services/search.service';
 
           <!-- Dropdown Menu -->
           @if (userDropdownOpen()) {
-            <div class="absolute right-0 top-full mt-2 w-56 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] shadow-md dark:shadow-xl rounded-xl overflow-hidden z-50 animate-fade-in" id="topnav-user-dropdown">
+            <div class="absolute right-0 top-full mt-2 w-56 card-premium overflow-hidden z-50 animate-fade-in shadow-md dark:shadow-xl" id="topnav-user-dropdown">
               @if (auth.isLoggedIn()) {
                 <!-- Logged In Header -->
                 <div class="px-4 py-3 border-b border-slate-200 dark:border-white/[0.06]">
@@ -208,7 +208,7 @@ import { SearchService } from '../../services/search.service';
     @if (showSyncConfirm()) {
       <div class="fixed inset-0 z-[100] flex items-center justify-center p-4">
         <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm animate-fade-in" (click)="showSyncConfirm.set(false)"></div>
-        <div class="bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden z-10 animate-scale-in">
+        <div class="card-premium w-full max-w-sm overflow-hidden z-10 animate-scale-in shadow-2xl">
           <div class="p-6">
             <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
@@ -216,8 +216,8 @@ import { SearchService } from '../../services/search.service';
             <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Synchronize Data?</h3>
             <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">This will refresh all platform data from the server. Any unsaved local changes might be overwritten.</p>
             <div class="flex gap-3">
-              <button (click)="showSyncConfirm.set(false)" class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-white/[0.08] text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">Cancel</button>
-              <button (click)="confirmSync()" class="flex-1 px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary-hover transition-colors shadow-lg shadow-primary/20">Confirm</button>
+              <button (click)="showSyncConfirm.set(false)" class="btn-secondary-premium flex-1 !px-4 !py-2.5">Cancel</button>
+              <button (click)="confirmSync()" class="btn-primary-premium flex-1 !px-4 !py-2.5">Confirm</button>
             </div>
           </div>
         </div>

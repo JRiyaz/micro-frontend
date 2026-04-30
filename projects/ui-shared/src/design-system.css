@@ -79,4 +79,82 @@
     from { opacity: 0; transform: translateY(-10px); scale: 0.95; }
     to { opacity: 1; transform: translateY(0); scale: 1; }
   }
+
+  /* Shared Premium UI Classes */
+  .btn-primary-premium {
+    @apply px-5 py-2.5 bg-primary text-white rounded-xl font-bold text-xs uppercase tracking-widest 
+           hover:bg-primary-hover hover:scale-[1.02] active:scale-95 
+           transition-all duration-200 shadow-lg shadow-primary/20 
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100;
+  }
+
+  .btn-secondary-premium {
+    @apply px-5 py-2.5 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 rounded-xl 
+           font-bold text-xs uppercase tracking-widest border border-slate-200 dark:border-white/10
+           hover:bg-slate-200 dark:hover:bg-white/10 hover:scale-[1.02] active:scale-95 
+           transition-all duration-200;
+  }
+
+  .btn-ghost-premium {
+    @apply px-3 py-1.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-lg
+           active:scale-95 transition-all duration-200 text-[10px] font-black uppercase tracking-widest;
+  }
+
+  .card-premium {
+    @apply bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-2xl shadow-sm;
+  }
+
+  .label-premium {
+    @apply text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1 px-1;
+  }
+
+  .heading-premium {
+    @apply text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight;
+  }
+
+  .hover-tilt {
+    @apply transition-all duration-300 hover:scale-[1.01] hover:-rotate-[0.5deg];
+  }
 }
+  .dots-wave {
+    @apply flex items-center gap-1 h-4;
+  }
+  .dots-wave span {
+    @apply w-1.5 h-1.5 bg-current rounded-full;
+    animation: dotsWave 1.4s infinite ease-in-out both;
+  }
+  .dots-wave span:nth-child(1) { animation-delay: -0.32s; }
+  .dots-wave span:nth-child(2) { animation-delay: -0.16s; }
+
+  @keyframes dotsWave {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  .btn-loading {
+    @apply relative !text-transparent pointer-events-none;
+  }
+  .btn-loading::after {
+    content: "";
+    @apply absolute inset-0 m-auto w-4 h-4 rounded-full;
+    box-shadow: 
+      0 -10px 0 0 white,
+      7px -7px 0 -0.5px rgba(255, 255, 255, 0.9),
+      10px 0 0 -1px rgba(255, 255, 255, 0.8),
+      7px 7px 0 -1.5px rgba(255, 255, 255, 0.7),
+      0 10px 0 -2px rgba(255, 255, 255, 0.6);
+    animation: btnSpinner 1s infinite linear;
+  }
+  .btn-secondary-premium.btn-loading::after {
+    box-shadow: 
+      0 -10px 0 0 theme('colors.primary.DEFAULT'),
+      7px -7px 0 -0.5px rgba(109, 116, 255, 0.9),
+      10px 0 0 -1px rgba(109, 116, 255, 0.8),
+      7px 7px 0 -1.5px rgba(109, 116, 255, 0.7),
+      0 10px 0 -2px rgba(109, 116, 255, 0.6);
+  }
+
+  @keyframes btnSpinner {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
