@@ -16,6 +16,7 @@ export * from './lib/components/sidebar/sidebar.component';
 export * from './lib/components/loading/loading.component';
 export * from './lib/components/notification-toast/notification-toast.component';
 export * from './lib/components/notification-sidenav/notification-sidenav.component';
+export * from './lib/components/skeleton/skeleton.component';
 
 // Shared services
 export * from './lib/services/auth-state.service';

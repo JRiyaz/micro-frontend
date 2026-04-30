@@ -1,0 +1,64 @@
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'lib-skeleton',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div 
+      [ngClass]="classes"
+      [style.width]="width"
+      [style.height]="height"
+      class="bg-slate-200 dark:bg-white/10 animate-pulse-fast relative overflow-hidden"
+    >
+      <!-- Shimmer Highlight Layer -->
+      <div class="absolute inset-0 shimmer-gradient"></div>
+    </div>
+  `,
+  styles: [`
+    :host {
+      display: inline-block;
+      width: var(--skeleton-width, auto);
+      height: var(--skeleton-height, auto);
+    }
+
+    .animate-pulse-fast {
+      animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+
+    .shimmer-gradient {
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+  `]
+})
+export class SkeletonComponent {
+  @Input() width: string = '100%';
+  @Input() height: string = '1rem';
+  @Input() shape: 'rect' | 'circle' | 'rounded' = 'rounded';
+  @Input() customClass: string = '';
+
+  get classes(): string {
+    const base = this.customClass;
+    const shapeClass = this.shape === 'circle' ? 'rounded-full' : 
+                       this.shape === 'rounded' ? 'rounded-xl' : 'rounded-none';
+    return `${base} ${shapeClass}`;
+  }
+}
