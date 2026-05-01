@@ -20,15 +20,14 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
         'sidebar-mobile-open': mobileOpen(),
         'sidebar-mobile-closed': !mobileOpen()
       }"
-      class="sidebar-aside fixed lg:static inset-y-0 left-0 bg-slate-50 dark:bg-dark-surface flex flex-col z-40 lg:z-auto">
+      class="sidebar-aside fixed lg:static inset-y-0 left-0 bg-slate-50 dark:bg-dark-base flex flex-col z-40 lg:z-auto transition-colors duration-500">
 
       <!-- Close button (mobile only) -->
       <button (click)="mobileOpen.set(false)" class="lg:hidden absolute top-4 right-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 z-50" id="sidebar-close-btn">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
 
-      <!-- Logo Area (Back in Sidebar) -->
-      <div class="h-14 flex items-center flex-shrink-0 bg-slate-50 dark:bg-dark-surface z-10 transition-all duration-300"
+      <div class="h-14 flex items-center flex-shrink-0 bg-slate-50 dark:bg-dark-base z-10 transition-all duration-500"
            [class.px-4]="!collapsed() || mobileOpen()" [class.justify-center]="collapsed() && !mobileOpen()">
         <a routerLink="/" class="flex items-center gap-2.5 overflow-hidden">
           <div class="w-8 h-8 bg-gradient-to-br from-primary to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 hover:scale-110 transition-transform">
