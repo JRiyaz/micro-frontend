@@ -3,24 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "build": "ng build",
-    "test": "ng test",
-
-    "build:libs": "ng build ui-shared",
-    "watch:libs": "ng build ui-shared --watch --configuration development",
-
     "serve": "ng serve",
-    "start:shell": "run-s build:libs dev:shell",
-    "start:user": "run-s build:libs dev:user",
-    "start:inventory": "run-s build:libs dev:inventory",
-    "start": "run-s build:libs dev:all",
-    "run": "run-s watch:libs dev:all",
-
-    "dev:shell": "ng serve --project shell",
-    "dev:user": "ng serve --project user-service",
-    "dev:inventory": "ng serve --project inventory-hub",
-    "dev:all": "run-p dev:shell dev:user dev:inventory",
-
+    "build:lib": "ng build --project ui-shared",
+    "start:shell": "ng serve --project shell",
+    "start:user": "ng serve --project user-service",
+    "start:inventory": "ng serve --project inventory-hub",
+    "start": "pnpm run build:lib && concurrently -k \"pnpm:start:*\"",
+    "run:all": "concurrently -k \"pnpm:start:*\"",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
     "prepare": "husky install",
     "postinstall": "sh submodule-husky-hook-path.sh"
   },
@@ -48,7 +40,7 @@
     "@tailwindcss/postcss": "^4.2.4",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.5.0",
-    "npm-run-all2": "^7.0.0",
+    "concurrently": "^9.1.0",
     "husky": "^8.0.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
