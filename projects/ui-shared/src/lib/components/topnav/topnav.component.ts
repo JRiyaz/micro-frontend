@@ -13,12 +13,9 @@ import { SearchService } from '../../services/search.service';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <header class="h-12 border-b border-slate-200 dark:border-white/[0.08] flex items-center justify-between px-3 sm:px-4 lg:px-6 bg-white/80 dark:bg-dark-surface/80 backdrop-blur-xl relative z-30">
-      <!-- Left: Hamburger + Logo -->
-      <div class="flex items-center gap-3">
-        <button (click)="sidebarToggle.emit()" class="lg:hidden text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5" id="topnav-sidebar-toggle">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        </button>
+    <header class="h-12 flex items-center justify-between px-3 sm:px-4 lg:px-6 bg-slate-50 dark:bg-dark-surface relative z-30 transition-colors duration-500">
+      <div class="flex items-center gap-4">
+        <!-- Removed duplicate logo -->
       </div>
 
       <!-- Center: Search Bar -->
@@ -88,45 +85,52 @@ import { SearchService } from '../../services/search.service';
         <!-- Sync Data -->
         <button 
           (click)="showSyncConfirm.set(true)"
-          class="text-slate-500 dark:text-slate-400 hover:text-primary transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5" 
+          class="text-slate-500 dark:text-slate-400 hover:text-primary transition-all p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 group/sync" 
           id="topnav-sync-data"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          <svg class="w-5 h-5 transition-transform duration-[1500ms] group-hover/sync:rotate-180 group-active/sync:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
         </button>
 
         <!-- Dark Mode Toggle -->
         <button 
           (click)="darkModeService.toggle()"
-          class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5" 
+          class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 group/darkmode overflow-hidden" 
           id="topnav-dark-mode"
         >
-          @if (!darkModeService.isDarkMode()) {
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-          } @else {
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-          }
+          <div class="relative w-5 h-5 flex flex-col transition-transform duration-[1000ms] ease-in-out"
+               [class.-translate-y-full]="darkModeService.isDarkMode()">
+            <div class="flex-shrink-0 w-5 h-5 flex items-center justify-center transition-opacity duration-700"
+                 [class.opacity-0]="darkModeService.isDarkMode()">
+              <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            </div>
+            <div class="flex-shrink-0 w-5 h-5 flex items-center justify-center transition-opacity duration-700"
+                 [class.opacity-0]="!darkModeService.isDarkMode()">
+              <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+            </div>
+          </div>
         </button>
 
-        <!-- Notifications -->
         <button 
           (click)="notificationService.sidenavOpen.set(!notificationService.sidenavOpen())"
-          class="relative text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5" 
+          class="notification-btn relative text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 flex items-center justify-center" 
           [class.text-amber-500]="notificationService.config().dnd"
           id="topnav-notifications"
         >
-          @if (notificationService.config().dnd) {
-            <!-- Bell Off Icon (Strikethrough only) -->
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-              <line x1="3" y1="3" x2="21" y2="21" stroke-width="2" stroke-linecap="round"></line>
-            </svg>
-          } @else {
-            <!-- Normal Bell Icon -->
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-          }
+          <div class="bell-icon-wrapper w-5 h-5 flex items-center justify-center relative">
+            @if (notificationService.config().dnd) {
+              <!-- Bell Off Icon (Strikethrough only) -->
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                <line x1="3" y1="3" x2="21" y2="21" stroke-width="2" stroke-linecap="round"></line>
+              </svg>
+            } @else {
+              <!-- Normal Bell Icon -->
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+            }
+          </div>
 
           @if (unreadCount() > 0) {
-            <span class="absolute top-1 right-1 w-2 h-2 rounded-full border-2 border-white dark:border-dark-surface"
+            <span class="absolute top-1 right-1 w-2 h-2 rounded-full border-2 border-white dark:border-dark-surface animate-pulse"
                   [class.bg-amber-500]="notificationService.config().dnd"
                   [class.bg-red-500]="!notificationService.config().dnd">
             </span>
@@ -236,7 +240,25 @@ import { SearchService } from '../../services/search.service';
       </div>
     }
   `,
-  styles: []
+  styles: [`
+    @keyframes bell-shake {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-15deg); }
+      40% { transform: rotate(15deg); }
+      60% { transform: rotate(-10deg); }
+      80% { transform: rotate(10deg); }
+    }
+    .notification-btn:hover .bell-icon-wrapper {
+      animation: bell-shake 0.5s ease-in-out infinite;
+      transform-origin: top center;
+    }
+    .bell-icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease-out;
+    }
+  `]
 })
 export class TopnavComponent implements OnInit {
   sidebarToggle = output<void>();
@@ -276,7 +298,7 @@ export class TopnavComponent implements OnInit {
         if (route.path && !route.path.includes(':') && !route.path.includes('**')) {
           const fullPath = parentPath ? `${parentPath}/${route.path}` : route.path;
           const title = route.data?.title || this.formatPath(route.path);
-          
+
           this.routeIndex.push({
             path: fullPath.startsWith('/') ? fullPath : `/${fullPath}`,
             title: title,
@@ -327,13 +349,13 @@ export class TopnavComponent implements OnInit {
     // Combine static route index with dynamic items from SearchService
     const dynamicItems = this.searchService.items();
     const allSearchable = [...this.routeIndex, ...dynamicItems];
-    
+
     const results = allSearchable.filter(item => {
       const matchesTitle = item.title.toLowerCase().includes(query);
       const matchesPath = item.path.toLowerCase().includes(query);
       const matchesCategory = item.category && item.category.toLowerCase().includes(query);
       const matchesKeywords = item.keywords && item.keywords.some((k: string) => k.toLowerCase().includes(query));
-      
+
       return matchesTitle || matchesPath || matchesCategory || matchesKeywords;
     }).slice(0, 5);
 

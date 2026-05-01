@@ -20,18 +20,18 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
         'sidebar-mobile-open': mobileOpen(),
         'sidebar-mobile-closed': !mobileOpen()
       }"
-      class="sidebar-aside fixed lg:static inset-y-0 left-0 border-r border-slate-200 dark:border-white/[0.06] bg-slate-50 dark:bg-dark-surface flex flex-col z-40 lg:z-auto">
+      class="sidebar-aside fixed lg:static inset-y-0 left-0 bg-slate-50 dark:bg-dark-surface flex flex-col z-40 lg:z-auto">
 
       <!-- Close button (mobile only) -->
       <button (click)="mobileOpen.set(false)" class="lg:hidden absolute top-4 right-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors p-1 z-50" id="sidebar-close-btn">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
 
-      <!-- Logo Area -->
-      <div class="h-12 flex items-center border-b border-slate-200 dark:border-white/[0.06] flex-shrink-0 sticky top-0 bg-slate-50 dark:bg-dark-surface z-10"
-           [class.px-5]="!collapsed() || mobileOpen()" [class.px-0]="collapsed() && !mobileOpen()" [class.justify-center]="collapsed() && !mobileOpen()">
-        <a routerLink="/" class="flex items-center gap-2.5">
-          <div class="w-7 h-7 bg-gradient-to-br from-primary to-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20">
+      <!-- Logo Area (Back in Sidebar) -->
+      <div class="h-14 flex items-center flex-shrink-0 bg-slate-50 dark:bg-dark-surface z-10 transition-all duration-300"
+           [class.px-4]="!collapsed() || mobileOpen()" [class.justify-center]="collapsed() && !mobileOpen()">
+        <a routerLink="/" class="flex items-center gap-2.5 overflow-hidden">
+          <div class="w-8 h-8 bg-gradient-to-br from-primary to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 hover:scale-110 transition-transform">
             <span class="text-white font-black text-sm">I</span>
           </div>
           <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" 
@@ -97,10 +97,11 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
         <button (click)="collapsed.set(!collapsed())" 
                 (mouseenter)="onUtilityHover($event, collapsed() ? 'Expand' : 'Collapse')"
                 (mouseleave)="onUtilityHover($event, null)"
-                class="hidden lg:flex w-full items-center justify-center gap-3 py-3 text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-colors border-t border-slate-200 dark:border-white/[0.06]" id="sidebar-collapse-toggle"
-                [class.px-3]="!collapsed() || mobileOpen()">
-          <svg class="w-5 h-5 flex-shrink-0 transition-transform duration-300" [class.rotate-180]="collapsed()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7"></path></svg>
-          <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text text-[10px] font-bold uppercase tracking-widest">Collapse</span>
+                class="hidden lg:flex w-full items-center justify-center gap-3 py-4 text-slate-500 hover:text-primary hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-all border-t border-slate-200 dark:border-white/[0.06] group/collapse" id="sidebar-collapse-toggle">
+          <div class="transition-transform duration-500" [class.rotate-180]="collapsed()">
+            <svg class="w-5 h-5 flex-shrink-0 group-hover/collapse:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7"></path></svg>
+          </div>
+          <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text text-[10px] font-bold uppercase tracking-widest">Collapse Sidebar</span>
         </button>
       </div>
     </aside>
