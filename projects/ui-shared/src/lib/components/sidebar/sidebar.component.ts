@@ -1,7 +1,7 @@
-import { Component, signal, inject, ElementRef, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'ui-sidebar',
@@ -53,10 +53,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
                  (mouseenter)="onNavHover($event, idx)"
                  (mouseleave)="onNavHover($event, -1)">
               <a [routerLink]="item.route" routerLinkActive="bg-primary/20 dark:bg-primary/20 shadow-sm hover:bg-primary" [routerLinkActiveOptions]="{ exact: item.exact }"
-                 class="nav-link flex items-center gap-2 py-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-primary/10 dark:hover:bg-white/[0.04] rounded-lg transition-all text-xs font-medium group"
-                 [class.px-2]="!collapsed() || mobileOpen()"
-                 [class.justify-center]="collapsed() && !mobileOpen()"
-                 [class.px-0]="collapsed() && !mobileOpen()">
+                 class="nav-link flex items-center gap-2 p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-primary/10 dark:hover:bg-white/[0.04] rounded-lg transition-all text-xs font-medium group"
+                 [class.justify-center]="collapsed() && !mobileOpen()">
                 <span [innerHTML]="item.icon" class="icon-container w-4 h-4 block group-hover:text-primary transition-colors flex-shrink-0"></span>
                 <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text">{{ item.label }}</span>
               </a>
