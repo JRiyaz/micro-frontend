@@ -10,16 +10,16 @@ export * from './lib/ui-shared.service';
 
 // Shared components
 export * from './lib/components/dashboard-layout/dashboard-layout.component';
+export * from './lib/components/detail-layout/detail-layout.component';
 export * from './lib/components/landing/landing.component';
 export * from './lib/components/loading/loading.component';
 export * from './lib/components/notification-sidenav/notification-sidenav.component';
 export * from './lib/components/notification-toast/notification-toast.component';
+export * from './lib/components/page-header/page-header.component';
 export * from './lib/components/sidebar/sidebar.component';
 export * from './lib/components/skeleton/skeleton.component';
-export * from './lib/components/topnav/topnav.component';
-export * from './lib/components/detail-layout/detail-layout.component';
-export * from './lib/components/page-header/page-header.component';
 export * from './lib/components/status-badge/status-badge.component';
+export * from './lib/components/topnav/topnav.component';
 
 // Shared services
 export * from './lib/services/auth-state.service';
@@ -32,4 +32,6 @@ export * from './lib/services/theme.service';
 export * from './lib/services/workspace.service';
 
 // Shared Utilities
+export * from './lib/models';
 export * from './lib/utils/drag-drop';
+

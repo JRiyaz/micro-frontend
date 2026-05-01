@@ -29,8 +29,10 @@
     box-shadow: none !important;
   }
 
-  .floating-input:focus {
-    border-bottom-color: var(--theme-primary);
+  .floating-input:hover,
+  .floating-input:focus,
+  .floating-input:active {
+    border-bottom-color: var(--theme-primary) !important;
   }
 
   .floating-label {
@@ -174,4 +176,92 @@
   @keyframes btnSpinner {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+  }
+
+  /* Flower Loader Animation */
+  .flower-loader {
+    @apply relative w-4 h-4 flex items-center justify-center;
+  }
+  .flower-loader span {
+    @apply absolute w-1 h-1 bg-primary rounded-full;
+    animation: flowerScale 1s infinite ease-in-out;
+  }
+  .flower-loader span:nth-child(1) { transform: rotate(0deg) translateY(-6px); animation-delay: 0s; }
+  .flower-loader span:nth-child(2) { transform: rotate(60deg) translateY(-6px); animation-delay: 0.1s; }
+  .flower-loader span:nth-child(3) { transform: rotate(120deg) translateY(-6px); animation-delay: 0.2s; }
+  .flower-loader span:nth-child(4) { transform: rotate(180deg) translateY(-6px); animation-delay: 0.3s; }
+  .flower-loader span:nth-child(5) { transform: rotate(240deg) translateY(-6px); animation-delay: 0.4s; }
+  .flower-loader span:nth-child(6) { transform: rotate(300deg) translateY(-6px); animation-delay: 0.5s; }
+
+  @keyframes flowerScale {
+    0%, 100% { transform: scale(1) translate(0, -6px); opacity: 1; }
+    50% { transform: scale(0.4) translate(0, 0); opacity: 0.2; }
+  }
+
+  .loader-wrapper-premium {
+    @apply absolute inset-0 flex items-center justify-center bg-slate-900/40 backdrop-blur-[2px] transition-all duration-300;
+  }
+
+  /* Gravity Orbit Animation */
+  .gravity-orbit {
+    @apply relative w-5 h-5 flex items-center justify-center;
+  }
+  .gravity-orbit span {
+    @apply absolute w-1.5 h-1.5 bg-primary rounded-full;
+    filter: blur(0.5px);
+  }
+  .gravity-orbit span:nth-child(1) {
+    animation: gravityOrbit1 1.5s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+  .gravity-orbit span:nth-child(2) {
+    animation: gravityOrbit2 1.5s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+
+  @keyframes gravityOrbit1 {
+    0% { transform: rotate(0deg) translateX(8px) scale(1); opacity: 1; z-index: 2; }
+    50% { transform: rotate(180deg) translateX(8px) scale(0.6); opacity: 0.5; z-index: 1; }
+    100% { transform: rotate(360deg) translateX(8px) scale(1); opacity: 1; z-index: 2; }
+  }
+
+  @keyframes gravityOrbit2 {
+    0% { transform: rotate(0deg) translateX(-8px) scale(0.6); opacity: 0.5; z-index: 1; }
+    50% { transform: rotate(180deg) translateX(-8px) scale(1); opacity: 1; z-index: 2; }
+    100% { transform: rotate(360deg) translateX(-8px) scale(0.6); opacity: 0.5; z-index: 1; }
+  }
+
+  /* Liquid Pulse Animation */
+  .liquid-pulse {
+    @apply relative w-6 h-6;
+  }
+  .liquid-pulse::before,
+  .liquid-pulse::after {
+    content: '';
+    @apply absolute inset-0 bg-primary rounded-full;
+    opacity: 0.6;
+    animation: liquidPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  }
+  .liquid-pulse::after {
+    animation-delay: -1s;
+  }
+
+  @keyframes liquidPulse {
+    0% { transform: scale(0.2); opacity: 0.8; }
+    50% { transform: scale(1); opacity: 0.2; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+
+  /* Pulse Rings Animation */
+  .pulse-rings {
+    @apply relative w-5 h-5 flex items-center justify-center;
+  }
+  .pulse-rings span {
+    @apply absolute border-2 border-primary rounded-full;
+    animation: pulseRing 1.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .pulse-rings span:nth-child(1) { width: 100%; height: 100%; animation-delay: 0s; }
+  .pulse-rings span:nth-child(2) { width: 100%; height: 100%; animation-delay: 0.5s; }
+
+  @keyframes pulseRing {
+    0% { transform: scale(0.1); opacity: 1; }
+    80%, 100% { transform: scale(1.5); opacity: 0; }
   }

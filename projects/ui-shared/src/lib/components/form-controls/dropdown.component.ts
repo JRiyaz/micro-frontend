@@ -17,7 +17,7 @@ export interface DropdownOption {
       <button 
         type="button"
         (click)="toggle()"
-        class="w-full flex items-center justify-between bg-transparent border-b-2 border-slate-200 dark:border-white/10 py-2.5 px-1 text-sm font-bold text-slate-900 dark:text-white transition-all hover:border-primary focus:border-primary outline-none group/btn"
+        class="w-full flex items-center justify-between bg-transparent border-b-2 border-slate-200 dark:border-white/10 py-2.5 px-1 text-sm font-bold text-slate-900 dark:text-white transition-all hover:border-[var(--theme-primary)] focus:border-[var(--theme-primary)] outline-none group/btn"
       >
         <span class="flex items-center gap-3">
           @if (selectedOption()?.color) {
@@ -50,7 +50,7 @@ export interface DropdownOption {
                 type="button"
                 tabindex="-1"
                 (click)="select(option)"
-                class="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold transition-all text-left outline-none"
+                class="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold transition-all text-left outline-none hover:bg-primary/10 hover:text-primary"
                 [class.text-primary]="option.value === value() || activeItemIndex() === i"
                 [class.bg-primary/5]="option.value === value() || activeItemIndex() === i"
                 [class.text-slate-600]="option.value !== value() && activeItemIndex() !== i"
