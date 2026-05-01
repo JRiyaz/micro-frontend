@@ -27,14 +27,14 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
 
-      <div class="h-14 flex items-center flex-shrink-0 bg-slate-50 dark:bg-dark-base z-10 transition-all duration-500"
+      <div class="h-12 flex items-center flex-shrink-0 bg-slate-50 dark:bg-dark-base z-10 transition-all duration-500"
            [class.px-4]="!collapsed() || mobileOpen()" [class.justify-center]="collapsed() && !mobileOpen()">
-        <a routerLink="/" class="flex items-center gap-2.5 overflow-hidden">
-          <div class="w-8 h-8 bg-gradient-to-br from-primary to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 hover:scale-110 transition-transform">
-            <span class="text-white font-black text-sm">I</span>
+        <a routerLink="/" class="flex items-center gap-2 overflow-hidden">
+          <div class="w-7 h-7 bg-gradient-to-br from-primary to-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 hover:scale-110 transition-transform">
+            <span class="text-white font-black text-xs">I</span>
           </div>
           <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" 
-                class="sidebar-fade-text text-base font-black tracking-tight text-slate-900 dark:text-white">Inven<span class="text-primary">tory</span></span>
+                class="sidebar-fade-text text-sm font-black tracking-tight text-slate-900 dark:text-white">Inven<span class="text-primary">tory</span></span>
         </a>
       </div>
 
@@ -53,11 +53,11 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
                  (mouseenter)="onNavHover($event, idx)"
                  (mouseleave)="onNavHover($event, -1)">
               <a [routerLink]="item.route" routerLinkActive="bg-primary/20 dark:bg-primary/20 shadow-sm hover:bg-primary" [routerLinkActiveOptions]="{ exact: item.exact }"
-                 class="nav-link flex items-center gap-2.5 py-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-primary/10 dark:hover:bg-white/[0.04] rounded-lg transition-all text-[13px] font-medium group"
-                 [class.px-2.5]="!collapsed() || mobileOpen()"
+                 class="nav-link flex items-center gap-2 py-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-primary/10 dark:hover:bg-white/[0.04] rounded-lg transition-all text-xs font-medium group"
+                 [class.px-2]="!collapsed() || mobileOpen()"
                  [class.justify-center]="collapsed() && !mobileOpen()"
                  [class.px-0]="collapsed() && !mobileOpen()">
-                <span [innerHTML]="item.icon" class="icon-container w-5 h-5 block group-hover:text-primary transition-colors flex-shrink-0"></span>
+                <span [innerHTML]="item.icon" class="icon-container w-4 h-4 block group-hover:text-primary transition-colors flex-shrink-0"></span>
                 <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" class="sidebar-fade-text">{{ item.label }}</span>
               </a>
             </div>
@@ -270,10 +270,22 @@ export class SidebarComponent {
       icon: this.sanitizer.bypassSecurityTrustHtml('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>')
     },
     {
-      label: 'Warehouse',
-      route: '/dashboard/warehouse',
+      label: 'Suppliers',
+      route: '/inventory/suppliers',
+      exact: false,
+      icon: this.sanitizer.bypassSecurityTrustHtml('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>')
+    },
+    {
+      label: 'Warehouses',
+      route: '/inventory/warehouses',
       exact: false,
       icon: this.sanitizer.bypassSecurityTrustHtml('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9,22 9,12 15,12 15,22"></polyline></svg>')
+    },
+    {
+      label: 'Payments',
+      route: '/inventory/payments',
+      exact: false,
+      icon: this.sanitizer.bypassSecurityTrustHtml('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>')
     },
     {
       label: 'Reports',

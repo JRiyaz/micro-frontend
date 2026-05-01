@@ -1,0 +1,9 @@
+{
+  "files.insertFinalNewline": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.removeUnusedImports": "explicit",
+    "source.fixAll.ts": "explicit",
+    "source.fixAll.eslint": "explicit"
+  }
+}

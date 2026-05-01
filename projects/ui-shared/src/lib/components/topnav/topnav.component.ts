@@ -13,7 +13,7 @@ import { SearchService } from '../../services/search.service';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <header class="h-12 flex items-center justify-between px-3 sm:px-4 lg:px-6 bg-slate-50 dark:bg-dark-base relative z-30 transition-colors duration-500">
+    <header class="h-10 flex items-center justify-between px-3 sm:px-4 bg-slate-50 dark:bg-dark-base relative z-30 transition-colors duration-500">
       <div class="flex items-center gap-4">
         <!-- Removed duplicate logo -->
       </div>
@@ -25,11 +25,11 @@ import { SearchService } from '../../services/search.service';
                  (input)="onSearchInput($event)"
                  (keydown)="handleSearchKeydown($event)"
                  (blur)="onBlur()"
-                 class="peer w-full bg-transparent border-b-2 border-slate-200 dark:border-white/[0.08] py-2.5 pl-1 pr-10 text-sm text-slate-900 dark:text-slate-200 focus:outline-none focus:border-primary transition-all placeholder-transparent" id="topnav-search">
+                 class="peer w-full bg-transparent border-b-2 border-slate-200 dark:border-white/[0.08] py-2 pl-1 pr-10 text-xs text-slate-900 dark:text-slate-200 focus:outline-none focus:border-primary transition-all placeholder-transparent" id="topnav-search">
           
           <label for="topnav-search" 
-                 class="absolute left-1 -top-2 text-slate-500 dark:text-slate-400 text-[10px] transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-slate-400 peer-placeholder-shown:top-2.5 peer-focus:-top-2 peer-focus:text-primary peer-focus:text-[10px] pointer-events-none uppercase font-bold tracking-widest">
-            Search products, orders...
+                 class="absolute left-1 -top-1.5 text-slate-500 dark:text-slate-400 text-[9px] transition-all peer-placeholder-shown:text-xs peer-placeholder-shown:text-slate-400 peer-placeholder-shown:top-2 peer-focus:-top-1.5 peer-focus:text-primary peer-focus:text-[9px] pointer-events-none uppercase font-bold tracking-widest">
+            Search...
           </label>
 
           <div class="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-2">

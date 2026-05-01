@@ -4,24 +4,29 @@
    (Base theme tokens and library overrides are in theme-base.css)
 */
 
+@reference "tailwindcss";
+
 @layer components {
   /* Premium Floating Label Input (Bottom Border Only) */
   .floating-input-group {
     position: relative;
-    padding-top: 1rem;
+    padding-top: 0.85rem;
     width: 100%;
   }
 
   .floating-input {
     width: 100%;
     background: transparent;
-    border: none;
-    border-bottom: 2px solid color-mix(in srgb, currentColor, transparent 80%);
-    padding: 0.375rem 0;
-    font-size: 0.8125rem;
+    border: none !important;
+    border-bottom: 2px solid color-mix(in srgb, currentColor, transparent 90%) !important;
+    border-radius: 0 !important;
+    padding: 0.4rem 0 !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
     color: inherit;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none !important;
+    box-shadow: none !important;
   }
 
   .floating-input:focus {
@@ -30,13 +35,13 @@
 
   .floating-label {
     position: absolute;
-    top: 1.5rem;
+    top: 1.25rem;
     left: 0;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: color-mix(in srgb, currentColor, transparent 50%);
     pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -57,7 +62,7 @@
 
   /* Global Premium Animations */
   .animate-fade-in {
-    animation: fadeIn 0.4s ease-out forwards;
+    animation: fadeIn 0.3s ease-out forwards;
   }
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
@@ -82,16 +87,16 @@
 
   /* Shared Premium UI Classes */
   .btn-primary-premium {
-    @apply px-5 py-2.5 bg-primary text-white rounded-xl font-bold text-xs uppercase tracking-widest 
-           hover:bg-primary-hover hover:scale-[1.02] active:scale-95 
-           transition-all duration-200 shadow-lg shadow-primary/20 
-           disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100;
+    @apply px-4 py-2 bg-primary text-white rounded-lg font-bold text-[10px] uppercase tracking-wider 
+           hover:bg-primary-hover active:scale-95 
+           transition-all duration-200 shadow-sm
+           disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary-premium {
-    @apply px-5 py-2.5 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 rounded-xl 
-           font-bold text-xs uppercase tracking-widest border border-slate-200 dark:border-white/10
-           hover:bg-slate-200 dark:hover:bg-white/10 hover:scale-[1.02] active:scale-95 
+    @apply px-4 py-2 bg-slate-50 dark:bg-white/5 text-slate-600 dark:text-slate-300 rounded-lg 
+           font-bold text-[10px] uppercase tracking-wider border border-slate-200 dark:border-white/10
+           hover:bg-slate-100 dark:hover:bg-white/10 active:scale-95 
            transition-all duration-200;
   }
 
@@ -101,7 +106,7 @@
   }
 
   .card-premium {
-    @apply bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-2xl shadow-sm;
+    @apply bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-xl shadow-sm;
   }
 
   .label-premium {
@@ -135,23 +140,35 @@
     @apply relative !text-transparent pointer-events-none;
   }
   .btn-loading::after {
-    content: "";
-    @apply absolute inset-0 m-auto w-4 h-4 rounded-full;
-    box-shadow: 
-      0 -10px 0 0 white,
-      7px -7px 0 -0.5px rgba(255, 255, 255, 0.9),
-      10px 0 0 -1px rgba(255, 255, 255, 0.8),
-      7px 7px 0 -1.5px rgba(255, 255, 255, 0.7),
-      0 10px 0 -2px rgba(255, 255, 255, 0.6);
-    animation: btnSpinner 1s infinite linear;
+    display: none;
   }
-  .btn-secondary-premium.btn-loading::after {
-    box-shadow: 
-      0 -10px 0 0 theme('colors.primary.DEFAULT'),
-      7px -7px 0 -0.5px rgba(109, 116, 255, 0.9),
-      10px 0 0 -1px rgba(109, 116, 255, 0.8),
-      7px 7px 0 -1.5px rgba(109, 116, 255, 0.7),
-      0 10px 0 -2px rgba(109, 116, 255, 0.6);
+  .btn-loading::before {
+    content: "";
+    @apply absolute inset-0 m-auto w-5 h-5 rounded-full border-[3px] border-white/20 border-t-white;
+    animation: btnSpinner 0.8s linear infinite;
+  }
+  
+  /* Windows-style Dot Spinner */
+  .windows-loader {
+    @apply flex items-center justify-center relative w-5 h-5;
+  }
+  .windows-loader span {
+    @apply absolute w-1 h-1 bg-current rounded-full;
+    animation: windowsLoader 1.5s infinite ease-in-out;
+  }
+  .windows-loader span:nth-child(1) { animation-delay: 0s; transform: rotate(0deg) translateY(-8px); }
+  .windows-loader span:nth-child(2) { animation-delay: 0.1s; transform: rotate(45deg) translateY(-8px); }
+  .windows-loader span:nth-child(3) { animation-delay: 0.2s; transform: rotate(90deg) translateY(-8px); }
+  .windows-loader span:nth-child(4) { animation-delay: 0.3s; transform: rotate(135deg) translateY(-8px); }
+  .windows-loader span:nth-child(5) { animation-delay: 0.4s; transform: rotate(180deg) translateY(-8px); }
+  .windows-loader span:nth-child(6) { animation-delay: 0.5s; transform: rotate(225deg) translateY(-8px); }
+  .windows-loader span:nth-child(7) { animation-delay: 0.6s; transform: rotate(270deg) translateY(-8px); }
+  .windows-loader span:nth-child(8) { animation-delay: 0.7s; transform: rotate(315deg) translateY(-8px); }
+
+  @keyframes windowsLoader {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.3); opacity: 0.3; }
+    100% { transform: scale(1); opacity: 1; }
   }
 
   @keyframes btnSpinner {
