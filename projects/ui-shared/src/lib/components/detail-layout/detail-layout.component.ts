@@ -45,13 +45,20 @@ import { Breadcrumb } from '../../models';
             </div>
 
             <div class="flex items-center gap-2">
-               <button class="btn-secondary-premium !px-3 !py-1.5 !text-[9px]">
-                  Export
-               </button>
+               @if (editLabel()) {
+                 <button (click)="edit.emit()" class="btn-secondary-premium !px-4 !py-1.5 !text-[9px]">
+                    {{ editLabel() }}
+                 </button>
+               }
                 <button (click)="action.emit()" [disabled]="loading()" class="btn-primary-premium !px-4 !py-1.5 !text-[9px] flex items-center justify-center min-w-[120px] relative overflow-hidden group">
                   @if (loading()) {
                     <div class="loader-wrapper-premium">
-                      @if (loaderType() === 'flower') {
+                      @if (loaderType() === 'bloom') {
+                        <div class="bloom-loader">
+                          <span></span><span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                      } 
+                      @else if (loaderType() === 'flower') {
                         <div class="flower-loader">
                           <span></span><span></span><span></span><span></span><span></span><span></span>
                         </div>
@@ -140,11 +147,13 @@ export class DetailLayoutComponent {
   backLabel = input<string>('Back');
   breadcrumbs = input<Breadcrumb[]>([]);
   actionLabel = input<string>('Primary Action');
+  editLabel = input<string>('');
   tabs = input<string[]>([]);
   loading = input<boolean>(false);
-  loaderType = input<'flower' | 'gravity' | 'pulse' | 'liquid' | 'pulse-slow'>('gravity');
+  loaderType = input<'flower' | 'gravity' | 'pulse' | 'liquid' | 'pulse-slow' | 'bloom'>('bloom');
 
   action = output<void>();
+  edit = output<void>();
   tabChanged = output<number>();
 
   currentTab = signal(0);

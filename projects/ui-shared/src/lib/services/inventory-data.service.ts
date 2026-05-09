@@ -50,6 +50,7 @@ export interface Customer {
   email: string;
   company: string;
   phone: string;
+  location?: string;
   status: "Active" | "Inactive";
   joinDate: string;
 }
@@ -82,6 +83,7 @@ export interface Warehouse {
   totalCapacity: number;
   currentStock: number;
   zones: Zone[];
+  manager?: string;
   lastAudit?: string;
 }
 
@@ -240,6 +242,32 @@ export class InventoryDataService {
 
   addWarehouse(warehouse: Warehouse): void {
     this._warehouses.update(prev => [...prev, warehouse]);
+  }
+
+  updateProduct(product: Product): void {
+    this._products.update(prev => prev.map(p => p.id === product.id ? product : p));
+    this.saveToStorage();
+  }
+
+  updateOrder(order: Order): void {
+    this._orders.update(prev => prev.map(o => o.id === order.id ? order : o));
+    this.saveToStorage();
+  }
+
+  updateCustomer(customer: Customer): void {
+    this._customers.update(prev => prev.map(c => c.id === customer.id ? customer : c));
+  }
+
+  updateSupplier(supplier: Supplier): void {
+    this._suppliers.update(prev => prev.map(s => s.id === supplier.id ? supplier : s));
+  }
+
+  updateWarehouse(warehouse: Warehouse): void {
+    this._warehouses.update(prev => prev.map(w => w.id === warehouse.id ? warehouse : w));
+  }
+
+  getProduct(id: number): Product | undefined {
+    return this.products().find(p => p.id === id);
   }
 
   getOrdersForCustomer(customerName: string): Order[] {

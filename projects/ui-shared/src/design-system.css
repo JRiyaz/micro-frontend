@@ -464,19 +464,80 @@
   }
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 2s infinite ease-in-out;
+.bloom-loader {
+  @apply relative;
+  width: 2.2em;
+  height: 2.2em;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
+.bloom-loader span {
+  @apply absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-current;
+  transform-origin: center 1.1em;
+  opacity: 0;
+  animation: 
+    bloomRotate 6s infinite cubic-bezier(0.4, 0, 0.2, 1),
+    flowerPetals 3s infinite ease-in-out;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(109, 116, 255, 0.1);
-  border-radius: 10px;
+.bloom-loader span:nth-child(1) { animation-delay: 0.2s; }
+.bloom-loader span:nth-child(2) { animation-delay: 0.4s; }
+.bloom-loader span:nth-child(3) { animation-delay: 0.6s; }
+.bloom-loader span:nth-child(4) { animation-delay: 0.8s; }
+.bloom-loader span:nth-child(5) { animation-delay: 1.0s; }
+.bloom-loader span:nth-child(6) { animation-delay: 1.2s; }
+
+@keyframes bloomRotate {
+  0% { transform: rotate(0deg) translate(-50%, 0); opacity: 0; }
+  5% { opacity: 1; }
+  30% { transform: rotate(360deg) translate(-50%, 0); }
+  60% { transform: rotate(720deg) translate(-50%, 0); }
+  90% { transform: rotate(1080deg) translate(-50%, 0); opacity: 1; }
+  100% { transform: rotate(1080deg) translate(-50%, 0); opacity: 0; }
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(109, 116, 255, 0.2);
+@keyframes flowerPetals {
+  0%, 100% {
+    box-shadow: 
+      0 0 0 currentColor,
+      3.5px 0 0 currentColor, -3.5px 0 0 currentColor, 0 3.5px 0 currentColor, 0 -3.5px 0 currentColor,
+      2.5px 2.5px 0 currentColor, -2.5px -2.5px 0 currentColor, 2.5px -2.5px 0 currentColor, -2.5px 2.5px 0 currentColor;
+  }
+  35% {
+    box-shadow: 
+      0 0 0 currentColor,
+      1.5px 0 0 currentColor, -1.5px 0 0 currentColor, 0 1.5px 0 currentColor, 0 -1.5px 0 currentColor,
+      1px 1px 0 currentColor, -1px -1px 0 currentColor, 1px -1px 0 currentColor, -1px 1px 0 currentColor;
+  }
+  50%, 70% {
+    box-shadow: 
+      0 0 0 currentColor,
+      0px 0 0 currentColor, -0px 0 0 currentColor, 0 0px 0 currentColor, 0 -0px 0 currentColor,
+      0px 0px 0 currentColor, -0px -0px 0 currentColor, 0px -0px 0 currentColor, -0px 0px 0 currentColor;
+  }
+}
+
+.flower-loader {
+  @apply relative;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.flower-loader span {
+  @apply absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-current opacity-0;
+  transform-origin: center 0.75em;
+  animation: flowerRotate 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.flower-loader span:nth-child(1) { animation-delay: 0.1s; }
+.flower-loader span:nth-child(2) { animation-delay: 0.2s; }
+.flower-loader span:nth-child(3) { animation-delay: 0.3s; }
+.flower-loader span:nth-child(4) { animation-delay: 0.4s; }
+.flower-loader span:nth-child(5) { animation-delay: 0.5s; }
+.flower-loader span:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes flowerRotate {
+  0% { transform: rotate(0deg) translate(-50%, 0); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: rotate(360deg) translate(-50%, 0); opacity: 0; }
 }
