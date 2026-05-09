@@ -9,12 +9,12 @@ import { SidebarComponent, SidebarNavItem } from '../sidebar/sidebar.component';
   standalone: true,
   imports: [CommonModule, RouterModule, TopnavComponent, SidebarComponent],
   template: `
-    <div class="flex h-screen bg-slate-50 dark:bg-dark-base text-slate-900 dark:text-slate-200 overflow-hidden transition-colors duration-500">
+    <div class="flex h-screen bg-white dark:bg-dark-base text-slate-900 dark:text-slate-200 overflow-hidden transition-colors duration-500">
       <!-- Sidebar -->
       <ui-sidebar #sidebar [branding]="branding()" [navItems]="navItems()" />
 
       <!-- Main Content Area -->
-      <div class="flex-1 flex flex-col min-w-0 relative">
+      <div class="flex-1 flex flex-col min-w-0 relative bg-white dark:bg-dark-base">
         <!-- Top Nav -->
         <ui-topnav (sidebarToggle)="sidebar.toggle()" class="flex-shrink-0" />
 

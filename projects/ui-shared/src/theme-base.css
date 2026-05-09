@@ -60,6 +60,15 @@
     --theme-dark-elevated: #282414;
     --theme-dark-card: #35301b;
   }
+
+  :root[data-theme="glass"] {
+    --theme-primary: #3b82f6;
+    --theme-primary-hover: #2563eb;
+    --theme-dark-base: #0f172a;
+    --theme-dark-surface: #1e293b;
+    --theme-dark-elevated: #334155;
+    --theme-dark-card: #475569;
+  }
 }
 
 @layer utilities {

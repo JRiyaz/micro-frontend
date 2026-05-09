@@ -13,7 +13,7 @@ import { ThemeService } from '../../services/theme.service';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <header class="h-12 flex items-center justify-between px-3 sm:px-4 bg-slate-50 dark:bg-dark-base relative z-30 transition-colors duration-500">
+    <header class="h-12 flex items-center justify-between px-3 sm:px-4 bg-white dark:bg-dark-base relative z-30 transition-colors duration-500 border-b border-slate-100 dark:border-white/[0.04]">
       <div class="flex items-center gap-4">
         <!-- Removed duplicate logo -->
       </div>

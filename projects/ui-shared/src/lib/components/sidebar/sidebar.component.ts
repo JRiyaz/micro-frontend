@@ -34,10 +34,10 @@ export interface SidebarNavItem {
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
       </button>
 
-      <div class="h-12 flex items-center flex-shrink-0 bg-slate-50 dark:bg-dark-base z-10 transition-all duration-500"
+      <div class="h-12 flex items-center flex-shrink-0 bg-white dark:bg-dark-base z-10 transition-all duration-500 border-b border-slate-100 dark:border-white/[0.04]"
            [class.px-4]="!collapsed() || mobileOpen()" [class.justify-center]="collapsed() && !mobileOpen()">
         <a routerLink="/" class="flex items-center gap-2 overflow-hidden">
-          <div class="w-7 h-7 bg-gradient-to-br from-primary to-blue-500 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 hover:scale-110 transition-transform">
+          <div class="w-8 h-8 bg-gradient-to-tr from-primary via-primary/80 to-blue-400 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20 hover:scale-110 transition-transform">
             <span class="text-white font-black text-xs">{{ branding.logoText || 'A' }}</span>
           </div>
           <span [class.sidebar-show]="!collapsed() || mobileOpen()" [class.sidebar-hide]="collapsed() && !mobileOpen()" 
