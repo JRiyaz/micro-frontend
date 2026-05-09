@@ -1,19 +1,19 @@
-import { Component, output, signal, OnInit, inject, computed, viewChild, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { Component, ElementRef, HostListener, OnInit, computed, inject, output, signal, viewChild } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { AuthStateService } from '../../services/auth-state.service';
-import { ThemeService } from '../../services/theme.service';
-import { NotificationService } from '../../services/notification.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { LoadingService } from '../../services/loading.service';
+import { NotificationService } from '../../services/notification.service';
 import { SearchService } from '../../services/search.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'ui-topnav',
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <header class="h-10 flex items-center justify-between px-3 sm:px-4 bg-slate-50 dark:bg-dark-base relative z-30 transition-colors duration-500">
+    <header class="h-12 flex items-center justify-between px-3 sm:px-4 bg-slate-50 dark:bg-dark-base relative z-30 transition-colors duration-500">
       <div class="flex items-center gap-4">
         <!-- Removed duplicate logo -->
       </div>

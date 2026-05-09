@@ -1,5 +1,5 @@
-import { Component, Input, signal, viewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, ElementRef, Input, signal, viewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SafeHtmlPipe } from '../../utils/safe-html.pipe';
 

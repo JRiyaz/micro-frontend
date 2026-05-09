@@ -353,6 +353,10 @@ export class InventoryDataService {
       { id: "ORD-2341", customer: "TechNexus Industries", customerName: "TechNexus Industries", status: "Processing", amount: 45200, totalAmount: 45200, date: "2024-03-28", priority: true, items: [{ productId: 1, name: "Precision Logic Controller", qty: 2, price: 1240 }, { productId: 2, name: "Thermal Flux Sensor", qty: 12, price: 450 }] },
       { id: "ORD-2342", customer: "Global Logistics Co", customerName: "Global Logistics Co", status: "Pending", amount: 12450, totalAmount: 12450, date: "2024-03-27", priority: false, items: [{ productId: 5, name: "Pneumatic Actuator X5", qty: 5, price: 670 }, { productId: 6, name: "Industrial Grade Coolant", qty: 10, price: 150 }] },
       { id: "ORD-2343", customer: "Quantum Systems", customerName: "Quantum Systems", status: "Completed", amount: 89000, totalAmount: 89000, date: "2024-03-25", priority: true, items: [{ productId: 4, name: "Quantum Circuit Breaker", qty: 1, price: 2100 }, { productId: 7, name: "Logic Gate Array V2", qty: 3, price: 320 }] },
+      { id: "ORD-2344", customer: "TechNexus Industries", customerName: "TechNexus Industries", status: "Completed", amount: 15000, totalAmount: 15000, date: "2024-03-20", priority: false, items: [{ productId: 1, name: "Precision Logic Controller", qty: 1, price: 1240 }] },
+      { id: "ORD-2345", customer: "Quantum Systems", customerName: "Quantum Systems", status: "Completed", amount: 25000, totalAmount: 25000, date: "2024-03-15", priority: false, items: [{ productId: 2, name: "Thermal Flux Sensor", qty: 5, price: 450 }] },
+      { id: "ORD-2346", customer: "Global Logistics Co", customerName: "Global Logistics Co", status: "Completed", amount: 18000, totalAmount: 18000, date: "2024-03-10", priority: false, items: [{ productId: 3, name: "Reinforced Steel Alloy", qty: 100, price: 89 }] },
+      { id: "ORD-2347", customer: "Apex Manufacturing", customerName: "Apex Manufacturing", status: "Completed", amount: 62000, totalAmount: 62000, date: "2024-03-05", priority: true, items: [{ productId: 8, name: "Heavy Duty Gear Box", qty: 1, price: 4500 }] },
     ];
   }
 
