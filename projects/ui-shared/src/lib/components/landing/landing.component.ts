@@ -21,6 +21,7 @@ import { RouterModule } from '@angular/router';
           <div class="hidden md:flex items-center gap-8">
             <a href="#features" class="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors font-medium">Features</a>
             <a href="#stats" class="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors font-medium">Stats</a>
+            <a routerLink="/store" class="text-sm text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors font-medium">Store</a>
           </div>
           <div class="flex items-center gap-3">
             <a routerLink="/user/login" class="px-5 py-2 text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors font-medium hidden sm:block">Sign In</a>
@@ -54,6 +55,7 @@ import { RouterModule } from '@angular/router';
         </p>
         <div class="flex flex-col sm:flex-row gap-4 mb-16 sm:mb-24">
           <a routerLink="/user/register" class="px-10 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:bg-primary-hover transition-colors">Get Started Free</a>
+          <a routerLink="/store" class="px-10 py-4 bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] backdrop-blur-md text-slate-900 dark:text-white rounded-xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-white/[0.06] transition-colors shadow-sm dark:shadow-none">Shop Now</a>
           <a routerLink="/dashboard" class="px-10 py-4 bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] backdrop-blur-md text-slate-900 dark:text-white rounded-xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-white/[0.06] transition-colors shadow-sm dark:shadow-none">View Demo</a>
         </div>
 

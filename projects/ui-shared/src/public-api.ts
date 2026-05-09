@@ -30,6 +30,7 @@ export * from './lib/services/notification.service';
 export * from './lib/services/search.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/workspace.service';
+export * from './lib/services/cart.service';
 
 // Shared Utilities
 export * from './lib/models';
