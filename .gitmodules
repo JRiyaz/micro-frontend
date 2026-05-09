@@ -10,3 +10,7 @@
 	path = projects/inventory-hub
 	url = git@github.com:JRiyaz/inventory-hub.git
 	branch = ai-main
+[submodule "projects/store-service"]
+	path = projects/store-service
+	url = git@github.com:JRiyaz/store-service.git
+	branch = main

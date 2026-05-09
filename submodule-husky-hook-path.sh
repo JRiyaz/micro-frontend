@@ -18,4 +18,5 @@ if [ -z "$PREVENT_WEBHOOKS" ]; then
     set_hooks_path "projects/shell"
     set_hooks_path "projects/user-service"
     set_hooks_path "projects/inventory-hub"
+    set_hooks_path "projects/store-service"
 fi
