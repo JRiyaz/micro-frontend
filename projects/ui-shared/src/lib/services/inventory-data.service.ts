@@ -116,6 +116,7 @@ export interface Payment {
   providedIn: "root",
 })
 export class InventoryDataService {
+  loading = signal(false);
   // System Settings
   settings = signal({
     currency: "USD",
