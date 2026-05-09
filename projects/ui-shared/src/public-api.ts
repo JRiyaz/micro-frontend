@@ -22,6 +22,7 @@ export * from './lib/components/status-badge/status-badge.component';
 export * from './lib/components/topnav/topnav.component';
 export * from './lib/components/mobile-bottom-nav/mobile-bottom-nav.component';
 export * from './lib/components/ui-chart/ui-chart.component';
+export * from './lib/components/empty-state/empty-state.component';
 
 // Shared services
 export * from './lib/services/auth-state.service';
