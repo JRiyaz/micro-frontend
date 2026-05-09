@@ -1,5 +1,5 @@
-import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, input, output, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Breadcrumb } from '../../models';
 
@@ -65,6 +65,9 @@ import { Breadcrumb } from '../../models';
                         </div>
                       } @else if (loaderType() === 'liquid') {
                         <div class="liquid-pulse"></div>
+                      }
+                       @else if (loaderType() === 'pulse-slow') {
+                        <div class="pulse-slow"></div>
                       }
                     </div>
                   }
@@ -139,8 +142,8 @@ export class DetailLayoutComponent {
   actionLabel = input<string>('Primary Action');
   tabs = input<string[]>([]);
   loading = input<boolean>(false);
-  loaderType = input<'flower' | 'gravity' | 'pulse' | 'liquid'>('gravity');
-  
+  loaderType = input<'flower' | 'gravity' | 'pulse' | 'liquid' | 'pulse-slow'>('gravity');
+
   action = output<void>();
   tabChanged = output<number>();
 

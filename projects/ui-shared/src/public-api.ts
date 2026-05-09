@@ -20,6 +20,8 @@ export * from './lib/components/sidebar/sidebar.component';
 export * from './lib/components/skeleton/skeleton.component';
 export * from './lib/components/status-badge/status-badge.component';
 export * from './lib/components/topnav/topnav.component';
+export * from './lib/components/mobile-bottom-nav/mobile-bottom-nav.component';
+export * from './lib/components/ui-chart/ui-chart.component';
 
 // Shared services
 export * from './lib/services/auth-state.service';
@@ -30,9 +32,9 @@ export * from './lib/services/notification.service';
 export * from './lib/services/search.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/workspace.service';
-export * from './lib/services/cart.service';
 
 // Shared Utilities
 export * from './lib/models';
+export * from './lib/utils/safe-html.pipe';
 export * from './lib/utils/drag-drop';
 
