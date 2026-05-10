@@ -14,6 +14,7 @@ export * from './lib/components/detail-layout/detail-layout.component';
 export * from './lib/components/empty-state/empty-state.component';
 export * from './lib/components/landing/landing.component';
 export * from './lib/components/loader/loader.component';
+export * from './lib/components/typewriter/typewriter.component';
 export * from './lib/components/loading/loading.component';
 export * from './lib/components/mobile-bottom-nav/mobile-bottom-nav.component';
 export * from './lib/components/notification-sidenav/notification-sidenav.component';
