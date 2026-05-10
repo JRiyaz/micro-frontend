@@ -5,6 +5,15 @@
 */
 
 @reference "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: var(--theme-primary);
+  --color-dark-base: var(--theme-dark-base);
+  --color-dark-surface: var(--theme-dark-surface);
+  --color-dark-elevated: var(--theme-dark-elevated);
+  --color-dark-card: var(--theme-dark-card);
+}
 
 @layer components {
 
@@ -128,7 +137,7 @@
   }
 
   .card-premium {
-    @apply bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-white/[0.08] rounded-xl shadow-sm;
+    @apply bg-white dark:bg-dark-surface border border-slate-200 dark:border-white/[0.08] rounded-xl shadow-sm;
   }
 
   .label-premium {
@@ -677,123 +686,113 @@
 }
 
 /* 
-  Glassmorphism Theme Support
-  ---------------------------
-  These styles are activated when [data-theme="glass"] is applied to the root.
+  Glassmorphism Theme Support (Minimalist Pure Glass Edition)
+  ---------------------------------------------------------
+  Clean, high-density glass look with no background distractions.
 */
 
 :root[data-theme="glass"] {
-  --glass-bg-light: rgba(255, 255, 255, 0.15);
-  --glass-bg-dark: rgba(15, 23, 42, 0.2);
-  --glass-border-light: rgba(255, 255, 255, 0.3);
-  --glass-border-dark: rgba(255, 255, 255, 0.1);
-  --glass-blur: blur(40px);
-  overflow-x: hidden;
+  --glass-bg-light: rgba(255, 255, 255, 0.45);
+  --glass-bg-dark: rgba(15, 23, 42, 0.45);
+  --glass-border-light: rgba(255, 255, 255, 0.4);
+  --glass-border-dark: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(32px) saturate(150%);
+  --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+:root[data-theme="glass"],
+:root[data-theme="glass"] body {
+  overflow: hidden; /* Lock to viewport height */
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Background - Pure solid for maximum clarity */
+:root[data-theme="glass"] body {
+  background: #f8fafc;
+}
+
+:root[data-theme="glass"].dark body {
+  background: #020617;
+}
+
+/* Clear any previous background elements */
+:root[data-theme="glass"] body::before,
+:root[data-theme="glass"] body::after {
+  display: none !important;
+}
+
+/* Unified Shell Panels (Seamless, No Borders) */
+:root[data-theme="glass"] .topnav-header,
+:root[data-theme="glass"] .sidebar-aside,
+:root[data-theme="glass"] .main-content-wrapper {
+  background: var(--glass-bg-light) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: none !important; /* Unified seamless look */
+  box-shadow: none !important; /* Eliminate gaps */
+}
+
+:root[data-theme="glass"].dark .topnav-header,
+:root[data-theme="glass"].dark .sidebar-aside,
+:root[data-theme="glass"].dark .main-content-wrapper {
+  background: var(--glass-bg-dark) !important;
+}
+
+/* Remove shell layout gaps and rounding in Glass mode */
+:root[data-theme="glass"] .main-content-wrapper {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  overflow-y: auto !important;
+}
+
+:root[data-theme="glass"].dark header,
+:root[data-theme="glass"].dark .sidebar-aside,
+:root[data-theme="glass"].dark .main-content-wrapper {
+  background: var(--glass-bg-dark) !important;
+}
+
+/* Pure Glass Cards (Maintain subtle borders for definition) */
+:root[data-theme="glass"] .card-premium,
+:root[data-theme="glass"] .bg-white,
+:root[data-theme="glass"] .bg-slate-50 {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid var(--glass-border-light) !important;
+  color: #1e293b !important;
+}
+
+:root[data-theme="glass"].dark .card-premium,
+:root[data-theme="glass"].dark .bg-white,
+:root[data-theme="glass"].dark .bg-slate-50,
+:root[data-theme="glass"].dark .dark\:bg-dark-base,
+:root[data-theme="glass"].dark .dark\:bg-dark-surface {
+  background: rgba(15, 23, 42, 0.5) !important;
+  border: 1px solid var(--glass-border-dark) !important;
+  color: #f8fafc !important;
 }
 
 /* Custom Glass Scrollbars */
 :root[data-theme="glass"] ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
 }
-
 :root[data-theme="glass"] ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(4px);
+  background: transparent;
 }
-
 :root[data-theme="glass"] ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid transparent;
-  background-clip: padding-box;
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  transition: background 0.3s ease;
 }
-
-:root[data-theme="glass"] ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
 :root[data-theme="glass"].dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
 }
 
-:root[data-theme="glass"].dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-
-:root[data-theme="glass"] .card-premium,
-:root[data-theme="glass"] .sidebar-aside,
-:root[data-theme="glass"] header,
-:root[data-theme="glass"] .bg-white,
-:root[data-theme="glass"] .bg-slate-50,
-:root[data-theme="glass"] .dark\:bg-dark-base,
-:root[data-theme="glass"] .dark\:bg-dark-surface {
-  background: var(--glass-bg-light) !important;
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border-light) !important;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
-  color: #0f172a !important;
-  /* Deepest slate for maximum contrast */
-}
-
-/* Force text visibility for nested elements in light mode glass */
-:root[data-theme="glass"]:not(.dark) .card-premium *,
-:root[data-theme="glass"]:not(.dark) .sidebar-aside *,
-:root[data-theme="glass"]:not(.dark) header * {
-  color: inherit !important;
-}
-
-/* Ensure labels are still readable but slightly dimmed */
-:root[data-theme="glass"]:not(.dark) .text-slate-500,
-:root[data-theme="glass"]:not(.dark) .text-slate-400 {
-  color: rgba(15, 23, 42, 0.7) !important;
-}
-
-:root[data-theme="glass"].dark .card-premium,
-:root[data-theme="glass"].dark .sidebar-aside,
-:root[data-theme="glass"].dark header,
-:root[data-theme="glass"].dark .bg-white,
-:root[data-theme="glass"].dark .dark\:bg-dark-base,
-:root[data-theme="glass"].dark .dark\:bg-dark-surface,
-:root[data-theme="glass"].dark .bg-slate-900,
-:root[data-theme="glass"].dark .bg-slate-50 {
-  background: var(--glass-bg-dark) !important;
-  border-color: var(--glass-border-dark) !important;
-  color: #f8fafc !important;
-}
-
-
-/* Specific button refinement for true glass feel */
 :root[data-theme="glass"] .btn-secondary-premium {
   background: rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(8px);
 }
 
-/* Special High-Fidelity Vibrancy Background for Glass mode */
-:root[data-theme="glass"] body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url('assets/images/glass-bg.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: saturate(1.8) brightness(1.1);
-  z-index: -1;
-  pointer-events: none;
-}
-
-
-:root[data-theme="glass"].dark body::before {
-  filter: saturate(1.2) brightness(0.4);
-}
-
-/* Reveal the background through the main container */
 :root[data-theme="glass"] main {
   background: transparent !important;
-  border: none !important;
 }

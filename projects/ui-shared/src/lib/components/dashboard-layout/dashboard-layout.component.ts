@@ -19,7 +19,7 @@ import { SidebarComponent, SidebarNavItem } from '../sidebar/sidebar.component';
         <ui-topnav (sidebarToggle)="sidebar.toggle()" class="flex-shrink-0" />
 
         <!-- Page Content -->
-        <main class="flex-1 overflow-hidden bg-white dark:bg-dark-surface rounded-tl-[2.5rem] border-t border-l border-slate-200 dark:border-white/[0.08] shadow-[0_-8px_30px_rgb(0,0,0,0.04)] dark:shadow-none transition-colors duration-500">
+        <main class="main-content-wrapper flex-1 overflow-hidden bg-white dark:bg-dark-surface rounded-tl-[2.5rem] border-t border-l border-slate-200 dark:border-white/[0.08] shadow-[0_-8px_30px_rgb(0,0,0,0.04)] dark:shadow-none transition-colors duration-500">
           <div class="h-full overflow-y-auto custom-scrollbar">
             <router-outlet />
           </div>
