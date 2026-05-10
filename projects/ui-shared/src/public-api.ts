@@ -38,6 +38,7 @@ export * from './lib/services/search.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/workspace.service';
 export * from './lib/services/chat.service';
+export * from './lib/services/favicon.service';
 
 // Shared Utilities
 export * from './lib/components/loader/loader.component';

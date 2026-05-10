@@ -5,6 +5,7 @@ import { TopnavComponent } from '../topnav/topnav.component';
 import { SidebarComponent, SidebarNavItem } from '../sidebar/sidebar.component';
 import { ChatWidgetComponent } from '../chat/chat-widget.component';
 import { AuthStateService } from '../../services/auth-state.service';
+import { FaviconService } from '../../services/favicon.service';
 
 @Component({
   selector: 'ui-dashboard-layout',
@@ -40,7 +41,12 @@ import { AuthStateService } from '../../services/auth-state.service';
 export class DashboardLayoutComponent {
   sidebar = viewChild<SidebarComponent>('sidebar');
   private route = inject(ActivatedRoute);
+  private faviconService = inject(FaviconService);
   authService = inject(AuthStateService);
+
+  constructor() {
+    this.faviconService.setFavicon('inventory-favicon.png');
+  }
 
   branding = computed(() => this.route.snapshot.data['branding'] || { title: 'App', subtitle: '', logoText: 'A' });
   navItems = computed(() => this.route.snapshot.data['navItems'] || []);
