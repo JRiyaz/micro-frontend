@@ -61,13 +61,15 @@ import { Breadcrumb, StatItem } from '../../models';
             </div>
           }
 
-          <button 
-            (click)="action.emit()" 
-            [disabled]="isActionLoading()"
-            class="btn-primary-premium flex items-center justify-center min-w-[140px] group overflow-hidden"
-          >
-             <lib-loader [loading]="isActionLoading()" [label]="actionLabel()"></lib-loader>
-          </button>
+          @if (showAction()) {
+            <button 
+              (click)="action.emit()" 
+              [disabled]="isActionLoading()"
+              class="btn-primary-premium flex items-center justify-center min-w-[140px] group overflow-hidden"
+            >
+               <lib-loader [loading]="isActionLoading()" [label]="actionLabel()"></lib-loader>
+            </button>
+          }
         </div>
       </div>
 
@@ -141,6 +143,7 @@ export class PageHeaderComponent {
   count = input<number | string | null>(null);
   loading = input<boolean>(false);
   isActionLoading = input<boolean>(false);
+  showAction = input<boolean>(true);
   stats = input<StatItem[]>([]);
 
   action = output<void>();

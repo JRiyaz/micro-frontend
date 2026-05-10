@@ -4,6 +4,8 @@
 
 export * from './lib/components/form-controls/datepicker.component';
 export * from './lib/components/form-controls/dropdown.component';
+export * from './lib/components/chat/chat-widget.component';
+export * from './lib/components/chat/chat-view.component';
 export * from './lib/http-interceptors/index';
 export * from './lib/ui-shared.component';
 export * from './lib/ui-shared.service';
@@ -35,6 +37,7 @@ export * from './lib/services/notification.service';
 export * from './lib/services/search.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/workspace.service';
+export * from './lib/services/chat.service';
 
 // Shared Utilities
 export * from './lib/components/loader/loader.component';

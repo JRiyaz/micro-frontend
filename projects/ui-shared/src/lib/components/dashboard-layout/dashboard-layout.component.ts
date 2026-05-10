@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { TopnavComponent } from '../topnav/topnav.component';
 import { SidebarComponent, SidebarNavItem } from '../sidebar/sidebar.component';
+import { ChatWidgetComponent } from '../chat/chat-widget.component';
+import { AuthStateService } from '../../services/auth-state.service';
 
 @Component({
   selector: 'ui-dashboard-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule, TopnavComponent, SidebarComponent],
+  imports: [CommonModule, RouterModule, TopnavComponent, SidebarComponent, ChatWidgetComponent],
   template: `
     <div class="flex h-screen bg-white dark:bg-dark-base text-slate-900 dark:text-slate-200 overflow-hidden transition-colors duration-500">
       <!-- Sidebar -->
@@ -25,6 +27,12 @@ import { SidebarComponent, SidebarNavItem } from '../sidebar/sidebar.component';
           </div>
         </main>
       </div>
+
+      <!-- Chat Widget (Employee Side) -->
+      <ui-chat-widget 
+        currentRole="employee" 
+        [userName]="authService.user()?.name || 'Admin'" 
+      />
     </div>
   `,
   styles: []
@@ -32,6 +40,7 @@ import { SidebarComponent, SidebarNavItem } from '../sidebar/sidebar.component';
 export class DashboardLayoutComponent {
   sidebar = viewChild<SidebarComponent>('sidebar');
   private route = inject(ActivatedRoute);
+  authService = inject(AuthStateService);
 
   branding = computed(() => this.route.snapshot.data['branding'] || { title: 'App', subtitle: '', logoText: 'A' });
   navItems = computed(() => this.route.snapshot.data['navItems'] || []);
