@@ -1,5 +1,6 @@
 import { Component, signal, input, output, HostListener, ElementRef, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SafeHtmlPipe } from '../../utils/safe-html.pipe';
 
 export interface DropdownOption {
   value: any;
@@ -11,7 +12,7 @@ export interface DropdownOption {
 @Component({
   selector: 'lib-custom-dropdown',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SafeHtmlPipe],
   template: `
     <div class="relative w-full pt-4 group" id="dropdown-container">
       <button 
@@ -60,7 +61,7 @@ export interface DropdownOption {
                   <div [style.background]="option.color" class="w-2 h-2 rounded-full"></div>
                 }
                 @if (option.icon) {
-                  <span [innerHTML]="option.icon" class="w-4 h-4 text-slate-400"></span>
+                  <span [innerHTML]="option.icon | safeHtml" class="w-4 h-4 text-slate-400"></span>
                 }
                 {{ option.label }}
               </button>

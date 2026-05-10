@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SafeHtmlPipe } from '../../utils/safe-html.pipe';
 
 export interface MobileNavItem {
   label: string;
@@ -13,7 +14,7 @@ export interface MobileNavItem {
 @Component({
   selector: 'ui-mobile-bottom-nav',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, SafeHtmlPipe],
   template: `
     <nav class="mobile-bottom-nav">
       <a *ngFor="let item of navItems" 
@@ -22,7 +23,7 @@ export interface MobileNavItem {
          [routerLinkActiveOptions]="{exact: item.exact || false}" 
          class="nav-item">
         <div class="icon-wrap">
-          <div [innerHTML]="item.icon" class="w-6 h-6 flex items-center justify-center"></div>
+          <div [innerHTML]="item.icon | safeHtml" class="w-6 h-6 flex items-center justify-center"></div>
           <span class="badge" *ngIf="item.badge && item.badge > 0">{{ item.badge }}</span>
         </div>
         <span>{{ item.label }}</span>

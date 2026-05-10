@@ -101,6 +101,6 @@ export class LoaderComponent {
           this.internalLoading.set(false);
         }
       }
-    }, { allowSignalWrites: true });
+    });
   }
 }
