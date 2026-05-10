@@ -150,7 +150,7 @@
 
 .dots-wave span {
   @apply w-1.5 h-1.5 bg-current rounded-full;
-  animation: dotsWave 1.4s infinite ease-in-out both;
+  animation: dotsWave calc(1.4s / var(--loader-speed, 1)) infinite ease-in-out both;
 }
 
 .dots-wave span:nth-child(1) {
@@ -176,86 +176,52 @@
   }
 }
 
-.btn-loading {
-  @apply relative !text-transparent pointer-events-none;
-}
-
-.btn-loading::after {
-  display: none;
-}
-
-.btn-loading::before {
-  content: "";
-  @apply absolute inset-0 m-auto w-5 h-5 rounded-full border-[3px] border-white/20 border-t-white;
-  animation: btnSpinner 0.8s linear infinite;
-}
+/* btn-loading removed - use lib-loader component instead */
 
 /* /* Shared Button Styles */
 
-/* Windows-style Dot Spinner */
+/* Jitter-inspired Circular Loader (Replaces Fluent/Windows) */
 .windows-loader {
-  @apply flex items-center justify-center relative w-5 h-5 text-slate-900 dark:text-white;
+  @apply relative w-8 h-8 flex items-center justify-center;
+  animation: jitterContainer calc(4s / var(--loader-speed, 1)) infinite ease-in-out;
 }
 
 .windows-loader span {
-  @apply absolute w-1 h-1 bg-current rounded-full opacity-0;
-  animation: windowsLoader 1.5s infinite ease-in-out;
+  @apply absolute w-1.5 h-1.5 bg-current rounded-full;
+  animation: jitterPulse calc(4s / var(--loader-speed, 1)) infinite ease-in-out;
 }
 
-.windows-loader span:nth-child(1) {
-  animation-delay: 0s;
-  transform: rotate(0deg) translateY(-8px);
+.windows-loader span:nth-child(1) { transform: rotate(0deg) translateY(-12px); animation-delay: calc(0s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(2) { transform: rotate(45deg) translateY(-12px); animation-delay: calc(0.1s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(3) { transform: rotate(90deg) translateY(-12px); animation-delay: calc(0.2s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(4) { transform: rotate(135deg) translateY(-12px); animation-delay: calc(0.3s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(5) { transform: rotate(180deg) translateY(-12px); animation-delay: calc(0.4s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(6) { transform: rotate(225deg) translateY(-12px); animation-delay: calc(0.5s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(7) { transform: rotate(270deg) translateY(-12px); animation-delay: calc(0.6s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(8) { transform: rotate(315deg) translateY(-12px); animation-delay: calc(0.7s / var(--loader-speed, 1)); }
+
+@keyframes jitterContainer {
+  0%, 100% { transform: scale(0.7) rotate(0deg); }
+  50% { transform: scale(1) rotate(180deg); }
 }
 
-.windows-loader span:nth-child(2) {
-  animation-delay: 0.1s;
-  transform: rotate(45deg) translateY(-8px);
-}
-
-.windows-loader span:nth-child(3) {
-  animation-delay: 0.2s;
-  transform: rotate(90deg) translateY(-8px);
-}
-
-.windows-loader span:nth-child(4) {
-  animation-delay: 0.3s;
-  transform: rotate(135deg) translateY(-8px);
-}
-
-.windows-loader span:nth-child(5) {
-  animation-delay: 0.4s;
-  transform: rotate(180deg) translateY(-8px);
-}
-
-.windows-loader span:nth-child(6) {
-  animation-delay: 0.5s;
-  transform: rotate(225deg) translateY(-8px);
-}
-
-.windows-loader span:nth-child(7) {
-  animation-delay: 0.6s;
-  transform: rotate(270deg) translateY(-8px);
-}
-
-.windows-loader span:nth-child(8) {
-  animation-delay: 0.7s;
-  transform: rotate(315deg) translateY(-8px);
-}
-
-@keyframes windowsLoader {
-  0% {
+@keyframes jitterPulse {
+  0%, 100% { 
     transform: scale(1);
     opacity: 1;
   }
-
+  25% {
+    transform: scale(1.4);
+    opacity: 0.8;
+  }
   50% {
     transform: scale(0.3);
-    opacity: 0.3;
+    opacity: 0.4;
+    filter: blur(1px);
   }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
+  75% {
+    transform: scale(1.2);
+    opacity: 0.7;
   }
 }
 
@@ -276,7 +242,7 @@
 
 .flower-loader span {
   @apply absolute w-1 h-1 bg-primary rounded-full;
-  animation: flowerScale 1s infinite ease-in-out;
+  animation: flowerScale calc(1s / var(--loader-speed, 1)) infinite ease-in-out;
 }
 
 .flower-loader span:nth-child(1) {
@@ -338,11 +304,11 @@
 }
 
 .gravity-orbit span:nth-child(1) {
-  animation: gravityOrbit1 1.5s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  animation: gravityOrbit1 calc(1.5s / var(--loader-speed, 1)) infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 .gravity-orbit span:nth-child(2) {
-  animation: gravityOrbit2 1.5s infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  animation: gravityOrbit2 calc(1.5s / var(--loader-speed, 1)) infinite cubic-bezier(0.45, 0.05, 0.55, 0.95);
 }
 
 @keyframes gravityOrbit1 {
@@ -385,36 +351,41 @@
   }
 }
 
+@keyframes gravitySpin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Liquid Pulse Animation */
 .liquid-pulse {
-  @apply relative w-6 h-6;
+  @apply relative w-5 h-5 bg-primary rounded-full;
+  animation: liquidPulse calc(1.2s / var(--loader-speed, 1)) infinite ease-in-out;
 }
 
 .liquid-pulse::before,
 .liquid-pulse::after {
-  content: '';
-  @apply absolute inset-0 bg-primary rounded-full;
-  opacity: 0.6;
-  animation: liquidPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  content: "";
+  @apply absolute inset-0 bg-primary rounded-full opacity-50;
+  animation: liquidPulse calc(1.2s / var(--loader-speed, 1)) infinite ease-in-out;
 }
 
 .liquid-pulse::after {
-  animation-delay: -1s;
+  animation-delay: calc(0.6s / var(--loader-speed, 1));
 }
 
 @keyframes liquidPulse {
   0% {
-    transform: scale(0.2);
-    opacity: 0.8;
-  }
-
-  50% {
     transform: scale(1);
-    opacity: 0.2;
+    opacity: 0.5;
   }
 
   100% {
-    transform: scale(1.5);
+    transform: scale(2.5);
     opacity: 0;
   }
 }
@@ -426,7 +397,7 @@
 
 .pulse-rings span {
   @apply absolute border-2 border-primary rounded-full;
-  animation: pulseRing 1.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  animation: pulseRing calc(1.5s / var(--loader-speed, 1)) infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 .pulse-rings span:nth-child(1) {
@@ -438,7 +409,7 @@
 .pulse-rings span:nth-child(2) {
   width: 100%;
   height: 100%;
-  animation-delay: 0.5s;
+  animation-delay: calc(0.5s / var(--loader-speed, 1));
 }
 
 @keyframes pulseRing {
@@ -454,18 +425,6 @@
   }
 }
 
-@keyframes pulse-slow {
-
-  0%,
-  100% {
-    border-color: rgba(109, 116, 255, 0.1);
-  }
-
-  50% {
-    border-color: rgba(109, 116, 255, 0.4);
-  }
-}
-
 .bloom-loader {
   @apply relative;
   width: 2.2em;
@@ -477,32 +436,32 @@
   transform-origin: center 1.1em;
   opacity: 0;
   animation:
-    bloomRotate 6s infinite cubic-bezier(0.4, 0, 0.2, 1),
-    flowerPetals 3s infinite ease-in-out;
+    bloomRotate calc(6s / var(--loader-speed, 1)) infinite cubic-bezier(0.4, 0, 0.2, 1),
+    flowerPetals calc(3s / var(--loader-speed, 1)) infinite ease-in-out;
 }
 
 .bloom-loader span:nth-child(1) {
-  animation-delay: 0.2s;
+  animation-delay: calc(0.2s / var(--loader-speed, 1));
 }
 
 .bloom-loader span:nth-child(2) {
-  animation-delay: 0.4s;
+  animation-delay: calc(0.4s / var(--loader-speed, 1));
 }
 
 .bloom-loader span:nth-child(3) {
-  animation-delay: 0.6s;
+  animation-delay: calc(0.6s / var(--loader-speed, 1));
 }
 
 .bloom-loader span:nth-child(4) {
-  animation-delay: 0.8s;
+  animation-delay: calc(0.8s / var(--loader-speed, 1));
 }
 
 .bloom-loader span:nth-child(5) {
-  animation-delay: 1.0s;
+  animation-delay: calc(1s / var(--loader-speed, 1));
 }
 
 .bloom-loader span:nth-child(6) {
-  animation-delay: 1.2s;
+  animation-delay: calc(1.2s / var(--loader-speed, 1));
 }
 
 @keyframes bloomRotate {
@@ -561,6 +520,22 @@
 }
 
 /* Jitter-inspired Morphing Loader (Renamed to Bloom) */
+@keyframes jitterRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes jitterMorph {
+  0%, 100% {
+    transform: scale(0.4);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
 .jitter-loader {
   position: relative;
   width: 1.5em;
@@ -568,17 +543,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  animation: jitterRotate 3.5s linear infinite;
+  animation: jitterRotate calc(1.5s / var(--loader-speed, 1)) steps(8) infinite;
 }
 
 .jitter-loader span {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 25%;
-  height: 25%;
-  margin-top: -12.5%;
-  margin-left: -12.5%;
+  width: 18%;
+  height: 18%;
+  margin-top: -9%;
+  margin-left: -9%;
+  border-radius: 50%;
+  background-color: currentColor;
 }
 
 .jitter-loader span::after {
@@ -586,97 +563,61 @@
   display: block;
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   background-color: currentColor;
-  animation: jitterMorph 3.5s ease-in-out infinite;
+  animation: jitterMorph calc(0.8s / var(--loader-speed, 1)) ease-in-out infinite;
 }
 
-.jitter-loader span:nth-child(1) { transform: rotate(0deg) translateY(-140%); }
-.jitter-loader span:nth-child(2) { transform: rotate(45deg) translateY(-140%); }
-.jitter-loader span:nth-child(3) { transform: rotate(90deg) translateY(-140%); }
-.jitter-loader span:nth-child(4) { transform: rotate(135deg) translateY(-140%); }
-.jitter-loader span:nth-child(5) { transform: rotate(180deg) translateY(-140%); }
-.jitter-loader span:nth-child(6) { transform: rotate(225deg) translateY(-140%); }
-.jitter-loader span:nth-child(7) { transform: rotate(270deg) translateY(-140%); }
-.jitter-loader span:nth-child(8) { transform: rotate(315deg) translateY(-140%); }
+.jitter-loader span:nth-child(1) { transform: rotate(0deg) translateY(-160%); animation-delay: calc(0.0s / var(--loader-speed, 1)); }
+.jitter-loader span:nth-child(2) { transform: rotate(45deg) translateY(-160%); animation-delay: calc(0.1s / var(--loader-speed, 1)); }
+.jitter-loader span:nth-child(3) { transform: rotate(90deg) translateY(-160%); animation-delay: calc(0.2s / var(--loader-speed, 1)); }
+.jitter-loader span:nth-child(4) { transform: rotate(135deg) translateY(-160%); animation-delay: calc(0.3s / var(--loader-speed, 1)); }
+.jitter-loader span:nth-child(5) { transform: rotate(180deg) translateY(-160%); animation-delay: calc(0.4s / var(--loader-speed, 1)); }
+.jitter-loader span:nth-child(6) { transform: rotate(225deg) translateY(-160%); animation-delay: calc(0.5s / var(--loader-speed, 1)); }
+.jitter-loader span:nth-child(7) { transform: rotate(270deg) translateY(-160%); animation-delay: calc(0.6s / var(--loader-speed, 1)); }
+.jitter-loader span:nth-child(8) { transform: rotate(315deg) translateY(-160%); animation-delay: calc(0.7s / var(--loader-speed, 1)); }
 
-@keyframes jitterRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes jitterMorph {
-  /* Phase 1: Diamond to Teardrop (0% - 20%) */
-  0% { 
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); 
-    transform: scale(1);
-  }
-  20%, 84% { 
-    border-radius: 50% 50% 50% 0;
-    transform: rotate(-45deg) scale(1.2);
-    clip-path: none;
-  }
-  /* Phase 3: Teardrop to Arrow (84% - 100%) */
-  100% {
-    clip-path: polygon(50% 100%, 0% 50%, 20% 50%, 20% 0%, 80% 0%, 80% 50%, 100% 50%);
-    transform: rotate(0deg) scale(1.5);
-    border-radius: 0;
-  }
-}
-
-/* Windows / Fluent Style Loader */
+/* Windows / Fluent Style Loader (Updated to Jitter Motion) */
 .windows-loader {
   position: relative;
-  width: 28px;
-  height: 28px;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: jitterRotate calc(1.5s / var(--loader-speed, 1)) steps(8) infinite;
 }
 
 .windows-loader span {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  animation: windowsOrbit 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  top: 50%;
+  left: 50%;
+  width: 18%;
+  height: 18%;
+  margin-top: -9%;
+  margin-left: -9%;
+  border-radius: 50%;
+  background-color: currentColor;
 }
 
 .windows-loader span::after {
   content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 3.5px;
-  height: 3.5px;
+  display: block;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background: var(--primary);
-  transform: translateX(-50%);
-  box-shadow: 0 0 8px var(--primary);
+  background-color: currentColor;
+  animation: jitterMorph calc(0.8s / var(--loader-speed, 1)) ease-in-out infinite;
 }
 
-/* Theme adaptation for dark mode */
-.dark .windows-loader span::after {
-  background: #60a5fa; /* Brighter blue for dark mode */
-  box-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
-}
-
-/* Invert colors if on a primary button to ensure visibility */
-.btn-primary-premium .windows-loader span::after {
-  background: #fff;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-}
-
-.windows-loader span:nth-child(1) { animation-delay: 0.1s; }
-.windows-loader span:nth-child(2) { animation-delay: 0.2s; }
-.windows-loader span:nth-child(3) { animation-delay: 0.3s; }
-.windows-loader span:nth-child(4) { animation-delay: 0.4s; }
-.windows-loader span:nth-child(5) { animation-delay: 0.5s; }
-.windows-loader span:nth-child(6) { animation-delay: 0.6s; }
-
-@keyframes windowsOrbit {
-  0% { transform: rotate(180deg); opacity: 0; animation-timing-function: ease-out; }
-  15% { transform: rotate(300deg); opacity: 1; animation-timing-function: linear; }
-  45% { transform: rotate(450deg); opacity: 1; animation-timing-function: ease-in-out; }
-  75% { transform: rotate(720deg); opacity: 1; animation-timing-function: ease-out; }
-  100% { transform: rotate(900deg); opacity: 0; }
-}
+.windows-loader span:nth-child(1) { transform: rotate(0deg) translateY(-160%); animation-delay: calc(0.0s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(2) { transform: rotate(45deg) translateY(-160%); animation-delay: calc(0.1s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(3) { transform: rotate(90deg) translateY(-160%); animation-delay: calc(0.2s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(4) { transform: rotate(135deg) translateY(-160%); animation-delay: calc(0.3s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(5) { transform: rotate(180deg) translateY(-160%); animation-delay: calc(0.4s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(6) { transform: rotate(225deg) translateY(-160%); animation-delay: calc(0.5s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(7) { transform: rotate(270deg) translateY(-160%); animation-delay: calc(0.6s / var(--loader-speed, 1)); }
+.windows-loader span:nth-child(8) { transform: rotate(315deg) translateY(-160%); animation-delay: calc(0.7s / var(--loader-speed, 1)); }
 
 /* Flower Loader */
 .flower-loader {
@@ -688,31 +629,31 @@
 .flower-loader span {
   @apply absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-current opacity-0;
   transform-origin: center 0.75em;
-  animation: flowerRotate 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  animation: flowerRotate calc(3s / var(--loader-speed, 1)) infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .flower-loader span:nth-child(1) {
-  animation-delay: 0.1s;
+  animation-delay: calc(0.1s / var(--loader-speed, 1));
 }
 
 .flower-loader span:nth-child(2) {
-  animation-delay: 0.2s;
+  animation-delay: calc(0.2s / var(--loader-speed, 1));
 }
 
 .flower-loader span:nth-child(3) {
-  animation-delay: 0.3s;
+  animation-delay: calc(0.3s / var(--loader-speed, 1));
 }
 
 .flower-loader span:nth-child(4) {
-  animation-delay: 0.4s;
+  animation-delay: calc(0.4s / var(--loader-speed, 1));
 }
 
 .flower-loader span:nth-child(5) {
-  animation-delay: 0.5s;
+  animation-delay: calc(0.5s / var(--loader-speed, 1));
 }
 
 .flower-loader span:nth-child(6) {
-  animation-delay: 0.6s;
+  animation-delay: calc(0.6s / var(--loader-speed, 1));
 }
 
 @keyframes flowerRotate {

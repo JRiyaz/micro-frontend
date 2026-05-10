@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, input, output, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
+import { LoaderComponent } from '../loader/loader.component';
 import { Breadcrumb, StatItem } from '../../models';
 
 @Component({
   selector: 'lib-page-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LoaderComponent],
   template: `
     <div class="mb-6 animate-fade-in">
       <!-- Breadcrumbs -->
@@ -61,9 +61,12 @@ import { Breadcrumb, StatItem } from '../../models';
             </div>
           }
 
-          <button (click)="action.emit()" class="btn-primary-premium flex items-center gap-2 group">
-             <svg class="w-3.5 h-3.5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/></svg>
-             {{ actionLabel() }}
+          <button 
+            (click)="action.emit()" 
+            [disabled]="isActionLoading()"
+            class="btn-primary-premium flex items-center justify-center min-w-[140px] group overflow-hidden"
+          >
+             <lib-loader [loading]="isActionLoading()" [label]="actionLabel()"></lib-loader>
           </button>
         </div>
       </div>
@@ -137,6 +140,7 @@ export class PageHeaderComponent {
   breadcrumbs = input<Breadcrumb[]>([]);
   count = input<number | string | null>(null);
   loading = input<boolean>(false);
+  isActionLoading = input<boolean>(false);
   stats = input<StatItem[]>([]);
 
   action = output<void>();

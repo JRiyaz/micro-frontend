@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, signal, inject, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Breadcrumb } from '../../models';
+import { LoaderComponent, LoaderType } from '../loader/loader.component';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'lib-detail-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, LoaderComponent],
   template: `
     <div class="min-h-screen bg-slate-50 dark:bg-dark-base transition-colors duration-500">
       <!-- Top Header -->
@@ -29,60 +31,27 @@ import { Breadcrumb } from '../../models';
               }
             </nav>
           }
-
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
-              <a [routerLink]="backLink()" class="w-8 h-8 rounded-lg border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-500 hover:text-primary transition-all group">
-                <svg class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
-              </a>
-              <div>
-                <div class="flex items-center gap-2">
-                   <h1 class="text-base font-black text-slate-900 dark:text-white tracking-tight leading-none">{{ title() }}</h1>
-                   <span class="px-1.5 py-0.5 rounded-md bg-primary/10 text-primary text-[8px] font-black uppercase tracking-widest border border-primary/20">{{ status() }}</span>
-                </div>
-                <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-none mt-0.5">{{ subtitle() }}</p>
-              </div>
+               <button [routerLink]="backLink()" class="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-colors">
+                  <svg class="w-5 h-5 text-slate-600 dark:text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+               </button>
+               <div>
+                 <h1 class="text-xl font-black text-slate-900 dark:text-white tracking-tight">{{ title() }}</h1>
+                 @if (subtitle()) {
+                   <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">{{ subtitle() }}</p>
+                 }
+               </div>
             </div>
-
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-3">
                @if (editLabel()) {
                  <button (click)="edit.emit()" class="btn-secondary-premium !px-4 !py-1.5 !text-[9px]">
                     {{ editLabel() }}
                  </button>
                }
-                <button (click)="action.emit()" [disabled]="loading()" class="btn-primary-premium !px-4 !py-1.5 !text-[9px] flex items-center justify-center min-w-[120px] relative overflow-hidden group">
-                  @if (loading()) {
-                    <div class="loader-wrapper-premium">
-                      @if (loaderType() === 'bloom' || loaderType() === 'jitter') {
-                        <div class="jitter-loader">
-                          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                        </div>
-                      } @else if (loaderType() === 'windows') {
-                        <div class="windows-loader">
-                          <span></span><span></span><span></span><span></span><span></span><span></span>
-                        </div>
-                      } @else if (loaderType() === 'flower') {
-                        <div class="flower-loader">
-                          <span></span><span></span><span></span><span></span><span></span><span></span>
-                        </div>
-                      } @else if (loaderType() === 'gravity') {
-                        <div class="gravity-orbit">
-                          <span></span><span></span>
-                        </div>
-                      } @else if (loaderType() === 'pulse') {
-                        <div class="pulse-rings">
-                          <span></span><span></span>
-                        </div>
-                      } @else if (loaderType() === 'liquid') {
-                        <div class="liquid-pulse"></div>
-                      }
-                       @else if (loaderType() === 'pulse-slow') {
-                        <div class="pulse-slow"></div>
-                      }
-                    </div>
-                  }
-                  <span [class.opacity-0]="loading()" class="transition-opacity duration-300">{{ actionLabel() }}</span>
-               </button>
+                 <button (click)="action.emit()" [disabled]="loading()" class="btn-primary-premium !px-4 !py-1.5 !text-[9px] flex items-center justify-center min-w-[120px] relative overflow-hidden group">
+                   <lib-loader [type]="actualLoaderType()" [loading]="loading()" [label]="actionLabel()" customClass="!text-white"></lib-loader>
+                </button>
             </div>
           </div>
         </div>
@@ -143,6 +112,8 @@ import { Breadcrumb } from '../../models';
   `]
 })
 export class DetailLayoutComponent {
+  themeService = inject(ThemeService);
+
   title = input.required<string>();
   subtitle = input<string>('');
   status = input<string>('Active');
@@ -153,7 +124,9 @@ export class DetailLayoutComponent {
   editLabel = input<string>('');
   tabs = input<string[]>([]);
   loading = input<boolean>(false);
-  loaderType = input<'flower' | 'gravity' | 'pulse' | 'liquid' | 'pulse-slow' | 'windows' | 'bloom' | 'jitter'>('bloom');
+  loaderType = input<LoaderType | undefined>(undefined);
+
+  actualLoaderType = computed(() => this.loaderType() || this.themeService.currentLoader());
 
   action = output<void>();
   edit = output<void>();

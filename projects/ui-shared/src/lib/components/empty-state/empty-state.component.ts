@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'lib-empty-state',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoaderComponent],
   template: `
     <div class="flex flex-col items-center justify-center py-20 px-4 text-center animate-fade-in">
       <div class="w-24 h-24 bg-slate-50 dark:bg-white/5 rounded-full flex items-center justify-center mb-6 relative group">
@@ -17,11 +18,12 @@ import { Component, input, output } from '@angular/core';
       <p class="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wide max-w-xs mb-8">{{ message() }}</p>
       
       @if (actionLabel()) {
-        <button (click)="action.emit()" class="btn-primary-premium flex items-center gap-2">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
-          </svg>
-          {{ actionLabel() }}
+        <button 
+          (click)="action.emit()" 
+          [disabled]="isActionLoading()"
+          class="btn-primary-premium flex items-center justify-center min-w-[140px]"
+        >
+          <lib-loader [loading]="isActionLoading()" [label]="actionLabel() || ''"></lib-loader>
         </button>
       }
     </div>
@@ -35,6 +37,7 @@ export class EmptyStateComponent {
   message = input<string>('Try adjusting your search or filters to find what you are looking for.');
   icon = input<string>('M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z');
   actionLabel = input<string | null>(null);
+  isActionLoading = input<boolean>(false);
   
   action = output<void>();
 }
