@@ -190,13 +190,15 @@
   animation: btnSpinner 0.8s linear infinite;
 }
 
+/* /* Shared Button Styles */
+
 /* Windows-style Dot Spinner */
 .windows-loader {
-  @apply flex items-center justify-center relative w-5 h-5;
+  @apply flex items-center justify-center relative w-5 h-5 text-slate-900 dark:text-white;
 }
 
 .windows-loader span {
-  @apply absolute w-1 h-1 bg-current rounded-full;
+  @apply absolute w-1 h-1 bg-current rounded-full opacity-0;
   animation: windowsLoader 1.5s infinite ease-in-out;
 }
 
@@ -474,48 +476,209 @@
   @apply absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-current;
   transform-origin: center 1.1em;
   opacity: 0;
-  animation: 
+  animation:
     bloomRotate 6s infinite cubic-bezier(0.4, 0, 0.2, 1),
     flowerPetals 3s infinite ease-in-out;
 }
 
-.bloom-loader span:nth-child(1) { animation-delay: 0.2s; }
-.bloom-loader span:nth-child(2) { animation-delay: 0.4s; }
-.bloom-loader span:nth-child(3) { animation-delay: 0.6s; }
-.bloom-loader span:nth-child(4) { animation-delay: 0.8s; }
-.bloom-loader span:nth-child(5) { animation-delay: 1.0s; }
-.bloom-loader span:nth-child(6) { animation-delay: 1.2s; }
+.bloom-loader span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.bloom-loader span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.bloom-loader span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.bloom-loader span:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.bloom-loader span:nth-child(5) {
+  animation-delay: 1.0s;
+}
+
+.bloom-loader span:nth-child(6) {
+  animation-delay: 1.2s;
+}
 
 @keyframes bloomRotate {
-  0% { transform: rotate(0deg) translate(-50%, 0); opacity: 0; }
-  5% { opacity: 1; }
-  30% { transform: rotate(360deg) translate(-50%, 0); }
-  60% { transform: rotate(720deg) translate(-50%, 0); }
-  90% { transform: rotate(1080deg) translate(-50%, 0); opacity: 1; }
-  100% { transform: rotate(1080deg) translate(-50%, 0); opacity: 0; }
+  0% {
+    transform: rotate(0deg) translate(-50%, 0);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  30% {
+    transform: rotate(360deg) translate(-50%, 0);
+  }
+
+  60% {
+    transform: rotate(720deg) translate(-50%, 0);
+  }
+
+  90% {
+    transform: rotate(1080deg) translate(-50%, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(1080deg) translate(-50%, 0);
+    opacity: 0;
+  }
 }
 
 @keyframes flowerPetals {
-  0%, 100% {
-    box-shadow: 
+
+  0%,
+  100% {
+    box-shadow:
       0 0 0 currentColor,
       3.5px 0 0 currentColor, -3.5px 0 0 currentColor, 0 3.5px 0 currentColor, 0 -3.5px 0 currentColor,
       2.5px 2.5px 0 currentColor, -2.5px -2.5px 0 currentColor, 2.5px -2.5px 0 currentColor, -2.5px 2.5px 0 currentColor;
   }
+
   35% {
-    box-shadow: 
+    box-shadow:
       0 0 0 currentColor,
       1.5px 0 0 currentColor, -1.5px 0 0 currentColor, 0 1.5px 0 currentColor, 0 -1.5px 0 currentColor,
       1px 1px 0 currentColor, -1px -1px 0 currentColor, 1px -1px 0 currentColor, -1px 1px 0 currentColor;
   }
-  50%, 70% {
-    box-shadow: 
+
+  50%,
+  70% {
+    box-shadow:
       0 0 0 currentColor,
       0px 0 0 currentColor, -0px 0 0 currentColor, 0 0px 0 currentColor, 0 -0px 0 currentColor,
       0px 0px 0 currentColor, -0px -0px 0 currentColor, 0px -0px 0 currentColor, -0px 0px 0 currentColor;
   }
 }
 
+/* Jitter-inspired Morphing Loader (Renamed to Bloom) */
+.jitter-loader {
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: jitterRotate 3.5s linear infinite;
+}
+
+.jitter-loader span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25%;
+  height: 25%;
+  margin-top: -12.5%;
+  margin-left: -12.5%;
+}
+
+.jitter-loader span::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: currentColor;
+  animation: jitterMorph 3.5s ease-in-out infinite;
+}
+
+.jitter-loader span:nth-child(1) { transform: rotate(0deg) translateY(-140%); }
+.jitter-loader span:nth-child(2) { transform: rotate(45deg) translateY(-140%); }
+.jitter-loader span:nth-child(3) { transform: rotate(90deg) translateY(-140%); }
+.jitter-loader span:nth-child(4) { transform: rotate(135deg) translateY(-140%); }
+.jitter-loader span:nth-child(5) { transform: rotate(180deg) translateY(-140%); }
+.jitter-loader span:nth-child(6) { transform: rotate(225deg) translateY(-140%); }
+.jitter-loader span:nth-child(7) { transform: rotate(270deg) translateY(-140%); }
+.jitter-loader span:nth-child(8) { transform: rotate(315deg) translateY(-140%); }
+
+@keyframes jitterRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes jitterMorph {
+  /* Phase 1: Diamond to Teardrop (0% - 20%) */
+  0% { 
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); 
+    transform: scale(1);
+  }
+  20%, 84% { 
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg) scale(1.2);
+    clip-path: none;
+  }
+  /* Phase 3: Teardrop to Arrow (84% - 100%) */
+  100% {
+    clip-path: polygon(50% 100%, 0% 50%, 20% 50%, 20% 0%, 80% 0%, 80% 50%, 100% 50%);
+    transform: rotate(0deg) scale(1.5);
+    border-radius: 0;
+  }
+}
+
+/* Windows / Fluent Style Loader */
+.windows-loader {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+
+.windows-loader span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  animation: windowsOrbit 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.windows-loader span::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--primary);
+  transform: translateX(-50%);
+  box-shadow: 0 0 8px var(--primary);
+}
+
+/* Theme adaptation for dark mode */
+.dark .windows-loader span::after {
+  background: #60a5fa; /* Brighter blue for dark mode */
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+}
+
+/* Invert colors if on a primary button to ensure visibility */
+.btn-primary-premium .windows-loader span::after {
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.windows-loader span:nth-child(1) { animation-delay: 0.1s; }
+.windows-loader span:nth-child(2) { animation-delay: 0.2s; }
+.windows-loader span:nth-child(3) { animation-delay: 0.3s; }
+.windows-loader span:nth-child(4) { animation-delay: 0.4s; }
+.windows-loader span:nth-child(5) { animation-delay: 0.5s; }
+.windows-loader span:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes windowsOrbit {
+  0% { transform: rotate(180deg); opacity: 0; animation-timing-function: ease-out; }
+  15% { transform: rotate(300deg); opacity: 1; animation-timing-function: linear; }
+  45% { transform: rotate(450deg); opacity: 1; animation-timing-function: ease-in-out; }
+  75% { transform: rotate(720deg); opacity: 1; animation-timing-function: ease-out; }
+  100% { transform: rotate(900deg); opacity: 0; }
+}
+
+/* Flower Loader */
 .flower-loader {
   @apply relative;
   width: 1.5em;
@@ -528,19 +691,50 @@
   animation: flowerRotate 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.flower-loader span:nth-child(1) { animation-delay: 0.1s; }
-.flower-loader span:nth-child(2) { animation-delay: 0.2s; }
-.flower-loader span:nth-child(3) { animation-delay: 0.3s; }
-.flower-loader span:nth-child(4) { animation-delay: 0.4s; }
-.flower-loader span:nth-child(5) { animation-delay: 0.5s; }
-.flower-loader span:nth-child(6) { animation-delay: 0.6s; }
+.flower-loader span:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.flower-loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.flower-loader span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.flower-loader span:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.flower-loader span:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.flower-loader span:nth-child(6) {
+  animation-delay: 0.6s;
+}
 
 @keyframes flowerRotate {
-  0% { transform: rotate(0deg) translate(-50%, 0); opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { transform: rotate(360deg) translate(-50%, 0); opacity: 0; }
+  0% {
+    transform: rotate(0deg) translate(-50%, 0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(360deg) translate(-50%, 0);
+    opacity: 0;
+  }
 }
+
 /* 
   Glassmorphism Theme Support
   ---------------------------
@@ -556,6 +750,38 @@
   overflow-x: hidden;
 }
 
+/* Custom Glass Scrollbars */
+:root[data-theme="glass"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+:root[data-theme="glass"] ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(4px);
+}
+
+:root[data-theme="glass"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+:root[data-theme="glass"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+:root[data-theme="glass"].dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+:root[data-theme="glass"].dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
 :root[data-theme="glass"] .card-premium,
 :root[data-theme="glass"] .sidebar-aside,
 :root[data-theme="glass"] header,
@@ -568,7 +794,8 @@
   -webkit-backdrop-filter: var(--glass-blur) !important;
   border: 1px solid var(--glass-border-light) !important;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1) !important;
-  color: #0f172a !important; /* Deepest slate for maximum contrast */
+  color: #0f172a !important;
+  /* Deepest slate for maximum contrast */
 }
 
 /* Force text visibility for nested elements in light mode glass */
@@ -609,13 +836,11 @@
 :root[data-theme="glass"] body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   background-image: url('assets/images/glass-bg.png');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   filter: saturate(1.8) brightness(1.1);
   z-index: -1;
   pointer-events: none;
@@ -631,5 +856,3 @@
   background: transparent !important;
   border: none !important;
 }
-
-

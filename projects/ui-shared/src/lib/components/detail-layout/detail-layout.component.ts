@@ -53,12 +53,15 @@ import { Breadcrumb } from '../../models';
                 <button (click)="action.emit()" [disabled]="loading()" class="btn-primary-premium !px-4 !py-1.5 !text-[9px] flex items-center justify-center min-w-[120px] relative overflow-hidden group">
                   @if (loading()) {
                     <div class="loader-wrapper-premium">
-                      @if (loaderType() === 'bloom') {
-                        <div class="bloom-loader">
+                      @if (loaderType() === 'bloom' || loaderType() === 'jitter') {
+                        <div class="jitter-loader">
+                          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                      } @else if (loaderType() === 'windows') {
+                        <div class="windows-loader">
                           <span></span><span></span><span></span><span></span><span></span><span></span>
                         </div>
-                      } 
-                      @else if (loaderType() === 'flower') {
+                      } @else if (loaderType() === 'flower') {
                         <div class="flower-loader">
                           <span></span><span></span><span></span><span></span><span></span><span></span>
                         </div>
@@ -150,7 +153,7 @@ export class DetailLayoutComponent {
   editLabel = input<string>('');
   tabs = input<string[]>([]);
   loading = input<boolean>(false);
-  loaderType = input<'flower' | 'gravity' | 'pulse' | 'liquid' | 'pulse-slow' | 'bloom'>('bloom');
+  loaderType = input<'flower' | 'gravity' | 'pulse' | 'liquid' | 'pulse-slow' | 'windows' | 'bloom' | 'jitter'>('bloom');
 
   action = output<void>();
   edit = output<void>();
