@@ -4,14 +4,20 @@
 */
 
 @layer base {
-  *, *::before, *::after {
-    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  *,
+  *::before,
+  *::after {
+    transition-property:
+      background-color, border-color, color, fill, stroke, box-shadow;
     transition-duration: 500ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Faster transitions for interactive states to maintain snappiness */
-  button, a, [role="button"], .interactive {
+  button,
+  a,
+  [role="button"],
+  .interactive {
     transition-duration: 200ms;
   }
 
@@ -90,6 +96,7 @@
   }
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, var(--theme-primary), transparent 80%) transparent;
+    scrollbar-color: color-mix(in srgb, var(--theme-primary), transparent 80%)
+      transparent;
   }
 }

@@ -13,7 +13,11 @@ export interface Notification {
   urgent?: boolean;
 }
 
-export type NotificationPlacement = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+export type NotificationPlacement =
+  | 'top-right'
+  | 'top-left'
+  | 'bottom-right'
+  | 'bottom-left';
 
 export interface NotificationConfig {
   duration: number;
@@ -23,14 +27,14 @@ export interface NotificationConfig {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
   private _notifications = signal<Notification[]>([]);
-  
+
   // All notifications for the side nav
   notifications = this._notifications.asReadonly();
-  
+
   // Active toasts (recent and not closed)
   private _activeToasts = signal<Notification[]>([]);
   activeToasts = this._activeToasts.asReadonly();
@@ -43,7 +47,7 @@ export class NotificationService {
     duration: 4000,
     placement: 'top-right',
     urgentStick: true,
-    dnd: false
+    dnd: false,
   });
 
   constructor() {
@@ -57,17 +61,22 @@ export class NotificationService {
   }
 
   updateConfig(newConfig: Partial<NotificationConfig>) {
-    this.config.update(prev => {
+    this.config.update((prev) => {
       const updated = { ...prev, ...newConfig };
       localStorage.setItem('notification_config', JSON.stringify(updated));
       return updated;
     });
   }
 
-  notify(type: NotificationType, title: string, message: string, urgent: boolean = false) {
+  notify(
+    type: NotificationType,
+    title: string,
+    message: string,
+    urgent: boolean = false,
+  ) {
     const id = Math.random().toString(36).substring(2, 9);
     const config = this.config();
-    
+
     const notification: Notification = {
       id,
       type,
@@ -76,15 +85,15 @@ export class NotificationService {
       timestamp: new Date(),
       read: false,
       autoClose: urgent ? !config.urgentStick : true,
-      urgent
+      urgent,
     };
 
     // Add to main list
-    this._notifications.update(prev => [notification, ...prev]);
-    
+    this._notifications.update((prev) => [notification, ...prev]);
+
     // Add to toasts if DND is off OR if it's urgent
     if (!config.dnd || urgent) {
-      this._activeToasts.update(prev => [...prev, notification]);
+      this._activeToasts.update((prev) => [...prev, notification]);
 
       // Auto-remove from toasts if not urgent/sticking
       if (notification.autoClose) {
@@ -93,7 +102,7 @@ export class NotificationService {
         }, config.duration);
       }
     }
-    
+
     return id;
   }
 
@@ -114,11 +123,11 @@ export class NotificationService {
   }
 
   removeToast(id: string) {
-    this._activeToasts.update(prev => prev.filter(n => n.id !== id));
+    this._activeToasts.update((prev) => prev.filter((n) => n.id !== id));
   }
 
   removeNotification(id: string) {
-    this._notifications.update(prev => prev.filter(n => n.id !== id));
+    this._notifications.update((prev) => prev.filter((n) => n.id !== id));
     this.removeToast(id);
   }
 
@@ -128,8 +137,8 @@ export class NotificationService {
   }
 
   markAsRead(id: string) {
-    this._notifications.update(prev => 
-      prev.map(n => n.id === id ? { ...n, read: true } : n)
+    this._notifications.update((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
     );
   }
 }

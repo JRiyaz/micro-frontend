@@ -1,4 +1,13 @@
-import { Component, signal, input, output, HostListener, ElementRef, inject, computed } from '@angular/core';
+import {
+  Component,
+  signal,
+  input,
+  output,
+  HostListener,
+  ElementRef,
+  inject,
+  computed,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SafeHtmlPipe } from '../../utils/safe-html.pipe';
 
@@ -15,23 +24,37 @@ export interface DropdownOption {
   imports: [CommonModule, SafeHtmlPipe],
   template: `
     <div class="relative w-full pt-4 group" id="dropdown-container">
-      <button 
+      <button
         type="button"
         (click)="toggle()"
         class="w-full flex items-center justify-between bg-transparent border-b-2 border-slate-200 dark:border-white/10 py-2.5 px-1 text-sm font-bold text-slate-900 dark:text-white transition-all hover:border-[var(--theme-primary)] focus:border-[var(--theme-primary)] outline-none group/btn"
       >
         <span class="flex items-center gap-3">
           @if (selectedOption()?.color) {
-            <div [style.background]="selectedOption()?.color" class="w-2 h-2 rounded-full"></div>
+            <div
+              [style.background]="selectedOption()?.color"
+              class="w-2 h-2 rounded-full"
+            ></div>
           }
           {{ selectedOption()?.label || '' }}
         </span>
-        <svg class="w-4 h-4 text-slate-400 transition-transform duration-300" [class.rotate-180]="isOpen()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        <svg
+          class="w-4 h-4 text-slate-400 transition-transform duration-300"
+          [class.rotate-180]="isOpen()"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          ></path>
         </svg>
       </button>
 
-      <label 
+      <label
         class="absolute left-1 transition-all duration-200 pointer-events-none uppercase font-black tracking-widest text-slate-400"
         [class.text-[10px]]="value() || isOpen()"
         [class.top-0]="value() || isOpen()"
@@ -43,25 +66,40 @@ export interface DropdownOption {
       </label>
 
       @if (isOpen()) {
-        <div 
-             class="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/10 rounded-xl shadow-2xl z-[100] overflow-hidden animate-dropdown-in backdrop-blur-xl">
+        <div
+          class="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/10 rounded-xl shadow-2xl z-[100] overflow-hidden animate-dropdown-in backdrop-blur-xl"
+        >
           <div class="max-h-60 overflow-y-auto custom-scrollbar">
             @for (option of options(); track option.value; let i = $index) {
-              <button 
+              <button
                 type="button"
                 tabindex="-1"
                 (click)="select(option)"
                 class="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold transition-all text-left outline-none hover:bg-primary/10 hover:text-primary"
-                [class.text-primary]="option.value === value() || activeItemIndex() === i"
-                [class.bg-primary/5]="option.value === value() || activeItemIndex() === i"
-                [class.text-slate-600]="option.value !== value() && activeItemIndex() !== i"
-                [class.dark:text-slate-300]="option.value !== value() && activeItemIndex() !== i"
+                [class.text-primary]="
+                  option.value === value() || activeItemIndex() === i
+                "
+                [class.bg-primary/5]="
+                  option.value === value() || activeItemIndex() === i
+                "
+                [class.text-slate-600]="
+                  option.value !== value() && activeItemIndex() !== i
+                "
+                [class.dark:text-slate-300]="
+                  option.value !== value() && activeItemIndex() !== i
+                "
               >
                 @if (option.color) {
-                  <div [style.background]="option.color" class="w-2 h-2 rounded-full"></div>
+                  <div
+                    [style.background]="option.color"
+                    class="w-2 h-2 rounded-full"
+                  ></div>
                 }
                 @if (option.icon) {
-                  <span [innerHTML]="option.icon | safeHtml" class="w-4 h-4 text-slate-400"></span>
+                  <span
+                    [innerHTML]="option.icon | safeHtml"
+                    class="w-4 h-4 text-slate-400"
+                  ></span>
                 }
                 {{ option.label }}
               </button>
@@ -71,15 +109,30 @@ export interface DropdownOption {
       }
     </div>
   `,
-  styles: [`
-    @keyframes dropdown-in {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-dropdown-in { animation: dropdown-in 0.2s ease-out; }
-    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(109, 116, 255, 0.2); border-radius: 10px; }
-  `]
+  styles: [
+    `
+      @keyframes dropdown-in {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-dropdown-in {
+        animation: dropdown-in 0.2s ease-out;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(109, 116, 255, 0.2);
+        border-radius: 10px;
+      }
+    `,
+  ],
 })
 export class CustomDropdownComponent {
   options = input<DropdownOption[]>([]);
@@ -92,7 +145,7 @@ export class CustomDropdownComponent {
   private eRef = inject(ElementRef);
 
   selectedOption = computed(() => {
-    return this.options().find(o => o.value === this.value());
+    return this.options().find((o) => o.value === this.value());
   });
 
   @HostListener('document:click', ['$event'])
@@ -104,7 +157,12 @@ export class CustomDropdownComponent {
 
   @HostListener('keydown', ['$event'])
   handleKeydown(event: KeyboardEvent) {
-    if (!this.isOpen() && (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter')) {
+    if (
+      !this.isOpen() &&
+      (event.key === 'ArrowDown' ||
+        event.key === 'ArrowUp' ||
+        event.key === 'Enter')
+    ) {
       event.preventDefault();
       this.open();
       return;
@@ -114,11 +172,13 @@ export class CustomDropdownComponent {
       switch (event.key) {
         case 'ArrowDown':
           event.preventDefault();
-          this.activeItemIndex.update(i => (i + 1) % this.options().length);
+          this.activeItemIndex.update((i) => (i + 1) % this.options().length);
           break;
         case 'ArrowUp':
           event.preventDefault();
-          this.activeItemIndex.update(i => (i - 1 + this.options().length) % this.options().length);
+          this.activeItemIndex.update(
+            (i) => (i - 1 + this.options().length) % this.options().length,
+          );
           break;
         case 'Enter':
           event.preventDefault();
@@ -142,7 +202,9 @@ export class CustomDropdownComponent {
 
   open() {
     this.isOpen.set(true);
-    const currentIndex = this.options().findIndex(o => o.value === this.value());
+    const currentIndex = this.options().findIndex(
+      (o) => o.value === this.value(),
+    );
     this.activeItemIndex.set(currentIndex >= 0 ? currentIndex : 0);
   }
 

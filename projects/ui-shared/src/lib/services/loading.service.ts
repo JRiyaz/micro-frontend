@@ -21,7 +21,10 @@ export class LoadingService {
    * @param durationMs Duration of the loading in milliseconds.
    * @param text Text to display while loading.
    */
-  simulateLoading(durationMs: number = 3000, text: string = 'Initializing services...') {
+  simulateLoading(
+    durationMs: number = 3000,
+    text: string = 'Initializing services...',
+  ) {
     this.show(text);
     setTimeout(() => {
       this.hide();

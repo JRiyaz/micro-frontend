@@ -6,11 +6,11 @@ import {
   signal,
   computed,
   effect,
-} from "@angular/core";
-import { CommonModule } from "@angular/common";
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: "lib-typewriter",
+  selector: 'lib-typewriter',
   standalone: true,
   imports: [CommonModule],
   template: `
@@ -57,13 +57,13 @@ import { CommonModule } from "@angular/common";
   ],
 })
 export class TypewriterComponent implements OnInit, OnDestroy {
-  @Input() words: string[] = ["Typewriter", "Effect", "Premium"];
+  @Input() words: string[] = ['Typewriter', 'Effect', 'Premium'];
   @Input() typeSpeed = 100;
   @Input() deleteSpeed = 50;
   @Input() delayBetweenWords = 2000;
-  @Input() customClass = "";
+  @Input() customClass = '';
 
-  displayText = signal("");
+  displayText = signal('');
   isDeleting = signal(false);
   wordIndex = signal(0);
   isCursorBlinking = signal(true);
@@ -89,7 +89,7 @@ export class TypewriterComponent implements OnInit, OnDestroy {
       this.isCursorBlinking.set(false);
       this.displayText.set(currentText.substring(0, currentText.length - 1));
 
-      if (this.displayText() === "") {
+      if (this.displayText() === '') {
         this.isDeleting.set(false);
         this.wordIndex.update((i) => i + 1);
         this.timeoutId = setTimeout(() => this.startTyping(), 500);

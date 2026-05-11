@@ -8,11 +8,16 @@ export interface SubProject {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WorkspaceService {
   subProjects = signal<SubProject[]>([
-    { name: 'Inventory Shell', status: 'running', port: 4200, services: ['Shell Core', 'Topnav', 'Sidebar'] }
+    {
+      name: 'Inventory Shell',
+      status: 'running',
+      port: 4200,
+      services: ['Shell Core', 'Topnav', 'Sidebar'],
+    },
   ]);
   selectedProjectIndex = signal(0);
 
@@ -26,14 +31,22 @@ export class WorkspaceService {
       const manifest = await response.json();
 
       const projects: SubProject[] = [
-        { name: 'Inventory Shell', status: 'running', port: 4200, services: ['Shell Core', 'Topnav', 'Sidebar'] }
+        {
+          name: 'Inventory Shell',
+          status: 'running',
+          port: 4200,
+          services: ['Shell Core', 'Topnav', 'Sidebar'],
+        },
       ];
 
       for (const [key, value] of Object.entries(manifest)) {
         const url = value as string;
         const portMatch = url.match(/:(\d+)\//);
         const port = portMatch ? parseInt(portMatch[1], 10) : undefined;
-        const name = key.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        const name = key
+          .split('-')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
 
         let services: string[] = [];
         try {
@@ -41,8 +54,13 @@ export class WorkspaceService {
           const remoteResponse = await fetch(url);
           const remoteManifest = await remoteResponse.json();
           if (remoteManifest.exposes) {
-            services = Object.keys(remoteManifest.exposes).map(s => 
-              s.replace('./', '').replace(/-/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+            services = Object.keys(remoteManifest.exposes).map((s) =>
+              s
+                .replace('./', '')
+                .replace(/-/g, ' ')
+                .split(' ')
+                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' '),
             );
           }
         } catch (e) {
@@ -53,7 +71,7 @@ export class WorkspaceService {
           name: name,
           status: 'running',
           port: port,
-          services: services.length > 0 ? services : ['Core Module']
+          services: services.length > 0 ? services : ['Core Module'],
         });
       }
 

@@ -51,6 +51,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^21.2.3",
     "postcss": "^8.5.12",
+    "prettier-plugin-organize-imports": "^4.3.0",
     "tailwindcss": "^4.2.4",
     "typescript": "~5.9.3"
   }

@@ -46,5 +46,5 @@ export * from './lib/models';
 export * from './lib/services/theme.service';
 export * from './lib/utils/drag-drop';
 export * from './lib/utils/safe-html.pipe';
-
-
+export * from './lib/pipes/validation-error.pipe';
+export * from './lib/directives/form-validation.directive';

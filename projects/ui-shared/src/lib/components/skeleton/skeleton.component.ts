@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div 
+    <div
       [ngClass]="classes()"
       [style.width]="width()"
       [style.height]="height()"
@@ -16,38 +16,49 @@ import { CommonModule } from '@angular/common';
       <div class="absolute inset-0 shimmer-gradient"></div>
     </div>
   `,
-  styles: [`
-    :host {
-      display: inline-block;
-      width: var(--skeleton-width, auto);
-      height: var(--skeleton-height, auto);
-    }
+  styles: [
+    `
+      :host {
+        display: inline-block;
+        width: var(--skeleton-width, auto);
+        height: var(--skeleton-height, auto);
+      }
 
-    .animate-pulse-fast {
-      animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
+      .animate-pulse-fast {
+        animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: .5; }
-    }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
 
-    .shimmer-gradient {
-      background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.05) 50%,
-        transparent 100%
-      );
-      background-size: 200% 100%;
-      animation: shimmer 2s infinite;
-    }
+      .shimmer-gradient {
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.05) 50%,
+          transparent 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 2s infinite;
+      }
 
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-  `]
+      @keyframes shimmer {
+        0% {
+          background-position: -200% 0;
+        }
+        100% {
+          background-position: 200% 0;
+        }
+      }
+    `,
+  ],
 })
 export class SkeletonComponent {
   width = input<string>('100%');
@@ -57,8 +68,12 @@ export class SkeletonComponent {
 
   classes = computed(() => {
     const base = this.customClass();
-    const shapeClass = this.shape() === 'circle' ? 'rounded-full' : 
-                       this.shape() === 'rounded' ? 'rounded-xl' : 'rounded-none';
+    const shapeClass =
+      this.shape() === 'circle'
+        ? 'rounded-full'
+        : this.shape() === 'rounded'
+          ? 'rounded-xl'
+          : 'rounded-none';
     return `${base} ${shapeClass}`;
   });
 }

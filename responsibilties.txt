@@ -1,0 +1,39 @@
+1. Components: The Building Blocks of UI
+    A Component is the most basic building block of an Angular application. It controls a patch of the screen called a view.
+
+    Responsibilities:
+    Presentation Logic: Deciding what to show on the screen based on the data.
+    User Interaction: Handling clicks, form inputs, and other user events.
+    Template Management: Linking the HTML (structure), CSS (style), and TypeScript (logic).
+
+
+2. Services: The Business Logic Layer
+    A Service is a broad category encompassing any value, function, or feature that an app needs. It is typically a class with a narrow, well-defined purpose.
+
+    Responsibilities:
+    Data Fetching: Handling HTTP requests to APIs (e.g., using HttpClient).
+    State Management: Sharing data across multiple components.
+    Complex Logic: Performing calculations or data transformations that don't belong in the UI layer.
+    Key Concept: Singleton
+    Services are typically singletons within their scope. This means one instance is shared across many components, making them perfect for "Source of Truth" data.
+
+3. Dependency Injection (DI)
+    DI is the "glue" that connects components and services. Instead of a component creating a service manually (new Service()), Angular injects it through the constructor.
+
+    How it works:
+    Component asks: "I need the CartService."
+    Angular looks up the service instance.
+    Angular provides the instance to the component.
+
+4. Directives
+    Directives are markers on a DOM element that tell Angular to attach a specific behavior or transform the DOM.
+
+    Structural Directives: Change the DOM layout (e.g., *ngIf, *ngFor).
+    Attribute Directives: Change the appearance or behavior of an element (e.g., ngModel, [ngClass]).
+
+5. Pipes
+    Pipes are simple functions used in templates to accept an input value and return a transformed value.
+
+    Example: {{ price | currency }} or {{ birthday | date:'short' }}.
+
+NOTE: use latest syntax of Angular and TypeScript

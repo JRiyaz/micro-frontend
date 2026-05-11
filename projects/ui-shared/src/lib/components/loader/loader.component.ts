@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { LoaderType, ThemeService } from '../../services/theme.service';
 export type { LoaderType };
 
@@ -8,37 +15,41 @@ export type { LoaderType };
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div 
+    <div
       class="relative flex items-center justify-center min-h-[1.5em] w-full h-full"
-      [style.--loader-speed]=\"themeService.animationSpeed()\"
+      [style.--loader-speed]="themeService.animationSpeed()"
     >
       <!-- Loader Animation -->
       @if (isAnimating()) {
-        <div [class]="containerClass()" [ngClass]="customClass()" class="animate-fade-in">
+        <div
+          [class]="containerClass()"
+          [ngClass]="customClass()"
+          class="animate-fade-in"
+        >
           @if (actualType() === 'jitter') {
             <div class="jitter-loader">
-              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span
+              ><span></span><span></span><span></span>
             </div>
           } @else if (actualType() === 'windows') {
             <div class="windows-loader">
-              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span
+              ><span></span><span></span><span></span>
             </div>
           } @else if (actualType() === 'bloom') {
             <div class="bloom-loader">
-              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span
+              ><span></span>
             </div>
           } @else if (actualType() === 'flower') {
             <div class="flower-loader">
-              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span
+              ><span></span>
             </div>
           } @else if (actualType() === 'gravity') {
-            <div class="gravity-orbit">
-              <span></span><span></span>
-            </div>
+            <div class="gravity-orbit"><span></span><span></span></div>
           } @else if (actualType() === 'pulse') {
-            <div class="pulse-rings">
-              <span></span><span></span>
-            </div>
+            <div class="pulse-rings"><span></span><span></span></div>
           } @else if (actualType() === 'liquid') {
             <div class="liquid-pulse"></div>
           }
@@ -46,8 +57,8 @@ export type { LoaderType };
       }
 
       <!-- Label -->
-      <span 
-        [class.opacity-0]="isAnimating()" 
+      <span
+        [class.opacity-0]="isAnimating()"
         [class.scale-95]="isAnimating()"
         class="transition-all duration-300 whitespace-nowrap"
       >
@@ -55,11 +66,29 @@ export type { LoaderType };
       </span>
     </div>
   `,
-  styles: [`
-    :host { display: inline-block; width: 100%; height: 100%; vertical-align: middle; }
-    .animate-fade-in { animation: fadeIn 0.3s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-  `]
+  styles: [
+    `
+      :host {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.3s ease-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    `,
+  ],
 })
 export class LoaderComponent {
   public themeService = inject(ThemeService);
@@ -68,7 +97,9 @@ export class LoaderComponent {
   label = input<string>('');
   type = input<LoaderType | undefined>(undefined);
   customClass = input<string | string[] | { [key: string]: boolean }>('');
-  containerClass = input<string>('absolute inset-0 flex items-center justify-center');
+  containerClass = input<string>(
+    'absolute inset-0 flex items-center justify-center',
+  );
 
   actualType = computed(() => this.type() || this.themeService.currentLoader());
 
