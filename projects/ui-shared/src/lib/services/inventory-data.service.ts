@@ -233,6 +233,13 @@ export class InventoryDataService {
     this.saveToStorage();
   }
 
+  updateOffer(offer: Offer) {
+    this._offers.update((prev) =>
+      prev.map((o) => (o.id === offer.id ? offer : o)),
+    );
+    this.saveToStorage();
+  }
+
   addOrder(order: Order): void {
     this._orders.update((prev) => [...prev, order]);
     this.saveToStorage();

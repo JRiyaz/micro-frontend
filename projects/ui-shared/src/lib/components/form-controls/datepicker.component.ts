@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
     <div class="floating-input-group w-full" id="datepicker-container">
       <button
         type="button"
-        (click)="toggle()"
+        (click)="toggle($event)"
         [class.border-primary]="isOpen()"
         class="floating-input flex items-center justify-between text-left group"
       >
@@ -329,7 +329,8 @@ export class CustomDatePickerComponent {
     }
   }
 
-  toggle() {
+  toggle(event: Event) {
+    event.stopPropagation();
     this.isOpen.set(!this.isOpen());
     if (this.isOpen()) {
       const val = this.value();

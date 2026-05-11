@@ -19,3 +19,7 @@ yarn.lock
 /coverage
 /projects
 **/assets/**/*
+
+# pnpm install --save-dev prettier-plugin-organize-imports
+# npx prettier --write .
+

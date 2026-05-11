@@ -26,7 +26,7 @@ export interface DropdownOption {
     <div class="relative w-full pt-4 group" id="dropdown-container">
       <button
         type="button"
-        (click)="toggle()"
+        (click)="toggle($event)"
         class="w-full flex items-center justify-between bg-transparent border-b-2 border-slate-200 dark:border-white/10 py-2.5 px-1 text-sm font-bold text-slate-900 dark:text-white transition-all hover:border-[var(--theme-primary)] focus:border-[var(--theme-primary)] outline-none group/btn"
       >
         <span class="flex items-center gap-3">
@@ -196,7 +196,8 @@ export class CustomDropdownComponent {
     }
   }
 
-  toggle() {
+  toggle(event: Event) {
+    event.stopPropagation();
     this.isOpen() ? this.close() : this.open();
   }
 
