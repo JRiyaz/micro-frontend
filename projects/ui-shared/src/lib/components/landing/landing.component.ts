@@ -136,9 +136,9 @@ import { RouterModule } from '@angular/router';
             >Shop Now</a
           >
           <a
-            routerLink="/dashboard"
+            routerLink="/inventory"
             class="px-10 py-4 bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] backdrop-blur-md text-slate-900 dark:text-white rounded-xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-white/[0.06] transition-colors shadow-sm dark:shadow-none"
-            >View Demo</a
+            >View Hub Demo</a
           >
         </div>
 
@@ -164,7 +164,7 @@ import { RouterModule } from '@angular/router';
                 <div
                   class="px-4 py-1 bg-white dark:bg-dark-base/50 border border-slate-200 dark:border-transparent rounded-md text-[10px] text-slate-500 font-mono shadow-sm dark:shadow-none"
                 >
-                  inventory.app/dashboard
+                  inventory.app/inventory
                 </div>
               </div>
             </div>

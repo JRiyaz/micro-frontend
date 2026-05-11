@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, signal, viewChild } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, ElementRef, Input, OnInit, signal, viewChild, inject, HostListener } from '@angular/core';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { SafeHtmlPipe } from '../../utils/safe-html.pipe';
 
 export interface SidebarNavItem {
   label: string;
-  route: string;
-  exact: boolean;
-  icon: string; // SVG string
+  route?: string;
+  exact?: boolean;
+  icon?: string; // SVG string
+  children?: SidebarNavItem[];
+  isSeparator?: boolean;
+  isOpen?: boolean; // Internal state for collapsible
+  childIcon?: string; // Icon for children if needed
 }
 
 @Component({
@@ -31,7 +36,7 @@ export interface SidebarNavItem {
         'sidebar-mobile-open': mobileOpen(),
         'sidebar-mobile-closed': !mobileOpen(),
       }"
-      class="sidebar-aside fixed lg:static inset-y-0 left-0 bg-white dark:bg-dark-base flex flex-col z-40 lg:z-auto transition-colors duration-500"
+      class="sidebar-aside fixed lg:static inset-y-0 left-0 bg-white dark:bg-dark-base flex flex-col z-40 lg:z-auto transition-colors duration-500 border-none"
     >
       <!-- Close button (mobile only) -->
       <button
@@ -86,46 +91,93 @@ export interface SidebarNavItem {
       >
         <!-- Navigation -->
         <nav class="space-y-1">
-          <!-- Section label (expanded only) -->
-          <label
-            [class.sidebar-show]="!collapsed() || mobileOpen()"
-            [class.sidebar-hide]="collapsed() && !mobileOpen()"
-            class="sidebar-fade text-[10px] font-bold text-slate-500 uppercase tracking-[0.15em] block mb-2 px-1"
-            >Navigation</label
-          >
-
-          @for (item of navItems; track item.route; let idx = $index) {
-            <div
-              class="nav-item-wrapper"
-              (mouseenter)="onNavHover($event, idx)"
-              (mouseleave)="onNavHover($event, -1)"
-            >
-              <a
-                [routerLink]="item.route"
-                routerLinkActive="bg-primary/20 dark:bg-primary/20 shadow-sm hover:bg-primary"
-                [routerLinkActiveOptions]="{ exact: item.exact }"
-                class="nav-link flex items-center gap-2 p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-primary/10 dark:hover:bg-white/[0.04] rounded-lg transition-all text-xs font-medium group"
-                [class.justify-center]="collapsed() && !mobileOpen()"
-              >
-                <span
-                  [innerHTML]="item.icon | safeHtml"
-                  class="icon-container w-4 h-4 block group-hover:text-primary transition-colors flex-shrink-0"
-                ></span>
-                <span
-                  [class.sidebar-show]="!collapsed() || mobileOpen()"
-                  [class.sidebar-hide]="collapsed() && !mobileOpen()"
-                  class="sidebar-fade-text"
-                  >{{ item.label }}</span
+          @for (item of navItems; track $index) {
+            @if (item.isSeparator) {
+              <!-- No line separator as requested -->
+              <div class="my-1"></div>
+            } @else {
+              <div class="nav-item-group">
+                <div
+                  class="nav-item-wrapper relative"
+                  (mouseenter)="onNavHover($event, $index)"
+                  (mouseleave)="onNavHover($event, -1)"
                 >
-              </a>
-            </div>
+                  <a
+                    [routerLink]="item.route ? item.route : null"
+                    routerLinkActive="bg-primary/10 text-primary"
+                    [routerLinkActiveOptions]="{ exact: item.exact || false }"
+                    (click)="item.children ? toggleGroup($index) : null"
+                    class="nav-link flex items-center gap-2.5 p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-primary/10 dark:hover:bg-white/[0.04] rounded-lg transition-all text-xs font-bold group cursor-pointer"
+                    [class.justify-center]="collapsed() && !mobileOpen()"
+                    [class.bg-primary-light]="isParentActive(item)"
+                    [class.text-primary]="isParentActive(item)"
+                  >
+                    <span
+                      *ngIf="item.icon"
+                      [innerHTML]="item.icon | safeHtml"
+                      class="icon-container w-4 h-4 block group-hover:scale-110 transition-transform flex-shrink-0"
+                    ></span>
+                    
+                    <span
+                      [class.sidebar-show]="!collapsed() || mobileOpen()"
+                      [class.sidebar-hide]="collapsed() && !mobileOpen()"
+                      class="sidebar-fade-text flex-1"
+                      >{{ item.label }}</span
+                    >
+                  </a>
+
+                  <!-- Flyout for Collapsed Mode -->
+                  @if (collapsed() && !mobileOpen() && item.children && activeFlyoutIndex() === $index) {
+                    <div class="fixed z-[100] left-[52px] bg-white dark:bg-dark-elevated rounded-xl shadow-2xl py-2 w-44 animate-flyout-in"
+                         [style.top.px]="navFlyoutTop">
+                      <div class="px-4 pb-1.5 mb-1.5">
+                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">{{ item.label }}</span>
+                      </div>
+                      <div class="px-2 space-y-0.5">
+                        @for (child of item.children; track child.route) {
+                          <a [routerLink]="child.route" 
+                             routerLinkActive="bg-primary/10 text-primary font-black"
+                             (click)="activeFlyoutIndex.set(-1)"
+                             class="flex items-center gap-2.5 p-2 text-[11px] font-bold text-slate-500 hover:text-primary hover:bg-primary/5 rounded-lg transition-all">
+                             <span *ngIf="child.icon" [innerHTML]="child.icon | safeHtml" class="w-3.5 h-3.5 opacity-70"></span>
+                             <span>{{ child.label }}</span>
+                          </a>
+                        }
+                      </div>
+                    </div>
+                  }
+                </div>
+
+                <!-- Children Items (Expanded Mode) -->
+                <div class="grid transition-[grid-template-rows,margin-bottom] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                     [class.grid-rows-[1fr]]="item.children && item.isOpen && (!collapsed() || mobileOpen())"
+                     [class.grid-rows-[0fr]]="!(item.children && item.isOpen && (!collapsed() || mobileOpen()))"
+                     [class.mb-2]="item.children && item.isOpen && (!collapsed() || mobileOpen())">
+                  <div class="overflow-hidden">
+                    <div class="children-container mt-1 ml-6 space-y-1">
+                      @for (child of item.children; track child.route) {
+                        <a
+                          [routerLink]="child.route"
+                          routerLinkActive="text-primary font-black bg-primary/5"
+                          [routerLinkActiveOptions]="{ exact: child.exact || false }"
+                          class="flex items-center gap-2.5 p-2 text-[11px] font-bold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/[0.02] rounded-lg transition-all group"
+                        >
+                          <span *ngIf="child.icon" [innerHTML]="child.icon | safeHtml" class="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity"></span>
+                          <span>{{ child.label }}</span>
+                        </a>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
           }
         </nav>
       </div>
 
       <!-- Bottom Utilities -->
       <div
-        class="border-t border-slate-200 dark:border-white/[0.06] flex-shrink-0"
+        class="flex-shrink-0"
       >
         <button
           (click)="collapsed.set(!collapsed())"
@@ -133,7 +185,7 @@ export interface SidebarNavItem {
             onUtilityHover($event, collapsed() ? 'Expand' : 'Collapse')
           "
           (mouseleave)="onUtilityHover($event, null)"
-          class="hidden lg:flex w-full items-center justify-center gap-3 py-4 text-slate-500 hover:text-primary hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-all border-t border-slate-200 dark:border-white/[0.06] group/collapse"
+          class="hidden lg:flex w-full items-center justify-center gap-3 py-4 text-slate-500 hover:text-primary hover:bg-slate-100 dark:hover:bg-white/[0.03] transition-all group/collapse"
         >
           <div
             class="transition-transform duration-500"
@@ -167,7 +219,8 @@ export interface SidebarNavItem {
     @if (
       (navFlyoutIndex() >= 0 || utilityFlyoutLabel()) &&
       collapsed() &&
-      !mobileOpen()
+      !mobileOpen() &&
+      activeFlyoutIndex() === -1
     ) {
       <div
         class="fixed z-[9999] animate-flyout"
@@ -175,7 +228,7 @@ export interface SidebarNavItem {
         [style.top.px]="navFlyoutTop"
       >
         <div
-          class="bg-white dark:bg-dark-elevated border border-slate-200 dark:border-white/[0.08] rounded-lg px-3 py-1.5 whitespace-nowrap shadow-md dark:shadow-xl dark:shadow-black/40"
+          class="bg-white dark:bg-dark-elevated rounded-lg px-3 py-1.5 whitespace-nowrap shadow-md dark:shadow-xl dark:shadow-black/40"
         >
           <span class="text-xs font-medium text-slate-900 dark:text-white">
             {{
@@ -280,13 +333,31 @@ export interface SidebarNavItem {
           min-height: 100vh;
         }
       }
+
+      @keyframes roll-down {
+        from { opacity: 0; transform: translateY(-5px); max-height: 0; }
+        to { opacity: 1; transform: translateY(0); max-height: 800px; }
+      }
+      .animate-roll-down {
+        animation: roll-down 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        overflow: hidden;
+        border-radius: 1rem;
+      }
+      @keyframes flyout-fade {
+        from { opacity: 0; transform: translateX(10px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      .bg-primary-light {
+        background-color: rgba(var(--primary-rgb, 59, 130, 246), 0.1);
+      }
     `,
   ],
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   @Input() branding = { title: 'App', subtitle: '', logoText: 'A' };
   @Input() navItems: SidebarNavItem[] = [];
 
+  private router = inject(Router);
   mobileOpen = signal(false);
   collapsed = signal(false);
   navFlyoutIndex = signal(-1);
@@ -297,6 +368,79 @@ export class SidebarComponent {
   private navFlyoutTimeout: any;
 
   sidebarRef = viewChild<ElementRef<HTMLElement>>('sidebarRef');
+
+  activeFlyoutIndex = signal(-1);
+
+  @HostListener('document:mousedown', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const sidebarEl = this.sidebarRef()?.nativeElement;
+    
+    // Check if click is outside the sidebar area
+    if (sidebarEl && !sidebarEl.contains(target)) {
+      this.activeFlyoutIndex.set(-1);
+      this.navFlyoutIndex.set(-1);
+      this.utilityFlyoutLabel.set(null);
+    }
+  }
+
+  ngOnInit(): void {
+    // Listen for navigation to auto-expand parent groups
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.autoExpandActiveGroup();
+    });
+
+    // Initial check
+    setTimeout(() => this.autoExpandActiveGroup(), 100);
+  }
+
+  private autoExpandActiveGroup(): void {
+    const currentUrl = this.router.url;
+    this.navItems.forEach((item, idx) => {
+      if (item.children) {
+        // Check if any child route is active
+        const hasActiveChild = item.children.some(child => {
+          if (!child.route) return false;
+          // Use exact match or startsWith for sub-pages
+          return currentUrl === child.route || currentUrl.startsWith(child.route + '/');
+        });
+
+        if (hasActiveChild && !item.isOpen) {
+          // Open this group if it has an active child and isn't already open
+          item.isOpen = true;
+          // Collapse others
+          this.navItems.forEach((it, i) => { if (i !== idx) it.isOpen = false; });
+        }
+      }
+    });
+  }
+
+  isParentActive(item: SidebarNavItem): boolean {
+    if (!item.children) return false;
+    const currentUrl = this.router.url;
+    return item.children.some(child => 
+      child.route && (currentUrl === child.route || currentUrl.startsWith(child.route + '/'))
+    );
+  }
+
+  toggleGroup(idx: number): void {
+    if (this.collapsed() && !this.mobileOpen()) {
+      this.activeFlyoutIndex.set(this.activeFlyoutIndex() === idx ? -1 : idx);
+      return;
+    }
+
+    const item = this.navItems[idx];
+    const wasOpen = item.isOpen;
+    
+    // Collapse all others
+    this.navItems.forEach((it, i) => {
+      if (i !== idx) it.isOpen = false;
+    });
+
+    item.isOpen = !wasOpen;
+  }
 
   onNavHover(event: MouseEvent, idx: number, isFlyout = false): void {
     if (!this.collapsed() || this.mobileOpen()) {
@@ -309,7 +453,7 @@ export class SidebarComponent {
       if (!isFlyout) {
         const target = event.currentTarget as HTMLElement;
         const rect = target.getBoundingClientRect();
-        this.navFlyoutTop = rect.top + rect.height / 2 - 14; // center vertically
+        this.navFlyoutTop = rect.top; // Align top of flyout with parent
         this.flyoutLeft = this.getSidebarRight();
       }
       this.navFlyoutIndex.set(idx);
