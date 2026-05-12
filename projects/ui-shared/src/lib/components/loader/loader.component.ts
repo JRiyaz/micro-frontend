@@ -50,13 +50,16 @@ export type { LoaderType };
         </div>
       }
 
-      <!-- Label -->
+      <!-- Label/Content -->
       <span
         [class.opacity-0]="isAnimating()"
         [class.scale-95]="isAnimating()"
-        class="transition-all duration-300 whitespace-nowrap"
+        class="transition-all duration-300 whitespace-nowrap flex items-center justify-center gap-2"
       >
-        {{ label() }}
+        <ng-content></ng-content>
+        @if (label()) {
+          {{ label() }}
+        }
       </span>
     </div>
   `,
