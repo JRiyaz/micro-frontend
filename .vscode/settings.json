@@ -5,5 +5,11 @@
     "source.removeUnusedImports": "explicit",
     "source.fixAll.ts": "explicit",
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "terminal.integrated.commandsToSkipShell": [
+    "workbench.action.terminal.copySelection",
+    "workbench.action.terminal.paste"
+  ]
 }

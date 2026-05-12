@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 export type NotificationType = 'success' | 'error' | 'info' | 'warning';
 
@@ -13,11 +13,7 @@ export interface Notification {
   urgent?: boolean;
 }
 
-export type NotificationPlacement =
-  | 'top-right'
-  | 'top-left'
-  | 'bottom-right'
-  | 'bottom-left';
+export type NotificationPlacement = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
 
 export interface NotificationConfig {
   duration: number;
@@ -68,12 +64,7 @@ export class NotificationService {
     });
   }
 
-  notify(
-    type: NotificationType,
-    title: string,
-    message: string,
-    urgent: boolean = false,
-  ) {
+  notify(type: NotificationType, title: string, message: string, urgent: boolean = false) {
     const id = Math.random().toString(36).substring(2, 9);
     const config = this.config();
 
@@ -137,8 +128,6 @@ export class NotificationService {
   }
 
   markAsRead(id: string) {
-    this._notifications.update((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-    );
+    this._notifications.update((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)));
   }
 }

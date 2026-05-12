@@ -1,5 +1,5 @@
-import { Component, Input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, Input } from '@angular/core';
 
 export interface ChartDataPoint {
   label: string;

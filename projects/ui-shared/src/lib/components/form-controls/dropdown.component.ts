@@ -1,14 +1,5 @@
-import {
-  Component,
-  signal,
-  input,
-  output,
-  HostListener,
-  ElementRef,
-  inject,
-  computed,
-} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, ElementRef, HostListener, inject, input, output, signal } from '@angular/core';
 import { SafeHtmlPipe } from '../../utils/safe-html.pipe';
 
 export interface DropdownOption {
@@ -157,12 +148,7 @@ export class CustomDropdownComponent {
 
   @HostListener('keydown', ['$event'])
   handleKeydown(event: KeyboardEvent) {
-    if (
-      !this.isOpen() &&
-      (event.key === 'ArrowDown' ||
-        event.key === 'ArrowUp' ||
-        event.key === 'Enter')
-    ) {
+    if (!this.isOpen() && (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter')) {
       event.preventDefault();
       this.open();
       return;
@@ -176,9 +162,7 @@ export class CustomDropdownComponent {
           break;
         case 'ArrowUp':
           event.preventDefault();
-          this.activeItemIndex.update(
-            (i) => (i - 1 + this.options().length) % this.options().length,
-          );
+          this.activeItemIndex.update((i) => (i - 1 + this.options().length) % this.options().length);
           break;
         case 'Enter':
           event.preventDefault();
@@ -203,9 +187,7 @@ export class CustomDropdownComponent {
 
   open() {
     this.isOpen.set(true);
-    const currentIndex = this.options().findIndex(
-      (o) => o.value === this.value(),
-    );
+    const currentIndex = this.options().findIndex((o) => o.value === this.value());
     this.activeItemIndex.set(currentIndex >= 0 ? currentIndex : 0);
   }
 

@@ -1,4 +1,5 @@
 {
+  "//": "SemVer Guide: ^ (Caret) = Update Minor & Patch (e.g. 21.2.0 -> 21.3.0). ~ (Tilde) = Update Patch ONLY (e.g. 21.2.0 -> 21.2.1). No symbol = Stay on exact version.",
   "name": "inventory",
   "version": "0.0.0",
   "scripts": {
@@ -38,6 +39,7 @@
     "@angular/build": "^21.2.8",
     "@angular/cli": "^21.2.8",
     "@angular/compiler-cli": "^21.2.10",
+    "@biomejs/biome": "^2.4.15",
     "@tailwindcss/postcss": "^4.2.4",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.5.0",
@@ -51,7 +53,6 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^21.2.3",
     "postcss": "^8.5.12",
-    "prettier-plugin-organize-imports": "^4.3.0",
     "tailwindcss": "^4.2.4",
     "typescript": "~5.9.3"
   }

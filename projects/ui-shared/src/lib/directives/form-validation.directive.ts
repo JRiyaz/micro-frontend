@@ -1,11 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  inject,
-} from '@angular/core';
+import { Directive, ElementRef, Input, inject, type OnChanges, type SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[libFormValidation]',
@@ -17,7 +10,7 @@ export class FormValidationDirective implements OnChanges {
   @Input('libFormValidation') isValid: boolean | string | null = true;
   @Input() errorMessage: string = '';
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(_changes: SimpleChanges): void {
     const element = this.el.nativeElement;
 
     if (this.isValid === false) {

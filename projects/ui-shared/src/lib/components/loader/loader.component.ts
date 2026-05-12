@@ -1,13 +1,7 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
-import { LoaderType, ThemeService } from '../../services/theme.service';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
+import { type LoaderType, ThemeService } from '../../services/theme.service';
+
 export type { LoaderType };
 
 @Component({
@@ -97,9 +91,7 @@ export class LoaderComponent {
   label = input<string>('');
   type = input<LoaderType | undefined>(undefined);
   customClass = input<string | string[] | { [key: string]: boolean }>('');
-  containerClass = input<string>(
-    'absolute inset-0 flex items-center justify-center',
-  );
+  containerClass = input<string>('absolute inset-0 flex items-center justify-center');
 
   actualType = computed(() => this.type() || this.themeService.currentLoader());
 

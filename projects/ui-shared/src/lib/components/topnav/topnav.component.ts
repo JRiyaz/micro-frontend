@@ -1,22 +1,22 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  ElementRef,
-  HostListener,
-  OnInit,
   computed,
+  type ElementRef,
+  HostListener,
   inject,
+  type OnInit,
   output,
   signal,
   viewChild,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { AuthStateService } from '../../services/auth-state.service';
+import type { AuthStateService } from '../../services/auth-state.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { LoadingService } from '../../services/loading.service';
 import { NotificationService } from '../../services/notification.service';
 import { SearchService } from '../../services/search.service';
-import { ThemeService } from '../../services/theme.service';
+import type { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'ui-topnav',
@@ -634,10 +634,7 @@ export class TopnavComponent implements OnInit {
   private searchService = inject(SearchService);
   private router = inject(Router);
 
-  unreadCount = computed(
-    () =>
-      this.notificationService.notifications().filter((n) => !n.read).length,
-  );
+  unreadCount = computed(() => this.notificationService.notifications().filter((n) => !n.read).length);
   isMac = false;
 
   private routeIndex: any[] = [];
@@ -648,9 +645,7 @@ export class TopnavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isMac =
-      typeof navigator !== 'undefined' &&
-      /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+    this.isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
     this.indexRoutes();
   }
 
@@ -658,14 +653,8 @@ export class TopnavComponent implements OnInit {
     // Dynamically build a searchable index from the router configuration
     const extractRoutes = (routes: any[], parentPath = '') => {
       routes.forEach((route) => {
-        if (
-          route.path &&
-          !route.path.includes(':') &&
-          !route.path.includes('**')
-        ) {
-          const fullPath = parentPath
-            ? `${parentPath}/${route.path}`
-            : route.path;
+        if (route.path && !route.path.includes(':') && !route.path.includes('**')) {
+          const fullPath = parentPath ? `${parentPath}/${route.path}` : route.path;
           const title = route.data?.title || this.formatPath(route.path);
 
           this.routeIndex.push({
@@ -676,10 +665,7 @@ export class TopnavComponent implements OnInit {
           });
         }
         if (route.children) {
-          extractRoutes(
-            route.children,
-            parentPath ? `${parentPath}/${route.path}` : route.path,
-          );
+          extractRoutes(route.children, parentPath ? `${parentPath}/${route.path}` : route.path);
         }
       });
     };
@@ -733,15 +719,10 @@ export class TopnavComponent implements OnInit {
       .filter((item) => {
         const matchesTitle = item.title.toLowerCase().includes(query);
         const matchesPath = item.path.toLowerCase().includes(query);
-        const matchesCategory =
-          item.category && item.category.toLowerCase().includes(query);
-        const matchesKeywords =
-          item.keywords &&
-          item.keywords.some((k: string) => k.toLowerCase().includes(query));
+        const matchesCategory = item.category?.toLowerCase().includes(query);
+        const matchesKeywords = item.keywords?.some((k: string) => k.toLowerCase().includes(query));
 
-        return (
-          matchesTitle || matchesPath || matchesCategory || matchesKeywords
-        );
+        return matchesTitle || matchesPath || matchesCategory || matchesKeywords;
       })
       .slice(0, 5);
 
@@ -761,9 +742,7 @@ export class TopnavComponent implements OnInit {
         break;
       case 'ArrowUp':
         event.preventDefault();
-        this.selectedIndex.update(
-          (i) => (i - 1 + results.length) % results.length,
-        );
+        this.selectedIndex.update((i) => (i - 1 + results.length) % results.length);
         break;
       case 'Enter':
         event.preventDefault();
@@ -798,7 +777,7 @@ export class TopnavComponent implements OnInit {
     this.selectedIndex.set(-1);
   }
 
-  handleSearch(event: any): void {
+  handleSearch(_event: any): void {
     // This is now handled by handleSearchKeydown for Enter key
   }
 

@@ -1,50 +1,21 @@
 import { isPlatformBrowser } from '@angular/common';
-import {
-  computed,
-  effect,
-  Inject,
-  Injectable,
-  PLATFORM_ID,
-  signal,
-} from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { computed, effect, Injectable, inject, PLATFORM_ID, signal } from '@angular/core';
+import { type Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-export type LoaderType =
-  | 'flower'
-  | 'gravity'
-  | 'pulse'
-  | 'liquid'
-  | 'pulse-slow'
-  | 'windows'
-  | 'bloom'
-  | 'jitter';
+export type LoaderType = 'flower' | 'gravity' | 'pulse' | 'liquid' | 'pulse-slow' | 'windows' | 'bloom' | 'jitter';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  readonly themes = [
-    'void-blue',
-    'emerald',
-    'rose',
-    'obsidian',
-    'gold',
-    'glass',
-  ];
-  readonly loaders: LoaderType[] = [
-    'bloom',
-    'windows',
-    'flower',
-    'gravity',
-    'pulse',
-    'liquid',
-    'pulse-slow',
-  ];
+  readonly themes = ['void-blue', 'emerald', 'rose', 'obsidian', 'gold', 'glass'];
+  readonly loaders: LoaderType[] = ['bloom', 'windows', 'flower', 'gravity', 'pulse', 'liquid', 'pulse-slow'];
 
   currentTheme = signal<string>('void-blue');
   currentLoader = signal<LoaderType>('bloom');
   loaderDuration = signal<number>(800); // Default 800ms delay
+  private platformId = inject(PLATFORM_ID);
 
   animationSpeed = computed(() => {
     const duration = this.loaderDuration();
@@ -54,7 +25,7 @@ export class ThemeService {
     return 0.7; // Smooth -> Elegant/Slow
   });
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor() {
     if (isPlatformBrowser(this.platformId)) {
       // Optimistic initial load from localStorage
       const storedTheme = localStorage.getItem('color-theme');
@@ -75,15 +46,11 @@ export class ThemeService {
 
       // Fetch from backend
       this.getThemeFromBackend().subscribe((data) => {
-        if (data && data.theme && this.themes.includes(data.theme)) {
+        if (data?.theme && this.themes.includes(data.theme)) {
           this.currentTheme.set(data.theme);
           this.applyThemeToDOM(data.theme);
         }
-        if (
-          data &&
-          data.loader &&
-          this.loaders.includes(data.loader as LoaderType)
-        ) {
+        if (data?.loader && this.loaders.includes(data.loader as LoaderType)) {
           this.currentLoader.set(data.loader as LoaderType);
         }
         if (data && data.duration !== undefined) {
@@ -151,10 +118,7 @@ export class ThemeService {
   } | null> {
     const mockDbTheme = localStorage.getItem('mock-db-theme') || 'void-blue';
     const mockDbLoader = localStorage.getItem('mock-db-loader') || 'bloom';
-    const mockDbDuration = parseInt(
-      localStorage.getItem('mock-db-duration') || '800',
-      10,
-    );
+    const mockDbDuration = parseInt(localStorage.getItem('mock-db-duration') || '800', 10);
     return of({
       theme: mockDbTheme,
       loader: mockDbLoader,
@@ -162,15 +126,10 @@ export class ThemeService {
     }).pipe(delay(500));
   }
 
-  private saveToBackend(data: {
-    theme?: string;
-    loader?: string;
-    duration?: number;
-  }): Observable<boolean> {
+  private saveToBackend(data: { theme?: string; loader?: string; duration?: number }): Observable<boolean> {
     if (data.theme) localStorage.setItem('mock-db-theme', data.theme);
     if (data.loader) localStorage.setItem('mock-db-loader', data.loader);
-    if (data.duration !== undefined)
-      localStorage.setItem('mock-db-duration', data.duration.toString());
+    if (data.duration !== undefined) localStorage.setItem('mock-db-duration', data.duration.toString());
     return of(true).pipe(delay(300));
   }
 }

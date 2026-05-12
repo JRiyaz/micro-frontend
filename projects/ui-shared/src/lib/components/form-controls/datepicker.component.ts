@@ -1,14 +1,5 @@
-import {
-  Component,
-  signal,
-  input,
-  output,
-  HostListener,
-  ElementRef,
-  inject,
-  computed,
-} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, ElementRef, HostListener, inject, input, output, signal } from '@angular/core';
 
 @Component({
   selector: 'lib-custom-datepicker',

@@ -1,19 +1,18 @@
-import { Injectable, signal, effect, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { effect, Injectable, inject, PLATFORM_ID, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DarkModeService {
   isDarkMode = signal(false);
+  private platformId = inject(PLATFORM_ID);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor() {
     if (isPlatformBrowser(this.platformId)) {
       const stored = localStorage.getItem('theme');
       // Default to dark if no setting exists, or check system preference
-      const isDark =
-        stored === 'dark' ||
-        (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
       this.isDarkMode.set(isDark);
       this.applyTheme(isDark);
     }

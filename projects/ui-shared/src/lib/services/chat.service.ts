@@ -1,4 +1,4 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { computed, Injectable, inject, signal } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NotificationService } from './notification.service';
 
@@ -32,17 +32,9 @@ export class ChatService {
 
   allMessages = computed(() => this.messages());
 
-  unreadCount = computed(
-    () =>
-      this.messages().filter((m) => !m.isRead && m.role === 'customer').length,
-  );
+  unreadCount = computed(() => this.messages().filter((m) => !m.isRead && m.role === 'customer').length);
 
-  sendMessage(
-    text: string,
-    senderId: string,
-    senderName: string,
-    role: 'customer' | 'employee',
-  ) {
+  sendMessage(text: string, senderId: string, senderName: string, role: 'customer' | 'employee') {
     const newMessage: ChatMessage = {
       id: Math.random().toString(36).substring(7),
       senderId,
@@ -50,7 +42,7 @@ export class ChatService {
       text,
       timestamp: new Date(),
       role,
-      isRead: role === 'customer' ? false : true, // Assume employee messages are read by customer instantly in this mock
+      isRead: role !== 'customer', // Assume employee messages are read by customer instantly in this mock
     };
 
     this.messages.update((msgs) => [...msgs, newMessage]);

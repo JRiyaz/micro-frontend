@@ -1,13 +1,5 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  OnDestroy,
-  signal,
-  computed,
-  effect,
-} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input, type OnDestroy, type OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'lib-typewriter',

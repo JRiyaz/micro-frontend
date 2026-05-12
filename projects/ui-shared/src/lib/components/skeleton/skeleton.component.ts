@@ -1,5 +1,5 @@
-import { Component, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'lib-skeleton',
@@ -69,11 +69,7 @@ export class SkeletonComponent {
   classes = computed(() => {
     const base = this.customClass();
     const shapeClass =
-      this.shape() === 'circle'
-        ? 'rounded-full'
-        : this.shape() === 'rounded'
-          ? 'rounded-xl'
-          : 'rounded-none';
+      this.shape() === 'circle' ? 'rounded-full' : this.shape() === 'rounded' ? 'rounded-xl' : 'rounded-none';
     return `${base} ${shapeClass}`;
   });
 }

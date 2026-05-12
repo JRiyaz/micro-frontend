@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 
 export interface UserProfile {
   name: string;
@@ -28,9 +28,7 @@ export class AuthStateService {
   readonly userRoles = computed(() => this._user()?.roles || []);
 
   /** True if user has Admin role among their active roles */
-  readonly isAdmin = computed(() =>
-    (this._user()?.roles || []).includes('Admin'),
-  );
+  readonly isAdmin = computed(() => (this._user()?.roles || []).includes('Admin'));
 
   /** Roles available in the system that user doesn't have yet */
   readonly otherRoles = computed(() => {
@@ -62,15 +60,11 @@ export class AuthStateService {
   }
 
   assignRoleToUser(role: string): void {
-    this._user.update((u) =>
-      u ? { ...u, roles: [...new Set([...u.roles, role])] } : null,
-    );
+    this._user.update((u) => (u ? { ...u, roles: [...new Set([...u.roles, role])] } : null));
   }
 
   removeRoleFromUser(role: string): void {
-    this._user.update((u) =>
-      u ? { ...u, roles: u.roles.filter((r) => r !== role) } : null,
-    );
+    this._user.update((u) => (u ? { ...u, roles: u.roles.filter((r) => r !== role) } : null));
   }
 
   hasRole(role: string): boolean {
@@ -88,10 +82,7 @@ export class AuthStateService {
   readonly avatarUrl = computed(() => {
     const u = this._user();
     if (!u) return '';
-    return (
-      u.avatarUrl ||
-      `https://ui-avatars.com/api/?name=${encodeURIComponent(u.name)}&background=3b429f&color=fff`
-    );
+    return u.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(u.name)}&background=3b429f&color=fff`;
   });
 
   /** Simulate login — replace with real auth later */

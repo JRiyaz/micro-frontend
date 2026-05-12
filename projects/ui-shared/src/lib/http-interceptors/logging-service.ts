@@ -1,9 +1,4 @@
-import {
-  HttpInterceptor,
-  HttpRequest,
-  HttpHandler,
-  HttpResponse,
-} from '@angular/common/http';
+import { type HttpHandler, type HttpInterceptor, type HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { finalize, tap } from 'rxjs/operators';
 
@@ -16,9 +11,8 @@ export class LoggingService implements HttpInterceptor {
     // extend server response observable with logging
     return next.handle(req).pipe(
       tap({
-        next: (event) =>
-          (ok = event instanceof HttpResponse ? 'succeeded' : ''),
-        error: (error) => (ok = 'failed'),
+        next: (event) => (ok = event instanceof HttpResponse ? 'succeeded' : ''),
+        error: (_error) => (ok = 'failed'),
       }),
       // Log when response observable either completes or errors
       finalize(() => {

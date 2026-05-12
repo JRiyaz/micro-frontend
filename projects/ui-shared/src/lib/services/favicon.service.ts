@@ -1,21 +1,23 @@
-import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FaviconService {
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  private document = inject(DOCUMENT);
 
   setFavicon(url: string) {
-    let link: HTMLLinkElement | null =
-      this.document.querySelector("link[rel*='icon']");
+    const link: HTMLLinkElement | null = this.document.querySelector("link[rel*='icon']");
     if (!link) {
-      link = this.document.createElement('link');
-      link.rel = 'icon';
-      this.document.getElementsByTagName('head')[0].appendChild(link);
+      const newLink = this.document.createElement('link');
+      newLink.rel = 'icon';
+      this.document.getElementsByTagName('head')[0].appendChild(newLink);
+      newLink.type = 'image/png';
+      newLink.href = url;
+    } else {
+      link.type = 'image/png';
+      link.href = url;
     }
-    link.type = 'image/png';
-    link.href = url;
   }
 }

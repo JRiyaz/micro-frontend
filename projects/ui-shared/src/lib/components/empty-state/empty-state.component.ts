@@ -65,9 +65,7 @@ import { LoaderComponent } from '../loader/loader.component';
 })
 export class EmptyStateComponent {
   title = input<string>('No records found');
-  message = input<string>(
-    'Try adjusting your search or filters to find what you are looking for.',
-  );
+  message = input<string>('Try adjusting your search or filters to find what you are looking for.');
   icon = input<string>('M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z');
   actionLabel = input<string | null>(null);
   isActionLoading = input<boolean>(false);

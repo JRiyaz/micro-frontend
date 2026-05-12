@@ -1,22 +1,16 @@
-import { Component, viewChild, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
-import { TopnavComponent } from '../topnav/topnav.component';
-import { SidebarComponent, SidebarNavItem } from '../sidebar/sidebar.component';
-import { ChatWidgetComponent } from '../chat/chat-widget.component';
+import { Component, computed, inject, viewChild } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { AuthStateService } from '../../services/auth-state.service';
 import { FaviconService } from '../../services/favicon.service';
+import { ChatWidgetComponent } from '../chat/chat-widget.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { TopnavComponent } from '../topnav/topnav.component';
 
 @Component({
   selector: 'ui-dashboard-layout',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    TopnavComponent,
-    SidebarComponent,
-    ChatWidgetComponent,
-  ],
+  imports: [CommonModule, RouterModule, TopnavComponent, SidebarComponent, ChatWidgetComponent],
   template: `
     <div
       class="flex h-screen bg-white dark:bg-dark-base text-slate-900 dark:text-slate-200 overflow-hidden transition-colors duration-500"

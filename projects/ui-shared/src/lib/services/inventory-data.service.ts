@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 export interface Product {
   id: number;
@@ -234,9 +234,7 @@ export class InventoryDataService {
   }
 
   updateOffer(offer: Offer) {
-    this._offers.update((prev) =>
-      prev.map((o) => (o.id === offer.id ? offer : o)),
-    );
+    this._offers.update((prev) => prev.map((o) => (o.id === offer.id ? offer : o)));
     this.saveToStorage();
   }
 
@@ -263,35 +261,25 @@ export class InventoryDataService {
   }
 
   updateProduct(product: Product): void {
-    this._products.update((prev) =>
-      prev.map((p) => (p.id === product.id ? product : p)),
-    );
+    this._products.update((prev) => prev.map((p) => (p.id === product.id ? product : p)));
     this.saveToStorage();
   }
 
   updateOrder(order: Order): void {
-    this._orders.update((prev) =>
-      prev.map((o) => (o.id === order.id ? order : o)),
-    );
+    this._orders.update((prev) => prev.map((o) => (o.id === order.id ? order : o)));
     this.saveToStorage();
   }
 
   updateCustomer(customer: Customer): void {
-    this._customers.update((prev) =>
-      prev.map((c) => (c.id === customer.id ? customer : c)),
-    );
+    this._customers.update((prev) => prev.map((c) => (c.id === customer.id ? customer : c)));
   }
 
   updateSupplier(supplier: Supplier): void {
-    this._suppliers.update((prev) =>
-      prev.map((s) => (s.id === supplier.id ? supplier : s)),
-    );
+    this._suppliers.update((prev) => prev.map((s) => (s.id === supplier.id ? supplier : s)));
   }
 
   updateWarehouse(warehouse: Warehouse): void {
-    this._warehouses.update((prev) =>
-      prev.map((w) => (w.id === warehouse.id ? warehouse : w)),
-    );
+    this._warehouses.update((prev) => prev.map((w) => (w.id === warehouse.id ? warehouse : w)));
   }
 
   getProduct(id: number): Product | undefined {
@@ -303,17 +291,13 @@ export class InventoryDataService {
   }
 
   getOrdersForProduct(productId: number): Order[] {
-    return this.orders().filter((order) =>
-      order.items.some((item) => item.productId === productId),
-    );
+    return this.orders().filter((order) => order.items.some((item) => item.productId === productId));
   }
 
   getCustomerIdByName(name: string): string | undefined {
     if (!name) return undefined;
     const searchName = name.trim().toLowerCase();
-    return this.customers().find(
-      (c) => c.name.trim().toLowerCase() === searchName,
-    )?.id;
+    return this.customers().find((c) => c.name.trim().toLowerCase() === searchName)?.id;
   }
 
   getSupplierById(id: string): Supplier | undefined {
@@ -341,8 +325,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 1240,
         stock: 45,
-        description:
-          'High-speed automated processing unit with dual redundancy support.',
+        description: 'High-speed automated processing unit with dual redundancy support.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-001',
         discount: 15,
@@ -353,8 +336,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 450,
         stock: 120,
-        description:
-          'Advanced temperature monitoring with ±0.1°C precision accuracy.',
+        description: 'Advanced temperature monitoring with ±0.1°C precision accuracy.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-001',
         discount: 10,
@@ -365,8 +347,7 @@ export class InventoryDataService {
         category: 'Raw Materials',
         price: 89,
         stock: 2500,
-        description:
-          'High-tensile strength industrial grade steel for structural components.',
+        description: 'High-tensile strength industrial grade steel for structural components.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-002',
       },
@@ -376,8 +357,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 2100,
         stock: 12,
-        description:
-          'Next-gen energy protection system with instant isolation capabilities.',
+        description: 'Next-gen energy protection system with instant isolation capabilities.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-001',
         discount: 20,
@@ -388,8 +368,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 670,
         stock: 88,
-        description:
-          'Heavy-duty air pressure driven mechanical movement system.',
+        description: 'Heavy-duty air pressure driven mechanical movement system.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-002',
       },
@@ -399,8 +378,7 @@ export class InventoryDataService {
         category: 'Raw Materials',
         price: 150,
         stock: 430,
-        description:
-          'Non-corrosive heat dissipation fluid for high-temperature machinery.',
+        description: 'Non-corrosive heat dissipation fluid for high-temperature machinery.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-001',
       },
@@ -410,8 +388,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 320,
         stock: 15,
-        description:
-          'Programmable logic controller for complex sequence automation.',
+        description: 'Programmable logic controller for complex sequence automation.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-001',
         discount: 30,
@@ -422,8 +399,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 4500,
         stock: 5,
-        description:
-          'Ultra-durable transmission system for mining and heavy lifting.',
+        description: 'Ultra-durable transmission system for mining and heavy lifting.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-002',
       },
@@ -433,8 +409,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 185,
         stock: 320,
-        description:
-          'Precision water flow management system with IoT connectivity.',
+        description: 'Precision water flow management system with IoT connectivity.',
         supplierId: 'SUP-004',
         warehouseId: 'WH-003',
         discount: 10,
@@ -445,8 +420,7 @@ export class InventoryDataService {
         category: 'Raw Materials',
         price: 120,
         stock: 150,
-        description:
-          'Lightweight, high-strength aerospace grade carbon fiber material.',
+        description: 'Lightweight, high-strength aerospace grade carbon fiber material.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-002',
       },
@@ -456,8 +430,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 890,
         stock: 22,
-        description:
-          'Non-invasive diagnostic tool for identifying gas and liquid leaks.',
+        description: 'Non-invasive diagnostic tool for identifying gas and liquid leaks.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-001',
         discount: 15,
@@ -468,8 +441,7 @@ export class InventoryDataService {
         category: 'Raw Materials',
         price: 45,
         stock: 1200,
-        description:
-          'Synthetic lubricant designed for extreme operating temperatures.',
+        description: 'Synthetic lubricant designed for extreme operating temperatures.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-003',
       },
@@ -479,8 +451,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 2800,
         stock: 8,
-        description:
-          'Customizable assembly line component for automated logistics.',
+        description: 'Customizable assembly line component for automated logistics.',
         supplierId: 'SUP-005',
         warehouseId: 'WH-001',
       },
@@ -490,8 +461,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 640,
         stock: 45,
-        description:
-          'Thermal imaging sensor for security and process monitoring.',
+        description: 'Thermal imaging sensor for security and process monitoring.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-002',
       },
@@ -501,8 +471,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 3400,
         stock: 15,
-        description:
-          'High-pressure hydraulic pump for heavy industrial machinery.',
+        description: 'High-pressure hydraulic pump for heavy industrial machinery.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-001',
       },
@@ -512,8 +481,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 560,
         stock: 85,
-        description:
-          'Precision laser distance measurement tool with ±1mm accuracy.',
+        description: 'Precision laser distance measurement tool with ±1mm accuracy.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-002',
       },
@@ -523,8 +491,7 @@ export class InventoryDataService {
         category: 'Raw Materials',
         price: 210,
         stock: 3500,
-        description:
-          '99.9% pure aluminum ingots for casting and manufacturing.',
+        description: '99.9% pure aluminum ingots for casting and manufacturing.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-002',
       },
@@ -554,8 +521,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 180,
         stock: 65,
-        description:
-          'Automatic voltage stabilizer for sensitive electronic equipment.',
+        description: 'Automatic voltage stabilizer for sensitive electronic equipment.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-003',
       },
@@ -565,8 +531,7 @@ export class InventoryDataService {
         category: 'Raw Materials',
         price: 350,
         stock: 120,
-        description:
-          'High-conductivity copper wire for industrial electrical installations.',
+        description: 'High-conductivity copper wire for industrial electrical installations.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-002',
       },
@@ -576,8 +541,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 85,
         stock: 140,
-        description:
-          'Quick-response air valve for pneumatic automation systems.',
+        description: 'Quick-response air valve for pneumatic automation systems.',
         supplierId: 'SUP-004',
         warehouseId: 'WH-003',
       },
@@ -587,8 +551,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 1100,
         stock: 18,
-        description:
-          'High-torque servo motor for CNC and robotic applications.',
+        description: 'High-torque servo motor for CNC and robotic applications.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-001',
       },
@@ -598,8 +561,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 450,
         stock: 30,
-        description:
-          'Powerful permanent magnet for lifting and separation tasks.',
+        description: 'Powerful permanent magnet for lifting and separation tasks.',
         supplierId: 'SUP-002',
         warehouseId: 'WH-002',
       },
@@ -609,8 +571,7 @@ export class InventoryDataService {
         category: 'Raw Materials',
         price: 950,
         stock: 60,
-        description:
-          'High-purity silicon wafers for semiconductor manufacturing.',
+        description: 'High-purity silicon wafers for semiconductor manufacturing.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-001',
       },
@@ -620,8 +581,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 220,
         stock: 110,
-        description:
-          'Professional grade multimeter with auto-ranging and data logging.',
+        description: 'Professional grade multimeter with auto-ranging and data logging.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-003',
       },
@@ -631,8 +591,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 65,
         stock: 300,
-        description:
-          'Durable swivel caster for industrial carts and machinery.',
+        description: 'Durable swivel caster for industrial carts and machinery.',
         supplierId: 'SUP-005',
         warehouseId: 'WH-001',
       },
@@ -642,8 +601,7 @@ export class InventoryDataService {
         category: 'Industrial',
         price: 420,
         stock: 25,
-        description:
-          'High-capacity industrial exhaust fan for ventilation systems.',
+        description: 'High-capacity industrial exhaust fan for ventilation systems.',
         supplierId: 'SUP-004',
         warehouseId: 'WH-002',
       },
@@ -653,8 +611,7 @@ export class InventoryDataService {
         category: 'Raw Materials',
         price: 15,
         stock: 5000,
-        description:
-          'Single-mode fiber optic cable for high-speed data transmission.',
+        description: 'Single-mode fiber optic cable for high-speed data transmission.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-001',
       },
@@ -664,8 +621,7 @@ export class InventoryDataService {
         category: 'Electronics',
         price: 280,
         stock: 40,
-        description:
-          'Three-phase circuit breaker for industrial power distribution.',
+        description: 'Three-phase circuit breaker for industrial power distribution.',
         supplierId: 'SUP-001',
         warehouseId: 'WH-003',
       },
@@ -706,8 +662,7 @@ export class InventoryDataService {
       {
         id: 'OFFER-2',
         title: 'Precision Tools Special',
-        description:
-          'Save 15% on high-precision machining tools for bulk orders.',
+        description: 'Save 15% on high-precision machining tools for bulk orders.',
         discount: 15,
         productId: 1,
         expiryDate: '2026-06-15',
@@ -716,8 +671,7 @@ export class InventoryDataService {
       {
         id: 'OFFER-3',
         title: 'Warehouse Clearance',
-        description:
-          'Massive 50% discount on raw materials to clear shelf space.',
+        description: 'Massive 50% discount on raw materials to clear shelf space.',
         discount: 50,
         category: 'Raw Materials',
         expiryDate: '2026-05-20',
@@ -812,9 +766,7 @@ export class InventoryDataService {
         totalAmount: 25000,
         date: '2024-03-15',
         priority: false,
-        items: [
-          { productId: 2, name: 'Thermal Flux Sensor', qty: 5, price: 450 },
-        ],
+        items: [{ productId: 2, name: 'Thermal Flux Sensor', qty: 5, price: 450 }],
       },
       {
         id: 'ORD-2346',
@@ -825,9 +777,7 @@ export class InventoryDataService {
         totalAmount: 18000,
         date: '2024-03-10',
         priority: false,
-        items: [
-          { productId: 3, name: 'Reinforced Steel Alloy', qty: 100, price: 89 },
-        ],
+        items: [{ productId: 3, name: 'Reinforced Steel Alloy', qty: 100, price: 89 }],
       },
       {
         id: 'ORD-2347',
@@ -838,9 +788,7 @@ export class InventoryDataService {
         totalAmount: 62000,
         date: '2024-03-05',
         priority: true,
-        items: [
-          { productId: 8, name: 'Heavy Duty Gear Box', qty: 1, price: 4500 },
-        ],
+        items: [{ productId: 8, name: 'Heavy Duty Gear Box', qty: 1, price: 4500 }],
       },
     ];
   }
@@ -908,9 +856,7 @@ export class InventoryDataService {
         utilization: 82,
         totalCapacity: 15000,
         currentStock: 12300,
-        zones: [
-          { id: 'Z-A1', name: 'Zone A1', description: 'Electronics & Sensors' },
-        ],
+        zones: [{ id: 'Z-A1', name: 'Zone A1', description: 'Electronics & Sensors' }],
         status: 'Active',
       },
     ];
@@ -925,9 +871,7 @@ export class InventoryDataService {
         status: 'Ordered',
         amount: 15600,
         date: '2024-03-30',
-        items: [
-          { productId: 2, name: 'Thermal Flux Sensor', qty: 30, price: 450 },
-        ],
+        items: [{ productId: 2, name: 'Thermal Flux Sensor', qty: 30, price: 450 }],
       },
     ];
   }

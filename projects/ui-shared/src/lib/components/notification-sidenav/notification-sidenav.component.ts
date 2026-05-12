@@ -1,5 +1,5 @@
-import { Component, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject, output } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
 
 @Component({

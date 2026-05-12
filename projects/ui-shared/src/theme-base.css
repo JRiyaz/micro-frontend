@@ -7,8 +7,7 @@
   *,
   *::before,
   *::after {
-    transition-property:
-      background-color, border-color, color, fill, stroke, box-shadow;
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
     transition-duration: 500ms;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -96,7 +95,6 @@
   }
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, var(--theme-primary), transparent 80%)
-      transparent;
+    scrollbar-color: color-mix(in srgb, var(--theme-primary), transparent 80%) transparent;
   }
 }

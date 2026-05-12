@@ -1,17 +1,7 @@
-import {
-  Component,
-  signal,
-  inject,
-  input,
-  output,
-  computed,
-  ElementRef,
-  viewChild,
-  effect,
-} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, type ElementRef, effect, inject, input, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ChatService, ChatMessage } from '../../services/chat.service';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'ui-chat-view',
@@ -186,19 +176,16 @@ export class ChatViewComponent {
   isCustomer = computed(() => this.currentRole() === 'customer');
 
   showTyping = computed(() => {
-    return this.isCustomer()
-      ? this.chatService.isEmployeeTyping()
-      : this.chatService.isCustomerTyping();
+    return this.isCustomer() ? this.chatService.isEmployeeTyping() : this.chatService.isCustomerTyping();
   });
 
   constructor() {
     effect(() => {
-      const msgs = this.chatService.allMessages();
+      const _msgs = this.chatService.allMessages();
       const container = this.scrollContainer();
       if (container) {
         setTimeout(() => {
-          container.nativeElement.scrollTop =
-            container.nativeElement.scrollHeight;
+          container.nativeElement.scrollTop = container.nativeElement.scrollHeight;
         }, 100);
       }
     });
@@ -209,7 +196,7 @@ export class ChatViewComponent {
 
     this.chatService.sendMessage(
       this.newMessage,
-      'user-' + Math.random().toString(36).substring(7),
+      `user-${Math.random().toString(36).substring(7)}`,
       this.userName(),
       this.currentRole(),
     );

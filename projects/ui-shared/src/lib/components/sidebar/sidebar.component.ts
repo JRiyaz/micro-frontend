@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, OnInit, signal, viewChild, inject, HostListener } from '@angular/core';
-import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { Component, type ElementRef, HostListener, Input, inject, type OnInit, signal, viewChild } from '@angular/core';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { SafeHtmlPipe } from '../../utils/safe-html.pipe';
 
@@ -375,7 +375,7 @@ export class SidebarComponent implements OnInit {
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
     const sidebarEl = this.sidebarRef()?.nativeElement;
-    
+
     // Check if click is outside the sidebar area
     if (sidebarEl && !sidebarEl.contains(target)) {
       this.activeFlyoutIndex.set(-1);
@@ -386,9 +386,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     // Listen for navigation to auto-expand parent groups
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
       this.autoExpandActiveGroup();
     });
 
@@ -401,17 +399,19 @@ export class SidebarComponent implements OnInit {
     this.navItems.forEach((item, idx) => {
       if (item.children) {
         // Check if any child route is active
-        const hasActiveChild = item.children.some(child => {
+        const hasActiveChild = item.children.some((child) => {
           if (!child.route) return false;
           // Use exact match or startsWith for sub-pages
-          return currentUrl === child.route || currentUrl.startsWith(child.route + '/');
+          return currentUrl === child.route || currentUrl.startsWith(`${child.route}/`);
         });
 
         if (hasActiveChild && !item.isOpen) {
           // Open this group if it has an active child and isn't already open
           item.isOpen = true;
           // Collapse others
-          this.navItems.forEach((it, i) => { if (i !== idx) it.isOpen = false; });
+          this.navItems.forEach((it, i) => {
+            if (i !== idx) it.isOpen = false;
+          });
         }
       }
     });
@@ -420,8 +420,8 @@ export class SidebarComponent implements OnInit {
   isParentActive(item: SidebarNavItem): boolean {
     if (!item.children) return false;
     const currentUrl = this.router.url;
-    return item.children.some(child => 
-      child.route && (currentUrl === child.route || currentUrl.startsWith(child.route + '/'))
+    return item.children.some(
+      (child) => child.route && (currentUrl === child.route || currentUrl.startsWith(`${child.route}/`)),
     );
   }
 
@@ -433,7 +433,7 @@ export class SidebarComponent implements OnInit {
 
     const item = this.navItems[idx];
     const wasOpen = item.isOpen;
-    
+
     // Collapse all others
     this.navItems.forEach((it, i) => {
       if (i !== idx) it.isOpen = false;

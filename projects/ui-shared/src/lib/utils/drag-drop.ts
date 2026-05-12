@@ -1,11 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  HostListener,
-  Renderer2,
-  input,
-  output,
-} from '@angular/core';
+import { Directive, type ElementRef, HostListener, input, output, type Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[uiDraggable]',
@@ -24,21 +17,15 @@ export class DraggableDirective {
   @HostListener('dragstart', ['$event'])
   onDragStart(event: DragEvent) {
     if (event.dataTransfer) {
-      event.dataTransfer.setData(
-        'application/json',
-        JSON.stringify(this.dragData()),
-      );
+      event.dataTransfer.setData('application/json', JSON.stringify(this.dragData()));
       event.dataTransfer.effectAllowed = 'move';
       // Adding a class for visual feedback during drag
-      setTimeout(
-        () => this.renderer.addClass(this.el.nativeElement, 'opacity-40'),
-        0,
-      );
+      setTimeout(() => this.renderer.addClass(this.el.nativeElement, 'opacity-40'), 0);
     }
   }
 
   @HostListener('dragend', ['$event'])
-  onDragEnd(event: DragEvent) {
+  onDragEnd(_event: DragEvent) {
     this.renderer.removeClass(this.el.nativeElement, 'opacity-40');
   }
 }
@@ -65,7 +52,7 @@ export class DroppableDirective {
   }
 
   @HostListener('dragleave', ['$event'])
-  onDragLeave(event: DragEvent) {
+  onDragLeave(_event: DragEvent) {
     this.removeStyles();
   }
 

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output, inject } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
+import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import type { Breadcrumb, StatItem } from '../../models';
 import { LoaderComponent } from '../loader/loader.component';
-import { Breadcrumb, StatItem } from '../../models';
 
 @Component({
   selector: 'lib-page-header',

@@ -1,5 +1,5 @@
-import { Component, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, input } from '@angular/core';
 
 @Component({
   selector: 'lib-status-badge',
@@ -36,34 +36,14 @@ export class StatusBadgeComponent {
   statusClasses = computed(() => {
     const s = this.status().toLowerCase();
     if (
-      [
-        'completed',
-        'active',
-        'shipped',
-        'delivered',
-        'received',
-        'optimal stock',
-        'in stock',
-        'low risk',
-      ].includes(s)
+      ['completed', 'active', 'shipped', 'delivered', 'received', 'optimal stock', 'in stock', 'low risk'].includes(s)
     ) {
       return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
     }
-    if (
-      ['pending', 'processing', 'ordered', 'draft', 'medium risk'].includes(s)
-    ) {
+    if (['pending', 'processing', 'ordered', 'draft', 'medium risk'].includes(s)) {
       return 'bg-amber-500/10 text-amber-500 border-amber-500/20';
     }
-    if (
-      [
-        'cancelled',
-        'failed',
-        'inactive',
-        'out of stock',
-        'low stock',
-        'high risk',
-      ].includes(s)
-    ) {
+    if (['cancelled', 'failed', 'inactive', 'out of stock', 'low stock', 'high risk'].includes(s)) {
       return 'bg-rose-500/10 text-rose-500 border-rose-500/20';
     }
     return 'bg-slate-500/10 text-slate-500 border-slate-500/20';
@@ -72,34 +52,14 @@ export class StatusBadgeComponent {
   dotClasses = computed(() => {
     const s = this.status().toLowerCase();
     if (
-      [
-        'completed',
-        'active',
-        'shipped',
-        'delivered',
-        'received',
-        'optimal stock',
-        'in stock',
-        'low risk',
-      ].includes(s)
+      ['completed', 'active', 'shipped', 'delivered', 'received', 'optimal stock', 'in stock', 'low risk'].includes(s)
     ) {
       return 'bg-emerald-500 shadow-[0_0_4px_rgba(16,185,129,0.5)]';
     }
-    if (
-      ['pending', 'processing', 'ordered', 'draft', 'medium risk'].includes(s)
-    ) {
+    if (['pending', 'processing', 'ordered', 'draft', 'medium risk'].includes(s)) {
       return 'bg-amber-500 shadow-[0_0_4px_rgba(245,158,11,0.5)]';
     }
-    if (
-      [
-        'cancelled',
-        'failed',
-        'inactive',
-        'out of stock',
-        'low stock',
-        'high risk',
-      ].includes(s)
-    ) {
+    if (['cancelled', 'failed', 'inactive', 'out of stock', 'low stock', 'high risk'].includes(s)) {
       return 'bg-rose-500 shadow-[0_0_4px_rgba(244,63,94,0.5)]';
     }
     return 'bg-slate-500';

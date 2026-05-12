@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 
 export interface SearchableItem {
   id: string;
@@ -39,9 +39,7 @@ export class SearchService {
    */
   register(items: SearchableItem[]): void {
     const currentGlobal = (window as any).__SEARCH_REGISTRY__ || [];
-    const newItems = items.filter(
-      (item) => !currentGlobal.find((c: any) => c.id === item.id),
-    );
+    const newItems = items.filter((item) => !currentGlobal.find((c: any) => c.id === item.id));
 
     if (newItems.length > 0) {
       const updated = [...currentGlobal, ...newItems];
@@ -61,9 +59,7 @@ export class SearchService {
     console.log('[SearchService] Unregistering items:', itemIds);
 
     const currentGlobal = (window as any).__SEARCH_REGISTRY__ || [];
-    const updated = currentGlobal.filter(
-      (item: any) => !itemIds.includes(item.id),
-    );
+    const updated = currentGlobal.filter((item: any) => !itemIds.includes(item.id));
 
     (window as any).__SEARCH_REGISTRY__ = updated;
     this.registeredItems.set(updated);

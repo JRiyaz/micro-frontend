@@ -1,16 +1,9 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  input,
-  output,
-  signal,
-  inject,
-  computed,
-} from '@angular/core';
+import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { Breadcrumb } from '../../models';
-import { LoaderComponent, LoaderType } from '../loader/loader.component';
+import type { Breadcrumb } from '../../models';
 import { ThemeService } from '../../services/theme.service';
+import { LoaderComponent, type LoaderType } from '../loader/loader.component';
 
 @Component({
   selector: 'lib-detail-layout',
@@ -208,9 +201,7 @@ export class DetailLayoutComponent {
   statusColor = input<string>('primary');
   loaderType = input<LoaderType | undefined>(undefined);
 
-  actualLoaderType = computed(
-    () => this.loaderType() || this.themeService.currentLoader(),
-  );
+  actualLoaderType = computed(() => this.loaderType() || this.themeService.currentLoader());
 
   action = output<void>();
   edit = output<void>();

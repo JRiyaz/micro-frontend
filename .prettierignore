@@ -20,6 +20,6 @@ yarn.lock
 /projects
 **/assets/**/*
 
-# pnpm install --save-dev prettier-plugin-organize-imports
-# npx prettier --write .
+# pnpm add -D @biomejs/biome
+# npx biome check --write .
 
