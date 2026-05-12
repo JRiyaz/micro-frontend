@@ -1,4 +1,5 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
+import { forkJoin, map, type Observable, of } from 'rxjs';
 
 export interface SearchableItem {
   id: string;
@@ -9,59 +10,80 @@ export interface SearchableItem {
   keywords?: string[];
 }
 
+export interface SearchProvider {
+  id: string;
+  name: string;
+  search: (query: string) => Observable<SearchableItem[]>;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  private registeredItems = signal<SearchableItem[]>([]);
+  private providers = signal<SearchProvider[]>([]);
 
   constructor() {
     // Initialize from global window object to ensure cross-MFE singleton behavior
-    const globalSearch = (window as any).__SEARCH_REGISTRY__ || [];
-    this.registeredItems.set(globalSearch);
-    (window as any).__SEARCH_REGISTRY__ = globalSearch;
+    const globalProviders = (window as any).__SEARCH_PROVIDERS__ || [];
+    this.providers.set(globalProviders);
+    (window as any).__SEARCH_PROVIDERS__ = globalProviders;
   }
 
   /**
-   * The global index of searchable items
+   * Register a search provider.
+   * Instead of registering items, services register a function that returns items.
    */
-  items = computed(() => {
-    // Always sync from global to handle multiple service instances across MFEs
-    const globalSearch = (window as any).__SEARCH_REGISTRY__ || [];
-    if (globalSearch.length !== this.registeredItems().length) {
-      this.registeredItems.set(globalSearch);
-    }
-    return this.registeredItems();
-  });
+  registerProvider(provider: SearchProvider): void {
+    const currentGlobal = (window as any).__SEARCH_PROVIDERS__ || [];
+    const exists = currentGlobal.find((p: any) => p.id === provider.id);
 
-  /**
-   * Register items to the global search index.
-   */
-  register(items: SearchableItem[]): void {
-    const currentGlobal = (window as any).__SEARCH_REGISTRY__ || [];
-    const newItems = items.filter((item) => !currentGlobal.find((c: any) => c.id === item.id));
-
-    if (newItems.length > 0) {
-      const updated = [...currentGlobal, ...newItems];
-      (window as any).__SEARCH_REGISTRY__ = updated;
-      this.registeredItems.set(updated);
-      console.log(
-        '[SearchService] Registered items:',
-        newItems.map((i) => i.title),
-      );
+    if (!exists) {
+      const updated = [...currentGlobal, provider];
+      (window as any).__SEARCH_PROVIDERS__ = updated;
+      this.providers.set(updated);
+      console.log(`[SearchService] Registered provider: ${provider.name}`);
     }
   }
 
   /**
-   * Unregister items from the global search index.
+   * Unregister a search provider.
    */
-  unregister(itemIds: string[]): void {
-    console.log('[SearchService] Unregistering items:', itemIds);
+  unregisterProvider(providerId: string): void {
+    const currentGlobal = (window as any).__SEARCH_PROVIDERS__ || [];
+    const updated = currentGlobal.filter((p: any) => p.id !== providerId);
 
-    const currentGlobal = (window as any).__SEARCH_REGISTRY__ || [];
-    const updated = currentGlobal.filter((item: any) => !itemIds.includes(item.id));
+    (window as any).__SEARCH_PROVIDERS__ = updated;
+    this.providers.set(updated);
+    console.log(`[SearchService] Unregistered provider: ${providerId}`);
+  }
 
-    (window as any).__SEARCH_REGISTRY__ = updated;
-    this.registeredItems.set(updated);
+  /**
+   * Perform a search across all registered providers.
+   */
+  search(query: string): Observable<SearchableItem[]> {
+    const activeProviders = this.providers();
+
+    if (activeProviders.length === 0 || !query.trim()) {
+      return of([]);
+    }
+
+    const searchTasks = activeProviders.map((provider) =>
+      provider.search(query).pipe(
+        // Add error handling per provider so one failure doesn't break everything
+        map((results) =>
+          results.map((item) => ({
+            ...item,
+            category: item.category || provider.name, // Fallback to provider name if category missing
+          })),
+        ),
+      ),
+    );
+
+    return forkJoin(searchTasks).pipe(
+      map((resultsArray) => {
+        // Flatten the array of results and return
+        return resultsArray.reduce((acc, curr) => [...acc, ...curr], []);
+      }),
+    );
   }
 }

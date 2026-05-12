@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, type ElementRef, effect, inject, input, viewChild } from '@angular/core';
+import { Component, computed, ElementRef, effect, inject, input, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ChatService } from '../../services/chat.service';
 import { ChatViewComponent } from './chat-view.component';

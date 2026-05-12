@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   computed,
-  type ElementRef,
+  ElementRef,
   HostListener,
   inject,
   type OnInit,
@@ -11,12 +11,13 @@ import {
   viewChild,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import type { AuthStateService } from '../../services/auth-state.service';
+import { of } from 'rxjs';
+import { AuthStateService } from '../../services/auth-state.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { LoadingService } from '../../services/loading.service';
 import { NotificationService } from '../../services/notification.service';
-import { SearchService } from '../../services/search.service';
-import type { ThemeService } from '../../services/theme.service';
+import { SearchService, type SearchableItem } from '../../services/search.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'ui-topnav',
@@ -637,7 +638,7 @@ export class TopnavComponent implements OnInit {
   unreadCount = computed(() => this.notificationService.notifications().filter((n) => !n.read).length);
   isMac = false;
 
-  private routeIndex: any[] = [];
+  private routeIndex: SearchableItem[] = [];
 
   constructor(
     public auth: AuthStateService,
@@ -647,6 +648,23 @@ export class TopnavComponent implements OnInit {
   ngOnInit(): void {
     this.isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
     this.indexRoutes();
+
+    // Register Topnav's internal route index as a search provider
+    this.searchService.registerProvider({
+      id: 'internal-routes',
+      name: 'System',
+      search: (query: string) => {
+        const results = this.routeIndex.filter((item) => {
+          const q = query.toLowerCase();
+          return (
+            item.title.toLowerCase().includes(q) ||
+            item.path.toLowerCase().includes(q) ||
+            item.keywords?.some((k) => k.toLowerCase().includes(q))
+          );
+        });
+        return of(results);
+      },
+    });
   }
 
   private indexRoutes(): void {
@@ -658,6 +676,7 @@ export class TopnavComponent implements OnInit {
           const title = route.data?.title || this.formatPath(route.path);
 
           this.routeIndex.push({
+            id: `route-${fullPath}`,
             path: fullPath.startsWith('/') ? fullPath : `/${fullPath}`,
             title: title,
             category: parentPath ? 'Section' : 'Page',
@@ -711,24 +730,13 @@ export class TopnavComponent implements OnInit {
       return;
     }
 
-    // Combine static route index with dynamic items from SearchService
-    const dynamicItems = this.searchService.items();
-    const allSearchable = [...this.routeIndex, ...dynamicItems];
-
-    const results = allSearchable
-      .filter((item) => {
-        const matchesTitle = item.title.toLowerCase().includes(query);
-        const matchesPath = item.path.toLowerCase().includes(query);
-        const matchesCategory = item.category?.toLowerCase().includes(query);
-        const matchesKeywords = item.keywords?.some((k: string) => k.toLowerCase().includes(query));
-
-        return matchesTitle || matchesPath || matchesCategory || matchesKeywords;
-      })
-      .slice(0, 5);
-
-    this.searchResults.set(results);
-    this.showResults.set(results.length > 0);
-    this.selectedIndex.set(results.length > 0 ? 0 : -1);
+    // Call the new search method which aggregates results from all providers
+    this.searchService.search(query).subscribe((results: SearchableItem[]) => {
+      const limitedResults = results.slice(0, 8);
+      this.searchResults.set(limitedResults);
+      this.showResults.set(limitedResults.length > 0);
+      this.selectedIndex.set(limitedResults.length > 0 ? 0 : -1);
+    });
   }
 
   handleSearchKeydown(event: KeyboardEvent): void {

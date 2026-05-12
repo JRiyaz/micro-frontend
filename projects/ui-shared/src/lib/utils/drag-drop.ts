@@ -1,4 +1,4 @@
-import { Directive, type ElementRef, HostListener, input, output, type Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, input, output, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[uiDraggable]',

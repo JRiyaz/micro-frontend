@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, type ElementRef, HostListener, Input, inject, type OnInit, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, inject, type OnInit, signal, viewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { SafeHtmlPipe } from '../../utils/safe-html.pipe';
