@@ -16,7 +16,7 @@ import { AuthStateService } from '../../services/auth-state.service';
 import { DarkModeService } from '../../services/dark-mode.service';
 import { LoadingService } from '../../services/loading.service';
 import { NotificationService } from '../../services/notification.service';
-import { SearchService, type SearchableItem } from '../../services/search.service';
+import { type SearchableItem, SearchService } from '../../services/search.service';
 import { ThemeService } from '../../services/theme.service';
 
 @Component({

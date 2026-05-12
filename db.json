@@ -1,0 +1,2191 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Electronics Beta 7",
+      "category": "Electronics",
+      "price": 2145,
+      "stock": 661,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "2",
+      "name": "Industrial Gamma 14",
+      "category": "Industrial",
+      "price": 4162,
+      "stock": 946,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "3",
+      "name": "Raw Materials Delta 21",
+      "category": "Raw Materials",
+      "price": 3059,
+      "stock": 217,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "4",
+      "name": "Raw Materials Sigma 28",
+      "category": "Raw Materials",
+      "price": 4402,
+      "stock": 913,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "5",
+      "name": "Tools Alpha 35",
+      "category": "Tools",
+      "price": 2042,
+      "stock": 422,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-006",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "6",
+      "name": "Electronics Beta 42",
+      "category": "Electronics",
+      "price": 1111,
+      "stock": 601,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "7",
+      "name": "Chemicals Gamma 49",
+      "category": "Chemicals",
+      "price": 488,
+      "stock": 403,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-010",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "8",
+      "name": "Safety Delta 56",
+      "category": "Safety",
+      "price": 3809,
+      "stock": 513,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-008",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "9",
+      "name": "Chemicals Sigma 63",
+      "category": "Chemicals",
+      "price": 3968,
+      "stock": 772,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "10",
+      "name": "Raw Materials Alpha 70",
+      "category": "Raw Materials",
+      "price": 2251,
+      "stock": 837,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-003",
+      "discount": 15
+    },
+    {
+      "id": "11",
+      "name": "Electronics Beta 77",
+      "category": "Electronics",
+      "price": 2524,
+      "stock": 158,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "12",
+      "name": "Electronics Gamma 84",
+      "category": "Electronics",
+      "price": 1886,
+      "stock": 96,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "13",
+      "name": "Tools Delta 91",
+      "category": "Tools",
+      "price": 409,
+      "stock": 207,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "14",
+      "name": "Raw Materials Sigma 98",
+      "category": "Raw Materials",
+      "price": 2162,
+      "stock": 354,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "15",
+      "name": "Raw Materials Alpha 105",
+      "category": "Raw Materials",
+      "price": 2833,
+      "stock": 826,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-002",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "16",
+      "name": "Electronics Beta 112",
+      "category": "Electronics",
+      "price": 1285,
+      "stock": 832,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "17",
+      "name": "Chemicals Gamma 119",
+      "category": "Chemicals",
+      "price": 2917,
+      "stock": 883,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-010",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "18",
+      "name": "Safety Delta 126",
+      "category": "Safety",
+      "price": 2142,
+      "stock": 818,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "19",
+      "name": "Chemicals Sigma 133",
+      "category": "Chemicals",
+      "price": 1423,
+      "stock": 95,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "20",
+      "name": "Industrial Alpha 140",
+      "category": "Industrial",
+      "price": 4453,
+      "stock": 599,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-010",
+      "warehouseId": "WH-003",
+      "discount": 15
+    },
+    {
+      "id": "21",
+      "name": "Chemicals Beta 147",
+      "category": "Chemicals",
+      "price": 516,
+      "stock": 57,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-003",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "22",
+      "name": "Industrial Gamma 154",
+      "category": "Industrial",
+      "price": 2287,
+      "stock": 66,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "23",
+      "name": "Safety Delta 161",
+      "category": "Safety",
+      "price": 3038,
+      "stock": 110,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-008",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "24",
+      "name": "Chemicals Sigma 168",
+      "category": "Chemicals",
+      "price": 3059,
+      "stock": 836,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "25",
+      "name": "Safety Alpha 175",
+      "category": "Safety",
+      "price": 1538,
+      "stock": 240,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-003",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "26",
+      "name": "Electronics Beta 182",
+      "category": "Electronics",
+      "price": 165,
+      "stock": 185,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "27",
+      "name": "Tools Gamma 189",
+      "category": "Tools",
+      "price": 2632,
+      "stock": 611,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-003",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "28",
+      "name": "Electronics Delta 196",
+      "category": "Electronics",
+      "price": 1021,
+      "stock": 290,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-003",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "29",
+      "name": "Electronics Sigma 203",
+      "category": "Electronics",
+      "price": 4697,
+      "stock": 547,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-006",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "30",
+      "name": "Chemicals Alpha 210",
+      "category": "Chemicals",
+      "price": 4090,
+      "stock": 516,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-002",
+      "warehouseId": "WH-004",
+      "discount": 15
+    },
+    {
+      "id": "31",
+      "name": "Safety Beta 217",
+      "category": "Safety",
+      "price": 2664,
+      "stock": 175,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "32",
+      "name": "Industrial Gamma 224",
+      "category": "Industrial",
+      "price": 582,
+      "stock": 94,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "33",
+      "name": "Tools Delta 231",
+      "category": "Tools",
+      "price": 92,
+      "stock": 974,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-008",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "34",
+      "name": "Raw Materials Sigma 238",
+      "category": "Raw Materials",
+      "price": 1422,
+      "stock": 460,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-008",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "35",
+      "name": "Raw Materials Alpha 245",
+      "category": "Raw Materials",
+      "price": 4017,
+      "stock": 37,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "36",
+      "name": "Chemicals Beta 252",
+      "category": "Chemicals",
+      "price": 860,
+      "stock": 803,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "37",
+      "name": "Tools Gamma 259",
+      "category": "Tools",
+      "price": 4851,
+      "stock": 667,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "38",
+      "name": "Industrial Delta 266",
+      "category": "Industrial",
+      "price": 4822,
+      "stock": 534,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "39",
+      "name": "Raw Materials Sigma 273",
+      "category": "Raw Materials",
+      "price": 4838,
+      "stock": 838,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "40",
+      "name": "Electronics Alpha 280",
+      "category": "Electronics",
+      "price": 1855,
+      "stock": 749,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-008",
+      "warehouseId": "WH-005",
+      "discount": 15
+    },
+    {
+      "id": "41",
+      "name": "Tools Beta 287",
+      "category": "Tools",
+      "price": 3264,
+      "stock": 944,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "42",
+      "name": "Industrial Gamma 294",
+      "category": "Industrial",
+      "price": 3163,
+      "stock": 596,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "43",
+      "name": "Electronics Delta 301",
+      "category": "Electronics",
+      "price": 3192,
+      "stock": 522,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-006",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "44",
+      "name": "Safety Sigma 308",
+      "category": "Safety",
+      "price": 3877,
+      "stock": 389,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "45",
+      "name": "Electronics Alpha 315",
+      "category": "Electronics",
+      "price": 3834,
+      "stock": 377,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "46",
+      "name": "Chemicals Beta 322",
+      "category": "Chemicals",
+      "price": 4537,
+      "stock": 402,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "47",
+      "name": "Chemicals Gamma 329",
+      "category": "Chemicals",
+      "price": 930,
+      "stock": 716,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-010",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "48",
+      "name": "Chemicals Delta 336",
+      "category": "Chemicals",
+      "price": 461,
+      "stock": 417,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "49",
+      "name": "Raw Materials Sigma 343",
+      "category": "Raw Materials",
+      "price": 1936,
+      "stock": 167,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-003",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "50",
+      "name": "Industrial Alpha 350",
+      "category": "Industrial",
+      "price": 47,
+      "stock": 765,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-001",
+      "discount": 15
+    },
+    {
+      "id": "51",
+      "name": "Safety Beta 357",
+      "category": "Safety",
+      "price": 1879,
+      "stock": 196,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-008",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "52",
+      "name": "Chemicals Gamma 364",
+      "category": "Chemicals",
+      "price": 165,
+      "stock": 483,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-002",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "53",
+      "name": "Industrial Delta 371",
+      "category": "Industrial",
+      "price": 549,
+      "stock": 390,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "54",
+      "name": "Safety Sigma 378",
+      "category": "Safety",
+      "price": 4889,
+      "stock": 58,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "55",
+      "name": "Raw Materials Alpha 385",
+      "category": "Raw Materials",
+      "price": 2921,
+      "stock": 999,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-002",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "56",
+      "name": "Electronics Beta 392",
+      "category": "Electronics",
+      "price": 2224,
+      "stock": 806,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "57",
+      "name": "Chemicals Gamma 399",
+      "category": "Chemicals",
+      "price": 19,
+      "stock": 72,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "58",
+      "name": "Tools Delta 406",
+      "category": "Tools",
+      "price": 4584,
+      "stock": 304,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-010",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "59",
+      "name": "Industrial Sigma 413",
+      "category": "Industrial",
+      "price": 1540,
+      "stock": 39,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-002",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "60",
+      "name": "Industrial Alpha 420",
+      "category": "Industrial",
+      "price": 3785,
+      "stock": 10,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-006",
+      "warehouseId": "WH-001",
+      "discount": 15
+    },
+    {
+      "id": "61",
+      "name": "Chemicals Beta 427",
+      "category": "Chemicals",
+      "price": 3117,
+      "stock": 108,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "62",
+      "name": "Electronics Gamma 434",
+      "category": "Electronics",
+      "price": 4699,
+      "stock": 179,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-002",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "63",
+      "name": "Safety Delta 441",
+      "category": "Safety",
+      "price": 1204,
+      "stock": 952,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-006",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "64",
+      "name": "Chemicals Sigma 448",
+      "category": "Chemicals",
+      "price": 1259,
+      "stock": 195,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "65",
+      "name": "Electronics Alpha 455",
+      "category": "Electronics",
+      "price": 791,
+      "stock": 492,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "66",
+      "name": "Tools Beta 462",
+      "category": "Tools",
+      "price": 2042,
+      "stock": 91,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "67",
+      "name": "Safety Gamma 469",
+      "category": "Safety",
+      "price": 3977,
+      "stock": 643,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "68",
+      "name": "Electronics Delta 476",
+      "category": "Electronics",
+      "price": 3680,
+      "stock": 475,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-002",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "69",
+      "name": "Industrial Sigma 483",
+      "category": "Industrial",
+      "price": 236,
+      "stock": 135,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "70",
+      "name": "Raw Materials Alpha 490",
+      "category": "Raw Materials",
+      "price": 4589,
+      "stock": 493,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-001",
+      "discount": 15
+    },
+    {
+      "id": "71",
+      "name": "Electronics Beta 497",
+      "category": "Electronics",
+      "price": 3361,
+      "stock": 984,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-010",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "72",
+      "name": "Electronics Gamma 504",
+      "category": "Electronics",
+      "price": 2236,
+      "stock": 771,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "73",
+      "name": "Raw Materials Delta 511",
+      "category": "Raw Materials",
+      "price": 3186,
+      "stock": 481,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "74",
+      "name": "Safety Sigma 518",
+      "category": "Safety",
+      "price": 3050,
+      "stock": 389,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-003",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "75",
+      "name": "Tools Alpha 525",
+      "category": "Tools",
+      "price": 2169,
+      "stock": 433,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-008",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "76",
+      "name": "Tools Beta 532",
+      "category": "Tools",
+      "price": 1325,
+      "stock": 164,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "77",
+      "name": "Chemicals Gamma 539",
+      "category": "Chemicals",
+      "price": 3546,
+      "stock": 13,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "78",
+      "name": "Raw Materials Delta 546",
+      "category": "Raw Materials",
+      "price": 2650,
+      "stock": 948,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "79",
+      "name": "Industrial Sigma 553",
+      "category": "Industrial",
+      "price": 3640,
+      "stock": 855,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "80",
+      "name": "Electronics Alpha 560",
+      "category": "Electronics",
+      "price": 127,
+      "stock": 330,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-010",
+      "warehouseId": "WH-003",
+      "discount": 15
+    },
+    {
+      "id": "81",
+      "name": "Safety Beta 567",
+      "category": "Safety",
+      "price": 1360,
+      "stock": 161,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-003",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "82",
+      "name": "Chemicals Gamma 574",
+      "category": "Chemicals",
+      "price": 4397,
+      "stock": 240,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-002",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "83",
+      "name": "Safety Delta 581",
+      "category": "Safety",
+      "price": 1574,
+      "stock": 251,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "84",
+      "name": "Industrial Sigma 588",
+      "category": "Industrial",
+      "price": 4589,
+      "stock": 550,
+      "description": "High-quality Industrial component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-006",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "85",
+      "name": "Electronics Alpha 595",
+      "category": "Electronics",
+      "price": 4881,
+      "stock": 519,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "86",
+      "name": "Electronics Beta 602",
+      "category": "Electronics",
+      "price": 4434,
+      "stock": 524,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-010",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "87",
+      "name": "Safety Gamma 609",
+      "category": "Safety",
+      "price": 2624,
+      "stock": 207,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-003",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "88",
+      "name": "Safety Delta 616",
+      "category": "Safety",
+      "price": 4804,
+      "stock": 214,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-008",
+      "warehouseId": "WH-003"
+    },
+    {
+      "id": "89",
+      "name": "Chemicals Sigma 623",
+      "category": "Chemicals",
+      "price": 952,
+      "stock": 55,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "90",
+      "name": "Electronics Alpha 630",
+      "category": "Electronics",
+      "price": 379,
+      "stock": 277,
+      "description": "High-quality Electronics component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-004",
+      "discount": 15
+    },
+    {
+      "id": "91",
+      "name": "Chemicals Beta 637",
+      "category": "Chemicals",
+      "price": 4031,
+      "stock": 342,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-010",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "92",
+      "name": "Chemicals Gamma 644",
+      "category": "Chemicals",
+      "price": 4613,
+      "stock": 208,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-009",
+      "warehouseId": "WH-005"
+    },
+    {
+      "id": "93",
+      "name": "Tools Delta 651",
+      "category": "Tools",
+      "price": 4208,
+      "stock": 820,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "94",
+      "name": "Raw Materials Sigma 658",
+      "category": "Raw Materials",
+      "price": 807,
+      "stock": 91,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-007",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "95",
+      "name": "Safety Alpha 665",
+      "category": "Safety",
+      "price": 912,
+      "stock": 229,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "96",
+      "name": "Safety Beta 672",
+      "category": "Safety",
+      "price": 656,
+      "stock": 329,
+      "description": "High-quality Safety component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-005",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "97",
+      "name": "Tools Gamma 679",
+      "category": "Tools",
+      "price": 1506,
+      "stock": 529,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-002",
+      "warehouseId": "WH-002"
+    },
+    {
+      "id": "98",
+      "name": "Raw Materials Delta 686",
+      "category": "Raw Materials",
+      "price": 4233,
+      "stock": 908,
+      "description": "High-quality Raw Materials component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-001",
+      "warehouseId": "WH-001"
+    },
+    {
+      "id": "99",
+      "name": "Chemicals Sigma 693",
+      "category": "Chemicals",
+      "price": 4661,
+      "stock": 491,
+      "description": "High-quality Chemicals component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-004"
+    },
+    {
+      "id": "100",
+      "name": "Tools Alpha 700",
+      "category": "Tools",
+      "price": 1633,
+      "stock": 651,
+      "description": "High-quality Tools component for professional use cases. Certified and tested for durability.",
+      "supplierId": "SUP-004",
+      "warehouseId": "WH-004",
+      "discount": 15
+    }
+  ],
+  "offers": [
+    {
+      "id": "OFFER-1",
+      "title": "Summer Expo",
+      "description": "20% off all Electronics.",
+      "discount": 20,
+      "category": "Electronics",
+      "expiryDate": "2026-08-31",
+      "color": "#9333ea"
+    },
+    {
+      "id": "OFFER-2",
+      "title": "Steel Special",
+      "description": "Save 15% on bulk orders.",
+      "discount": 15,
+      "category": "Raw Materials",
+      "expiryDate": "2026-06-15",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "OFFER-3",
+      "title": "Clearance",
+      "description": "50% off outdated stock.",
+      "discount": 50,
+      "category": "Industrial",
+      "expiryDate": "2026-05-20",
+      "color": "#ef4444"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-2001",
+      "customer": "Global Logistics Co",
+      "customerName": "Global Logistics Co",
+      "status": "Pending",
+      "amount": 15880,
+      "totalAmount": 15880,
+      "date": "2024-03-29",
+      "priority": false,
+      "items": [
+        {
+          "productId": 29,
+          "name": "Electronics Sigma 203",
+          "qty": 2,
+          "price": 4697
+        },
+        {
+          "productId": 14,
+          "name": "Raw Materials Sigma 98",
+          "qty": 3,
+          "price": 2162
+        }
+      ]
+    },
+    {
+      "id": "ORD-2002",
+      "customer": "Future Robotics",
+      "customerName": "Future Robotics",
+      "status": "Completed",
+      "amount": 7238,
+      "totalAmount": 7238,
+      "date": "2024-03-10",
+      "priority": false,
+      "items": [
+        {
+          "productId": 10,
+          "name": "Raw Materials Alpha 70",
+          "qty": 2,
+          "price": 2251
+        },
+        {
+          "productId": 95,
+          "name": "Safety Alpha 665",
+          "qty": 3,
+          "price": 912
+        }
+      ]
+    },
+    {
+      "id": "ORD-2003",
+      "customer": "Future Robotics",
+      "customerName": "Future Robotics",
+      "status": "Shipped",
+      "amount": 5580,
+      "totalAmount": 5580,
+      "date": "2024-03-25",
+      "priority": true,
+      "items": [
+        {
+          "productId": 34,
+          "name": "Raw Materials Sigma 238",
+          "qty": 2,
+          "price": 1422
+        },
+        {
+          "productId": 95,
+          "name": "Safety Alpha 665",
+          "qty": 3,
+          "price": 912
+        }
+      ]
+    },
+    {
+      "id": "ORD-2004",
+      "customer": "Future Robotics",
+      "customerName": "Future Robotics",
+      "status": "Cancelled",
+      "amount": 7798,
+      "totalAmount": 7798,
+      "date": "2024-03-11",
+      "priority": false,
+      "items": [
+        {
+          "productId": 25,
+          "name": "Safety Alpha 175",
+          "qty": 2,
+          "price": 1538
+        },
+        {
+          "productId": 83,
+          "name": "Safety Delta 581",
+          "qty": 3,
+          "price": 1574
+        }
+      ]
+    },
+    {
+      "id": "ORD-2005",
+      "customer": "Stellar Aerospace",
+      "customerName": "Stellar Aerospace",
+      "status": "Processing",
+      "amount": 12202,
+      "totalAmount": 12202,
+      "date": "2024-03-22",
+      "priority": false,
+      "items": [
+        {
+          "productId": 9,
+          "name": "Chemicals Sigma 63",
+          "qty": 2,
+          "price": 3968
+        },
+        {
+          "productId": 34,
+          "name": "Raw Materials Sigma 238",
+          "qty": 3,
+          "price": 1422
+        }
+      ]
+    },
+    {
+      "id": "ORD-2006",
+      "customer": "Future Robotics",
+      "customerName": "Future Robotics",
+      "status": "Pending",
+      "amount": 17126,
+      "totalAmount": 17126,
+      "date": "2024-03-19",
+      "priority": true,
+      "items": [
+        {
+          "productId": 10,
+          "name": "Raw Materials Alpha 70",
+          "qty": 2,
+          "price": 2251
+        },
+        {
+          "productId": 93,
+          "name": "Tools Delta 651",
+          "qty": 3,
+          "price": 4208
+        }
+      ]
+    },
+    {
+      "id": "ORD-2007",
+      "customer": "Eco-Flow Solutions",
+      "customerName": "Eco-Flow Solutions",
+      "status": "Completed",
+      "amount": 17287,
+      "totalAmount": 17287,
+      "date": "2024-03-22",
+      "priority": false,
+      "items": [
+        {
+          "productId": 9,
+          "name": "Chemicals Sigma 63",
+          "qty": 2,
+          "price": 3968
+        },
+        {
+          "productId": 61,
+          "name": "Chemicals Beta 427",
+          "qty": 3,
+          "price": 3117
+        }
+      ]
+    },
+    {
+      "id": "ORD-2008",
+      "customer": "Future Robotics",
+      "customerName": "Future Robotics",
+      "status": "Shipped",
+      "amount": 12125,
+      "totalAmount": 12125,
+      "date": "2024-03-23",
+      "priority": false,
+      "items": [
+        {
+          "productId": 27,
+          "name": "Tools Gamma 189",
+          "qty": 2,
+          "price": 2632
+        },
+        {
+          "productId": 22,
+          "name": "Industrial Gamma 154",
+          "qty": 3,
+          "price": 2287
+        }
+      ]
+    },
+    {
+      "id": "ORD-2009",
+      "customer": "Global Logistics Co",
+      "customerName": "Global Logistics Co",
+      "status": "Cancelled",
+      "amount": 3857,
+      "totalAmount": 3857,
+      "date": "2024-03-20",
+      "priority": true,
+      "items": [
+        {
+          "productId": 81,
+          "name": "Safety Beta 567",
+          "qty": 2,
+          "price": 1360
+        },
+        {
+          "productId": 90,
+          "name": "Electronics Alpha 630",
+          "qty": 3,
+          "price": 379
+        }
+      ]
+    },
+    {
+      "id": "ORD-2010",
+      "customer": "Eco-Flow Solutions",
+      "customerName": "Eco-Flow Solutions",
+      "status": "Processing",
+      "amount": 1713,
+      "totalAmount": 1713,
+      "date": "2024-03-13",
+      "priority": false,
+      "items": [
+        {
+          "productId": 52,
+          "name": "Chemicals Gamma 364",
+          "qty": 2,
+          "price": 165
+        },
+        {
+          "productId": 48,
+          "name": "Chemicals Delta 336",
+          "qty": 3,
+          "price": 461
+        }
+      ]
+    },
+    {
+      "id": "ORD-2011",
+      "customer": "Quantum Systems",
+      "customerName": "Quantum Systems",
+      "status": "Pending",
+      "amount": 21189,
+      "totalAmount": 21189,
+      "date": "2024-03-14",
+      "priority": false,
+      "items": [
+        {
+          "productId": 77,
+          "name": "Chemicals Gamma 539",
+          "qty": 2,
+          "price": 3546
+        },
+        {
+          "productId": 62,
+          "name": "Electronics Gamma 434",
+          "qty": 3,
+          "price": 4699
+        }
+      ]
+    },
+    {
+      "id": "ORD-2012",
+      "customer": "TechNexus Industries",
+      "customerName": "TechNexus Industries",
+      "status": "Completed",
+      "amount": 14614,
+      "totalAmount": 14614,
+      "date": "2024-03-25",
+      "priority": true,
+      "items": [
+        {
+          "productId": 96,
+          "name": "Safety Beta 672",
+          "qty": 2,
+          "price": 656
+        },
+        {
+          "productId": 86,
+          "name": "Electronics Beta 602",
+          "qty": 3,
+          "price": 4434
+        }
+      ]
+    },
+    {
+      "id": "ORD-2013",
+      "customer": "Quantum Systems",
+      "customerName": "Quantum Systems",
+      "status": "Shipped",
+      "amount": 17573,
+      "totalAmount": 17573,
+      "date": "2024-03-27",
+      "priority": false,
+      "items": [
+        {
+          "productId": 46,
+          "name": "Chemicals Beta 322",
+          "qty": 2,
+          "price": 4537
+        },
+        {
+          "productId": 15,
+          "name": "Raw Materials Alpha 105",
+          "qty": 3,
+          "price": 2833
+        }
+      ]
+    },
+    {
+      "id": "ORD-2014",
+      "customer": "Eco-Flow Solutions",
+      "customerName": "Eco-Flow Solutions",
+      "status": "Cancelled",
+      "amount": 6690,
+      "totalAmount": 6690,
+      "date": "2024-03-16",
+      "priority": false,
+      "items": [
+        {
+          "productId": 21,
+          "name": "Chemicals Beta 147",
+          "qty": 2,
+          "price": 516
+        },
+        {
+          "productId": 12,
+          "name": "Electronics Gamma 84",
+          "qty": 3,
+          "price": 1886
+        }
+      ]
+    },
+    {
+      "id": "ORD-2015",
+      "customer": "Global Logistics Co",
+      "customerName": "Global Logistics Co",
+      "status": "Processing",
+      "amount": 8911,
+      "totalAmount": 8911,
+      "date": "2024-03-10",
+      "priority": true,
+      "items": [
+        {
+          "productId": 93,
+          "name": "Tools Delta 651",
+          "qty": 2,
+          "price": 4208
+        },
+        {
+          "productId": 26,
+          "name": "Electronics Beta 182",
+          "qty": 3,
+          "price": 165
+        }
+      ]
+    },
+    {
+      "id": "ORD-2016",
+      "customer": "Astro-Mining Corp",
+      "customerName": "Astro-Mining Corp",
+      "status": "Pending",
+      "amount": 4793,
+      "totalAmount": 4793,
+      "date": "2024-03-21",
+      "priority": false,
+      "items": [
+        {
+          "productId": 13,
+          "name": "Tools Delta 91",
+          "qty": 2,
+          "price": 409
+        },
+        {
+          "productId": 76,
+          "name": "Tools Beta 532",
+          "qty": 3,
+          "price": 1325
+        }
+      ]
+    },
+    {
+      "id": "ORD-2017",
+      "customer": "Green-Energy Tech",
+      "customerName": "Green-Energy Tech",
+      "status": "Completed",
+      "amount": 15636,
+      "totalAmount": 15636,
+      "date": "2024-03-27",
+      "priority": false,
+      "items": [
+        {
+          "productId": 97,
+          "name": "Tools Gamma 679",
+          "qty": 2,
+          "price": 1506
+        },
+        {
+          "productId": 93,
+          "name": "Tools Delta 651",
+          "qty": 3,
+          "price": 4208
+        }
+      ]
+    },
+    {
+      "id": "ORD-2018",
+      "customer": "TechNexus Industries",
+      "customerName": "TechNexus Industries",
+      "status": "Shipped",
+      "amount": 4875,
+      "totalAmount": 4875,
+      "date": "2024-03-24",
+      "priority": true,
+      "items": [
+        {
+          "productId": 53,
+          "name": "Industrial Delta 371",
+          "qty": 2,
+          "price": 549
+        },
+        {
+          "productId": 64,
+          "name": "Chemicals Sigma 448",
+          "qty": 3,
+          "price": 1259
+        }
+      ]
+    },
+    {
+      "id": "ORD-2019",
+      "customer": "Global Logistics Co",
+      "customerName": "Global Logistics Co",
+      "status": "Cancelled",
+      "amount": 15331,
+      "totalAmount": 15331,
+      "date": "2024-03-17",
+      "priority": false,
+      "items": [
+        {
+          "productId": 55,
+          "name": "Raw Materials Alpha 385",
+          "qty": 2,
+          "price": 2921
+        },
+        {
+          "productId": 42,
+          "name": "Industrial Gamma 294",
+          "qty": 3,
+          "price": 3163
+        }
+      ]
+    },
+    {
+      "id": "ORD-2020",
+      "customer": "Eco-Flow Solutions",
+      "customerName": "Eco-Flow Solutions",
+      "status": "Processing",
+      "amount": 7920,
+      "totalAmount": 7920,
+      "date": "2024-03-18",
+      "priority": false,
+      "items": [
+        {
+          "productId": 73,
+          "name": "Raw Materials Delta 511",
+          "qty": 2,
+          "price": 3186
+        },
+        {
+          "productId": 21,
+          "name": "Chemicals Beta 147",
+          "qty": 3,
+          "price": 516
+        }
+      ]
+    },
+    {
+      "id": "ORD-2021",
+      "customer": "Green-Energy Tech",
+      "customerName": "Green-Energy Tech",
+      "status": "Pending",
+      "amount": 20855,
+      "totalAmount": 20855,
+      "date": "2024-03-14",
+      "priority": true,
+      "items": [
+        {
+          "productId": 4,
+          "name": "Raw Materials Sigma 28",
+          "qty": 2,
+          "price": 4402
+        },
+        {
+          "productId": 35,
+          "name": "Raw Materials Alpha 245",
+          "qty": 3,
+          "price": 4017
+        }
+      ]
+    },
+    {
+      "id": "ORD-2022",
+      "customer": "Green-Energy Tech",
+      "customerName": "Green-Energy Tech",
+      "status": "Completed",
+      "amount": 9794,
+      "totalAmount": 9794,
+      "date": "2024-03-12",
+      "priority": false,
+      "items": [
+        {
+          "productId": 6,
+          "name": "Electronics Beta 42",
+          "qty": 2,
+          "price": 1111
+        },
+        {
+          "productId": 11,
+          "name": "Electronics Beta 77",
+          "qty": 3,
+          "price": 2524
+        }
+      ]
+    },
+    {
+      "id": "ORD-2023",
+      "customer": "Quantum Systems",
+      "customerName": "Quantum Systems",
+      "status": "Shipped",
+      "amount": 3571,
+      "totalAmount": 3571,
+      "date": "2024-03-19",
+      "priority": false,
+      "items": [
+        {
+          "productId": 25,
+          "name": "Safety Alpha 175",
+          "qty": 2,
+          "price": 1538
+        },
+        {
+          "productId": 52,
+          "name": "Chemicals Gamma 364",
+          "qty": 3,
+          "price": 165
+        }
+      ]
+    },
+    {
+      "id": "ORD-2024",
+      "customer": "Eco-Flow Solutions",
+      "customerName": "Eco-Flow Solutions",
+      "status": "Cancelled",
+      "amount": 5723,
+      "totalAmount": 5723,
+      "date": "2024-03-18",
+      "priority": true,
+      "items": [
+        {
+          "productId": 15,
+          "name": "Raw Materials Alpha 105",
+          "qty": 2,
+          "price": 2833
+        },
+        {
+          "productId": 57,
+          "name": "Chemicals Gamma 399",
+          "qty": 3,
+          "price": 19
+        }
+      ]
+    },
+    {
+      "id": "ORD-2025",
+      "customer": "Green-Energy Tech",
+      "customerName": "Green-Energy Tech",
+      "status": "Processing",
+      "amount": 8734,
+      "totalAmount": 8734,
+      "date": "2024-03-11",
+      "priority": false,
+      "items": [
+        {
+          "productId": 25,
+          "name": "Safety Alpha 175",
+          "qty": 2,
+          "price": 1538
+        },
+        {
+          "productId": 12,
+          "name": "Electronics Gamma 84",
+          "qty": 3,
+          "price": 1886
+        }
+      ]
+    },
+    {
+      "id": "ORD-2026",
+      "customer": "TechNexus Industries",
+      "customerName": "TechNexus Industries",
+      "status": "Pending",
+      "amount": 5743,
+      "totalAmount": 5743,
+      "date": "2024-03-28",
+      "priority": false,
+      "items": [
+        {
+          "productId": 87,
+          "name": "Safety Gamma 609",
+          "qty": 2,
+          "price": 2624
+        },
+        {
+          "productId": 52,
+          "name": "Chemicals Gamma 364",
+          "qty": 3,
+          "price": 165
+        }
+      ]
+    },
+    {
+      "id": "ORD-2027",
+      "customer": "TechNexus Industries",
+      "customerName": "TechNexus Industries",
+      "status": "Completed",
+      "amount": 21027,
+      "totalAmount": 21027,
+      "date": "2024-03-27",
+      "priority": true,
+      "items": [
+        {
+          "productId": 43,
+          "name": "Electronics Delta 301",
+          "qty": 2,
+          "price": 3192
+        },
+        {
+          "productId": 85,
+          "name": "Electronics Alpha 595",
+          "qty": 3,
+          "price": 4881
+        }
+      ]
+    },
+    {
+      "id": "ORD-2028",
+      "customer": "Global Logistics Co",
+      "customerName": "Global Logistics Co",
+      "status": "Shipped",
+      "amount": 4476,
+      "totalAmount": 4476,
+      "date": "2024-03-25",
+      "priority": false,
+      "items": [
+        {
+          "productId": 97,
+          "name": "Tools Gamma 679",
+          "qty": 2,
+          "price": 1506
+        },
+        {
+          "productId": 7,
+          "name": "Chemicals Gamma 49",
+          "qty": 3,
+          "price": 488
+        }
+      ]
+    },
+    {
+      "id": "ORD-2029",
+      "customer": "Green-Energy Tech",
+      "customerName": "Green-Energy Tech",
+      "status": "Cancelled",
+      "amount": 21261,
+      "totalAmount": 21261,
+      "date": "2024-03-27",
+      "priority": false,
+      "items": [
+        {
+          "productId": 58,
+          "name": "Tools Delta 406",
+          "qty": 2,
+          "price": 4584
+        },
+        {
+          "productId": 91,
+          "name": "Chemicals Beta 637",
+          "qty": 3,
+          "price": 4031
+        }
+      ]
+    },
+    {
+      "id": "ORD-2030",
+      "customer": "Quantum Systems",
+      "customerName": "Quantum Systems",
+      "status": "Processing",
+      "amount": 12358,
+      "totalAmount": 12358,
+      "date": "2024-03-15",
+      "priority": true,
+      "items": [
+        {
+          "productId": 54,
+          "name": "Safety Sigma 378",
+          "qty": 2,
+          "price": 4889
+        },
+        {
+          "productId": 36,
+          "name": "Chemicals Beta 252",
+          "qty": 3,
+          "price": 860
+        }
+      ]
+    }
+  ],
+  "customers": [
+    {
+      "id": "CUST-001",
+      "name": "TechNexus Industries",
+      "segment": "VIP",
+      "email": "contact@technexusindustries.com",
+      "company": "TechNexus Industries",
+      "phone": "+1 (555) 100-2000",
+      "status": "Active",
+      "joinDate": "2023-01-10",
+      "orders": 10,
+      "spend": 33757
+    },
+    {
+      "id": "CUST-002",
+      "name": "Global Logistics Co",
+      "segment": "Standard",
+      "email": "contact@globallogisticsco.com",
+      "company": "Global Logistics Co",
+      "phone": "+1 (555) 101-2001",
+      "status": "Active",
+      "joinDate": "2023-01-11",
+      "orders": 19,
+      "spend": 64118
+    },
+    {
+      "id": "CUST-003",
+      "name": "Quantum Systems",
+      "segment": "VIP",
+      "email": "contact@quantumsystems.com",
+      "company": "Quantum Systems",
+      "phone": "+1 (555) 102-2002",
+      "status": "Active",
+      "joinDate": "2023-01-12",
+      "orders": 3,
+      "spend": 76789
+    },
+    {
+      "id": "CUST-004",
+      "name": "Stellar Aerospace",
+      "segment": "VIP",
+      "email": "contact@stellaraerospace.com",
+      "company": "Stellar Aerospace",
+      "phone": "+1 (555) 103-2003",
+      "status": "Active",
+      "joinDate": "2023-01-13",
+      "orders": 18,
+      "spend": 96414
+    },
+    {
+      "id": "CUST-005",
+      "name": "Eco-Flow Solutions",
+      "segment": "Growth",
+      "email": "contact@eco-flowsolutions.com",
+      "company": "Eco-Flow Solutions",
+      "phone": "+1 (555) 104-2004",
+      "status": "Active",
+      "joinDate": "2023-01-14",
+      "orders": 3,
+      "spend": 65504
+    },
+    {
+      "id": "CUST-006",
+      "name": "Future Robotics",
+      "segment": "High Potential",
+      "email": "contact@futurerobotics.com",
+      "company": "Future Robotics",
+      "phone": "+1 (555) 105-2005",
+      "status": "Active",
+      "joinDate": "2023-01-15",
+      "orders": 12,
+      "spend": 11052
+    },
+    {
+      "id": "CUST-007",
+      "name": "Astro-Mining Corp",
+      "segment": "VIP",
+      "email": "contact@astro-miningcorp.com",
+      "company": "Astro-Mining Corp",
+      "phone": "+1 (555) 106-2006",
+      "status": "Active",
+      "joinDate": "2023-01-16",
+      "orders": 11,
+      "spend": 21711
+    },
+    {
+      "id": "CUST-008",
+      "name": "Green-Energy Tech",
+      "segment": "Growth",
+      "email": "contact@green-energytech.com",
+      "company": "Green-Energy Tech",
+      "phone": "+1 (555) 107-2007",
+      "status": "Active",
+      "joinDate": "2023-01-17",
+      "orders": 5,
+      "spend": 41292
+    }
+  ],
+  "suppliers": [
+    {
+      "id": "SUP-001",
+      "name": "TechNova Solutions",
+      "category": "Electronics",
+      "email": "sales@technovasolutions.com",
+      "phone": "+49 30 109831",
+      "location": "Berlin, DELI",
+      "reliability": 92,
+      "status": "Active"
+    },
+    {
+      "id": "SUP-002",
+      "name": "Industrial Steel Co",
+      "category": "Raw Materials",
+      "location": "Chicago, US",
+      "email": "sales@industrialsteelco.com",
+      "phone": "+49 30 33308",
+      "status": "Active",
+      "reliability": 97
+    },
+    {
+      "id": "SUP-003",
+      "name": "Nano-Core Tech",
+      "category": "Electronics",
+      "location": "Tokyo, JP",
+      "email": "sales@nano-coretech.com",
+      "phone": "+49 30 814650",
+      "status": "Active",
+      "reliability": 97
+    },
+    {
+      "id": "SUP-004",
+      "name": "Hydro-Flow Systems",
+      "category": "Industrial",
+      "location": "London, UK",
+      "email": "sales@hydro-flowsystems.com",
+      "phone": "+49 30 746208",
+      "status": "Active",
+      "reliability": 98
+    },
+    {
+      "id": "SUP-005",
+      "name": "Logi-Rollers Ltd",
+      "category": "Industrial",
+      "location": "Rotterdam, NL",
+      "email": "sales@logi-rollersltd.com",
+      "phone": "+49 30 714272",
+      "status": "Active",
+      "reliability": 98
+    },
+    {
+      "id": "SUP-006",
+      "name": "Titanium Foundries",
+      "category": "Raw Materials",
+      "location": "Moscow, RU",
+      "email": "sales@titaniumfoundries.com",
+      "phone": "+49 30 336879",
+      "status": "Active",
+      "reliability": 97
+    },
+    {
+      "id": "SUP-007",
+      "name": "Robo-Grips Inc",
+      "category": "Industrial",
+      "location": "San Francisco, US",
+      "email": "sales@robo-gripsinc.com",
+      "phone": "+49 30 83443",
+      "status": "Active",
+      "reliability": 92
+    },
+    {
+      "id": "SUP-008",
+      "name": "Eco-Plastics Corp",
+      "category": "Raw Materials",
+      "location": "Sao Paulo, BR",
+      "email": "sales@eco-plasticscorp.com",
+      "phone": "+49 30 673839",
+      "status": "Active",
+      "reliability": 92
+    },
+    {
+      "id": "SUP-009",
+      "name": "Chem-Tech Labs",
+      "category": "Chemicals",
+      "location": "Lyon, FR",
+      "email": "sales@chem-techlabs.com",
+      "phone": "+49 30 895460",
+      "status": "Active",
+      "reliability": 98
+    },
+    {
+      "id": "SUP-010",
+      "name": "Secure-Guard Inc",
+      "category": "Safety",
+      "location": "Toronto, CA",
+      "email": "sales@secure-guardinc.com",
+      "phone": "+49 30 724987",
+      "status": "Active",
+      "reliability": 93
+    }
+  ],
+  "warehouses": [
+    {
+      "id": "WH-001",
+      "name": "Main Distribution Center",
+      "location": "Frankfurt, DE",
+      "utilization": 63,
+      "totalCapacity": 20000,
+      "currentStock": 12000,
+      "status": "Active",
+      "zones": [
+        {
+          "id": "Z-11",
+          "name": "Zone 11",
+          "description": "Primary Storage"
+        }
+      ]
+    },
+    {
+      "id": "WH-002",
+      "name": "Raw Materials Hub",
+      "location": "Chicago, US",
+      "utilization": 86,
+      "totalCapacity": 20000,
+      "currentStock": 12000,
+      "status": "Active",
+      "zones": [
+        {
+          "id": "Z-21",
+          "name": "Zone 21",
+          "description": "Primary Storage"
+        }
+      ]
+    },
+    {
+      "id": "WH-003",
+      "name": "Pacific Supply Node",
+      "location": "Singapore, SG",
+      "utilization": 63,
+      "totalCapacity": 20000,
+      "currentStock": 12000,
+      "status": "Active",
+      "zones": [
+        {
+          "id": "Z-31",
+          "name": "Zone 31",
+          "description": "Primary Storage"
+        }
+      ]
+    },
+    {
+      "id": "WH-004",
+      "name": "High-Tech Annex",
+      "location": "Tokyo, JP",
+      "utilization": 67,
+      "totalCapacity": 20000,
+      "currentStock": 12000,
+      "status": "Active",
+      "zones": [
+        {
+          "id": "Z-41",
+          "name": "Zone 41",
+          "description": "Primary Storage"
+        }
+      ]
+    },
+    {
+      "id": "WH-005",
+      "name": "Southern Hemisphere Hub",
+      "location": "Sydney, AU",
+      "utilization": 62,
+      "totalCapacity": 20000,
+      "currentStock": 12000,
+      "status": "Active",
+      "zones": [
+        {
+          "id": "Z-51",
+          "name": "Zone 51",
+          "description": "Primary Storage"
+        }
+      ]
+    }
+  ],
+  "purchaseOrders": [
+    {
+      "id": "PO-5001",
+      "supplierId": "SUP-001",
+      "supplierName": "TechNova Solutions",
+      "status": "Ordered",
+      "amount": 25000,
+      "date": "2024-04-01",
+      "items": [
+        {
+          "productId": 10,
+          "name": "Product 10",
+          "qty": 50,
+          "price": 500
+        }
+      ]
+    }
+  ],
+  "movements": [
+    {
+      "id": "MOV-1001",
+      "productId": 1,
+      "type": "Transfer",
+      "qty": 10,
+      "fromLocation": "WH-001",
+      "toLocation": "WH-002",
+      "date": "2024-04-02",
+      "reason": "Rebalancing",
+      "user": "Admin"
+    }
+  ],
+  "payments": [
+    {
+      "id": "PAY-6000",
+      "orderId": "ORD-2001",
+      "amount": 15880,
+      "date": "2024-03-29",
+      "method": "Stripe",
+      "status": "Completed",
+      "transactionId": "TXN-EKYL7CET5",
+      "reference": "REF-ORD-2001",
+      "recipient": "Global Logistics Co"
+    },
+    {
+      "id": "PAY-6001",
+      "orderId": "ORD-2002",
+      "amount": 7238,
+      "date": "2024-03-10",
+      "method": "PayPal",
+      "status": "Completed",
+      "transactionId": "TXN-CXKDF3EI4",
+      "reference": "REF-ORD-2002",
+      "recipient": "Future Robotics"
+    },
+    {
+      "id": "PAY-6002",
+      "orderId": "ORD-2003",
+      "amount": 5580,
+      "date": "2024-03-25",
+      "method": "Wire Transfer",
+      "status": "Completed",
+      "transactionId": "TXN-7JF5Y9LUF",
+      "reference": "REF-ORD-2003",
+      "recipient": "Future Robotics"
+    },
+    {
+      "id": "PAY-6003",
+      "orderId": "ORD-2004",
+      "amount": 7798,
+      "date": "2024-03-11",
+      "method": "Stripe",
+      "status": "Completed",
+      "transactionId": "TXN-77KN3JR1R",
+      "reference": "REF-ORD-2004",
+      "recipient": "Future Robotics"
+    },
+    {
+      "id": "PAY-6004",
+      "orderId": "ORD-2005",
+      "amount": 12202,
+      "date": "2024-03-22",
+      "method": "PayPal",
+      "status": "Completed",
+      "transactionId": "TXN-51YV7U0P5",
+      "reference": "REF-ORD-2005",
+      "recipient": "Stellar Aerospace"
+    },
+    {
+      "id": "PAY-6005",
+      "orderId": "ORD-2006",
+      "amount": 17126,
+      "date": "2024-03-19",
+      "method": "Wire Transfer",
+      "status": "Completed",
+      "transactionId": "TXN-4BM92YS51",
+      "reference": "REF-ORD-2006",
+      "recipient": "Future Robotics"
+    },
+    {
+      "id": "PAY-6006",
+      "orderId": "ORD-2007",
+      "amount": 17287,
+      "date": "2024-03-22",
+      "method": "Stripe",
+      "status": "Completed",
+      "transactionId": "TXN-OEAJXSKBM",
+      "reference": "REF-ORD-2007",
+      "recipient": "Eco-Flow Solutions"
+    },
+    {
+      "id": "PAY-6007",
+      "orderId": "ORD-2008",
+      "amount": 12125,
+      "date": "2024-03-23",
+      "method": "PayPal",
+      "status": "Completed",
+      "transactionId": "TXN-JU8QH7AU9",
+      "reference": "REF-ORD-2008",
+      "recipient": "Future Robotics"
+    },
+    {
+      "id": "PAY-6008",
+      "orderId": "ORD-2009",
+      "amount": 3857,
+      "date": "2024-03-20",
+      "method": "Wire Transfer",
+      "status": "Completed",
+      "transactionId": "TXN-GUHPSMMJG",
+      "reference": "REF-ORD-2009",
+      "recipient": "Global Logistics Co"
+    },
+    {
+      "id": "PAY-6009",
+      "orderId": "ORD-2010",
+      "amount": 1713,
+      "date": "2024-03-13",
+      "method": "Stripe",
+      "status": "Completed",
+      "transactionId": "TXN-HVS5JEQL7",
+      "reference": "REF-ORD-2010",
+      "recipient": "Eco-Flow Solutions"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
