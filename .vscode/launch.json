@@ -11,11 +11,29 @@
       "console": "internalConsole"
     },
     {
-      "name": "ng test",
+      "name": "Debug App",
       "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "npm: test",
-      "url": "http://localhost:9876/debug.html"
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "http://localhost:4200/**",
+        "http://localhost:4210/**",
+        "http://localhost:4220/**",
+        "http://localhost:4230/**",
+        "!**/node_modules/**"
+      ],
+      "sourceMapPathOverrides": {
+        "../../../*": "${workspaceFolder}/*"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Start & Debug",
+      "configurations": ["pnpm start", "Debug App"]
     }
   ]
 }
