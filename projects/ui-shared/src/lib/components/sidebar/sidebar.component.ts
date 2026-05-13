@@ -11,7 +11,6 @@ export interface SidebarNavItem {
   icon?: string; // SVG string
   children?: SidebarNavItem[];
   isSeparator?: boolean;
-  isOpen?: boolean; // Internal state for collapsible
   childIcon?: string; // Icon for children if needed
 }
 
@@ -150,9 +149,9 @@ export interface SidebarNavItem {
 
                 <!-- Children Items (Expanded Mode) -->
                 <div class="grid transition-[grid-template-rows,margin-bottom] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
-                     [class.grid-rows-[1fr]]="item.children && item.isOpen && (!collapsed() || mobileOpen())"
-                     [class.grid-rows-[0fr]]="!(item.children && item.isOpen && (!collapsed() || mobileOpen()))"
-                     [class.mb-2]="item.children && item.isOpen && (!collapsed() || mobileOpen())">
+                     [class.grid-rows-[1fr]]="item.children && openIndex() === $index && (!collapsed() || mobileOpen())"
+                     [class.grid-rows-[0fr]]="!(item.children && openIndex() === $index && (!collapsed() || mobileOpen()))"
+                     [class.mb-2]="item.children && openIndex() === $index && (!collapsed() || mobileOpen())">
                   <div class="overflow-hidden">
                     <div class="children-container mt-1 ml-6 space-y-1">
                       @for (child of item.children; track child.route) {
@@ -370,6 +369,7 @@ export class SidebarComponent implements OnInit {
   sidebarRef = viewChild<ElementRef<HTMLElement>>('sidebarRef');
 
   activeFlyoutIndex = signal(-1);
+  openIndex = signal<number | null>(null);
 
   @HostListener('document:mousedown', ['$event'])
   onDocumentClick(event: MouseEvent): void {
@@ -405,13 +405,8 @@ export class SidebarComponent implements OnInit {
           return currentUrl === child.route || currentUrl.startsWith(`${child.route}/`);
         });
 
-        if (hasActiveChild && !item.isOpen) {
-          // Open this group if it has an active child and isn't already open
-          item.isOpen = true;
-          // Collapse others
-          this.navItems.forEach((it, i) => {
-            if (i !== idx) it.isOpen = false;
-          });
+        if (hasActiveChild) {
+          this.openIndex.set(idx);
         }
       }
     });
@@ -431,15 +426,7 @@ export class SidebarComponent implements OnInit {
       return;
     }
 
-    const item = this.navItems[idx];
-    const wasOpen = item.isOpen;
-
-    // Collapse all others
-    this.navItems.forEach((it, i) => {
-      if (i !== idx) it.isOpen = false;
-    });
-
-    item.isOpen = !wasOpen;
+    this.openIndex.update((current) => (current === idx ? null : idx));
   }
 
   onNavHover(event: MouseEvent, idx: number, isFlyout = false): void {

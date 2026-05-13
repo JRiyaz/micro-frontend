@@ -1742,10 +1742,8 @@
       "customer": "Quantum Systems",
       "customerName": "Quantum Systems",
       "status": "Processing",
-      "amount": 12358,
-      "totalAmount": 12358,
-      "date": "2024-03-15",
       "priority": true,
+      "date": "2024-03-15",
       "items": [
         {
           "productId": 54,
@@ -1758,22 +1756,31 @@
           "name": "Chemicals Beta 252",
           "qty": 3,
           "price": 860
+        },
+        {
+          "productId": "9",
+          "name": "Chemicals Sigma 63",
+          "qty": 1,
+          "price": 3968
         }
-      ]
+      ],
+      "totalAmount": 16326,
+      "amount": 16326
     }
   ],
   "customers": [
     {
       "id": "CUST-001",
       "name": "TechNexus Industries",
-      "segment": "VIP",
-      "email": "contact@technexusindustries.com",
       "company": "TechNexus Industries",
+      "email": "contact@technexusindustries.com",
       "phone": "+1 (555) 100-2000",
+      "location": "sdfsdsdfsdfdssd",
       "status": "Active",
       "joinDate": "2023-01-10",
-      "orders": 10,
-      "spend": 33757
+      "segment": "Standard",
+      "orders": 0,
+      "spend": 0
     },
     {
       "id": "CUST-002",
@@ -1850,14 +1857,15 @@
     {
       "id": "CUST-008",
       "name": "Green-Energy Tech",
-      "segment": "Growth",
-      "email": "contact@green-energytech.com",
       "company": "Green-Energy Tech",
+      "email": "contact@green-energytech.com",
       "phone": "+1 (555) 107-2007",
+      "location": "fytftyfytfy",
       "status": "Active",
       "joinDate": "2023-01-17",
-      "orders": 5,
-      "spend": 41292
+      "segment": "Standard",
+      "orders": 0,
+      "spend": 0
     }
   ],
   "suppliers": [
