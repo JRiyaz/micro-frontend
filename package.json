@@ -10,7 +10,7 @@
     "start:user": "ng serve --project user-service",
     "start:store": "ng serve --project store-service",
     "start:inventory": "ng serve --project inventory-hub",
-    "start:backend": "json-server --watch db.json --port 3000 --delay 1000",
+    "start:backend": "json-server --watch db.json --port 3000 --delay 5000",
     "start": "pnpm run build:lib && concurrently -k \"pnpm:start:*\"",
     "run:all": "concurrently -k \"pnpm:start:*\"",
     "build": "ng build",

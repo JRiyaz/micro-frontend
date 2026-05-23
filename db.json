@@ -1866,6 +1866,19 @@
       "segment": "Standard",
       "orders": 0,
       "spend": 0
+    },
+    {
+      "id": "CUST-9625",
+      "name": "JRiyaz",
+      "company": "Riyaz co",
+      "email": "jriyaz.sync@gmail.com",
+      "phone": "df0030303030",
+      "location": "Saudi",
+      "status": "Active",
+      "joinDate": "2026-05-23",
+      "segment": "Standard",
+      "orders": 0,
+      "spend": 0
     }
   ],
   "suppliers": [
