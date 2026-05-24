@@ -1,6 +1,6 @@
 mod config;
 
-use tauri::{AppHandle, Manager, Url, WebviewUrl, WebviewWindowBuilder};
+use tauri::{AppHandle, Listener, Manager, Url, WebviewUrl, WebviewWindowBuilder};
 use tauri::menu::{Menu, MenuItem, Submenu};
 
 // Helper to open the setup/configuration window
@@ -35,7 +35,7 @@ fn open_main_window(app: &AppHandle) {
     let config = config::read_config(app).expect("Config should exist here");
     
     // Choose target URL depending on active packaging feature
-    let url = if cfg!(feature = "bundled-assets") {
+    let url = if cfg!(feature = "bundled_assets") {
         WebviewUrl::App("index.html".into())
     } else {
         let frontend_url = config.frontend_url.clone().unwrap_or_else(|| "http://localhost:4200".into());
@@ -94,7 +94,7 @@ pub fn run() {
             // 2. Listen for native menu click event
             let handle_menu_click = handle.clone();
             handle.on_menu_event(move |_app, event| {
-                if event.identifier == "reconfigure" {
+                if event.id == "reconfigure" {
                     open_setup_window(&handle_menu_click);
                 }
             });

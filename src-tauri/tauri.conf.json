@@ -2,14 +2,15 @@
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "inventory-desktop",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "com.inventory.desktop",
   "build": {
     "frontendDist": "../dist/desktop-bundle",
     "devUrl": "http://localhost:4200",
     "beforeDevCommand": "",
-    "beforeBuildCommand": "pnpm build"
+    "beforeBuildCommand": ""
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "title": "Inventory Hub Desktop",

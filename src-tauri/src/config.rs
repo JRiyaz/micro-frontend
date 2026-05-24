@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::PathBuf;
 use serde::{Deserialize, Serialize};
-use tauri::{AppHandle, Manager};
+use tauri::{AppHandle, Manager, Emitter};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct AppConfig {
@@ -52,7 +52,7 @@ pub fn write_config(app: &AppHandle, config: &AppConfig) -> Result<(), String> {
 // IPC command returning the active configuration and flavour context
 #[tauri::command]
 pub fn get_app_config(app: AppHandle) -> serde_json::Value {
-    let has_assets = cfg!(feature = "bundled-assets");
+    let has_assets = cfg!(feature = "bundled_assets");
     let current_config = read_config(&app);
     
     serde_json::json!({
