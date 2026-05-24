@@ -11,11 +11,6 @@ fn open_setup_window(app: &AppHandle) {
         return;
     }
 
-    // Close main window if it is open so only the setup screen is active
-    if let Some(win) = app.get_webview_window("main") {
-        win.close().ok();
-    }
-
     let _setup_window = WebviewWindowBuilder::new(
         app,
         "setup",
@@ -35,11 +30,12 @@ fn open_main_window_fresh(app: &AppHandle) {
     let config = config::read_config(app).expect("Config should exist here");
     
     // Choose target URL depending on active packaging feature
-    let url = if cfg!(feature = "bundled_assets") {
-        Url::parse("tauri://localhost/index.html").unwrap()
+    let webview_url = if cfg!(feature = "bundled_assets") {
+        WebviewUrl::App("index.html".into())
     } else {
         let frontend_url = config.frontend_url.clone().unwrap_or_else(|| "http://localhost:4200".into());
-        Url::parse(&frontend_url).expect("Invalid Frontend URL configured")
+        let url = Url::parse(&frontend_url).expect("Invalid Frontend URL configured");
+        WebviewUrl::External(url)
     };
 
     // Inject Backend API URL globally and disable the default browser right-click context menu
@@ -49,8 +45,6 @@ fn open_main_window_fresh(app: &AppHandle) {
          console.log('Tauri backend injected API:', window.BACKEND_API_URL);",
         config.backend_url
     );
-
-    let webview_url = WebviewUrl::External(url);
     
     // Run on the main thread to prevent cross-thread window creation crashes
     let app_clone = app.clone();

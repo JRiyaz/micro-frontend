@@ -39,6 +39,7 @@ export interface Order {
   date: string;
   priority: boolean;
   items: OrderItem[];
+  createdBy?: 'Customer' | 'Admin';
 }
 
 export interface Customer {

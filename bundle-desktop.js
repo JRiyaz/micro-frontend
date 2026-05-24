@@ -2,6 +2,8 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+const NG_CLI_PATH = path.join(__dirname, 'node_modules', '@angular', 'cli', 'bin', 'ng.js');
+
 const PROJECTS = [
   { name: 'ui-shared', type: 'library', command: 'ng build --project ui-shared' },
   { name: 'shell', type: 'application', distName: 'shell' },
@@ -16,7 +18,7 @@ function runCommand(command) {
   console.log(`\n========================================`);
   console.log(`[Executing]: ${command}`);
   console.log(`========================================`);
-  execSync(command, { stdio: 'inherit' });
+  execSync(command, { stdio: 'inherit', shell: true });
 }
 
 function cleanAndCreateDir(dir) {
@@ -50,12 +52,12 @@ function main() {
   cleanAndCreateDir(TARGET_DIR);
 
   // 2. Build the ui-shared library first
-  runCommand('ng build --project ui-shared');
+  runCommand(`node "${NG_CLI_PATH}" build --project ui-shared`);
 
   // 3. Build each application project in production configuration
   for (const proj of PROJECTS) {
     if (proj.type === 'application') {
-      runCommand(`ng build ${proj.name} --configuration production`);
+      runCommand(`node "${NG_CLI_PATH}" build ${proj.name} --configuration production`);
     }
   }
 

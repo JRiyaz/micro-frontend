@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Electronics Beta 7",
       "category": "Electronics",
       "price": 2145,
@@ -11,7 +11,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Industrial Gamma 14",
       "category": "Industrial",
       "price": 4162,
@@ -21,7 +21,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Raw Materials Delta 21",
       "category": "Raw Materials",
       "price": 3059,
@@ -31,7 +31,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Raw Materials Sigma 28",
       "category": "Raw Materials",
       "price": 4402,
@@ -41,7 +41,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "5",
+      "id": 5,
       "name": "Tools Alpha 35",
       "category": "Tools",
       "price": 2042,
@@ -51,7 +51,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "6",
+      "id": 6,
       "name": "Electronics Beta 42",
       "category": "Electronics",
       "price": 1111,
@@ -61,7 +61,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "7",
+      "id": 7,
       "name": "Chemicals Gamma 49",
       "category": "Chemicals",
       "price": 488,
@@ -71,7 +71,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "8",
+      "id": 8,
       "name": "Safety Delta 56",
       "category": "Safety",
       "price": 3809,
@@ -81,7 +81,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "9",
+      "id": 9,
       "name": "Chemicals Sigma 63",
       "category": "Chemicals",
       "price": 3968,
@@ -91,7 +91,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "10",
+      "id": 10,
       "name": "Raw Materials Alpha 70",
       "category": "Raw Materials",
       "price": 2251,
@@ -102,7 +102,7 @@
       "discount": 15
     },
     {
-      "id": "11",
+      "id": 11,
       "name": "Electronics Beta 77",
       "category": "Electronics",
       "price": 2524,
@@ -112,7 +112,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "12",
+      "id": 12,
       "name": "Electronics Gamma 84",
       "category": "Electronics",
       "price": 1886,
@@ -122,7 +122,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "13",
+      "id": 13,
       "name": "Tools Delta 91",
       "category": "Tools",
       "price": 409,
@@ -132,7 +132,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "14",
+      "id": 14,
       "name": "Raw Materials Sigma 98",
       "category": "Raw Materials",
       "price": 2162,
@@ -142,7 +142,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "15",
+      "id": 15,
       "name": "Raw Materials Alpha 105",
       "category": "Raw Materials",
       "price": 2833,
@@ -152,7 +152,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "16",
+      "id": 16,
       "name": "Electronics Beta 112",
       "category": "Electronics",
       "price": 1285,
@@ -162,7 +162,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "17",
+      "id": 17,
       "name": "Chemicals Gamma 119",
       "category": "Chemicals",
       "price": 2917,
@@ -172,7 +172,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "18",
+      "id": 18,
       "name": "Safety Delta 126",
       "category": "Safety",
       "price": 2142,
@@ -182,7 +182,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "19",
+      "id": 19,
       "name": "Chemicals Sigma 133",
       "category": "Chemicals",
       "price": 1423,
@@ -192,7 +192,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "20",
+      "id": 20,
       "name": "Industrial Alpha 140",
       "category": "Industrial",
       "price": 4453,
@@ -203,7 +203,7 @@
       "discount": 15
     },
     {
-      "id": "21",
+      "id": 21,
       "name": "Chemicals Beta 147",
       "category": "Chemicals",
       "price": 516,
@@ -213,7 +213,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "22",
+      "id": 22,
       "name": "Industrial Gamma 154",
       "category": "Industrial",
       "price": 2287,
@@ -223,7 +223,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "23",
+      "id": 23,
       "name": "Safety Delta 161",
       "category": "Safety",
       "price": 3038,
@@ -233,7 +233,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "24",
+      "id": 24,
       "name": "Chemicals Sigma 168",
       "category": "Chemicals",
       "price": 3059,
@@ -243,7 +243,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "25",
+      "id": 25,
       "name": "Safety Alpha 175",
       "category": "Safety",
       "price": 1538,
@@ -253,7 +253,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "26",
+      "id": 26,
       "name": "Electronics Beta 182",
       "category": "Electronics",
       "price": 165,
@@ -263,7 +263,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "27",
+      "id": 27,
       "name": "Tools Gamma 189",
       "category": "Tools",
       "price": 2632,
@@ -273,7 +273,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "28",
+      "id": 28,
       "name": "Electronics Delta 196",
       "category": "Electronics",
       "price": 1021,
@@ -283,7 +283,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "29",
+      "id": 29,
       "name": "Electronics Sigma 203",
       "category": "Electronics",
       "price": 4697,
@@ -293,7 +293,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "30",
+      "id": 30,
       "name": "Chemicals Alpha 210",
       "category": "Chemicals",
       "price": 4090,
@@ -304,7 +304,7 @@
       "discount": 15
     },
     {
-      "id": "31",
+      "id": 31,
       "name": "Safety Beta 217",
       "category": "Safety",
       "price": 2664,
@@ -314,7 +314,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "32",
+      "id": 32,
       "name": "Industrial Gamma 224",
       "category": "Industrial",
       "price": 582,
@@ -324,7 +324,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "33",
+      "id": 33,
       "name": "Tools Delta 231",
       "category": "Tools",
       "price": 92,
@@ -334,7 +334,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "34",
+      "id": 34,
       "name": "Raw Materials Sigma 238",
       "category": "Raw Materials",
       "price": 1422,
@@ -344,7 +344,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "35",
+      "id": 35,
       "name": "Raw Materials Alpha 245",
       "category": "Raw Materials",
       "price": 4017,
@@ -354,7 +354,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "36",
+      "id": 36,
       "name": "Chemicals Beta 252",
       "category": "Chemicals",
       "price": 860,
@@ -364,7 +364,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "37",
+      "id": 37,
       "name": "Tools Gamma 259",
       "category": "Tools",
       "price": 4851,
@@ -374,7 +374,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "38",
+      "id": 38,
       "name": "Industrial Delta 266",
       "category": "Industrial",
       "price": 4822,
@@ -384,7 +384,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "39",
+      "id": 39,
       "name": "Raw Materials Sigma 273",
       "category": "Raw Materials",
       "price": 4838,
@@ -394,7 +394,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "40",
+      "id": 40,
       "name": "Electronics Alpha 280",
       "category": "Electronics",
       "price": 1855,
@@ -405,7 +405,7 @@
       "discount": 15
     },
     {
-      "id": "41",
+      "id": 41,
       "name": "Tools Beta 287",
       "category": "Tools",
       "price": 3264,
@@ -415,7 +415,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "42",
+      "id": 42,
       "name": "Industrial Gamma 294",
       "category": "Industrial",
       "price": 3163,
@@ -425,7 +425,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "43",
+      "id": 43,
       "name": "Electronics Delta 301",
       "category": "Electronics",
       "price": 3192,
@@ -435,7 +435,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "44",
+      "id": 44,
       "name": "Safety Sigma 308",
       "category": "Safety",
       "price": 3877,
@@ -445,7 +445,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "45",
+      "id": 45,
       "name": "Electronics Alpha 315",
       "category": "Electronics",
       "price": 3834,
@@ -455,7 +455,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "46",
+      "id": 46,
       "name": "Chemicals Beta 322",
       "category": "Chemicals",
       "price": 4537,
@@ -465,7 +465,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "47",
+      "id": 47,
       "name": "Chemicals Gamma 329",
       "category": "Chemicals",
       "price": 930,
@@ -475,7 +475,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "48",
+      "id": 48,
       "name": "Chemicals Delta 336",
       "category": "Chemicals",
       "price": 461,
@@ -485,7 +485,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "49",
+      "id": 49,
       "name": "Raw Materials Sigma 343",
       "category": "Raw Materials",
       "price": 1936,
@@ -495,7 +495,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "50",
+      "id": 50,
       "name": "Industrial Alpha 350",
       "category": "Industrial",
       "price": 47,
@@ -506,7 +506,7 @@
       "discount": 15
     },
     {
-      "id": "51",
+      "id": 51,
       "name": "Safety Beta 357",
       "category": "Safety",
       "price": 1879,
@@ -516,7 +516,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "52",
+      "id": 52,
       "name": "Chemicals Gamma 364",
       "category": "Chemicals",
       "price": 165,
@@ -526,7 +526,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "53",
+      "id": 53,
       "name": "Industrial Delta 371",
       "category": "Industrial",
       "price": 549,
@@ -536,7 +536,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "54",
+      "id": 54,
       "name": "Safety Sigma 378",
       "category": "Safety",
       "price": 4889,
@@ -546,7 +546,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "55",
+      "id": 55,
       "name": "Raw Materials Alpha 385",
       "category": "Raw Materials",
       "price": 2921,
@@ -556,7 +556,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "56",
+      "id": 56,
       "name": "Electronics Beta 392",
       "category": "Electronics",
       "price": 2224,
@@ -566,7 +566,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "57",
+      "id": 57,
       "name": "Chemicals Gamma 399",
       "category": "Chemicals",
       "price": 19,
@@ -576,7 +576,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "58",
+      "id": 58,
       "name": "Tools Delta 406",
       "category": "Tools",
       "price": 4584,
@@ -586,7 +586,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "59",
+      "id": 59,
       "name": "Industrial Sigma 413",
       "category": "Industrial",
       "price": 1540,
@@ -596,7 +596,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "60",
+      "id": 60,
       "name": "Industrial Alpha 420",
       "category": "Industrial",
       "price": 3785,
@@ -607,7 +607,7 @@
       "discount": 15
     },
     {
-      "id": "61",
+      "id": 61,
       "name": "Chemicals Beta 427",
       "category": "Chemicals",
       "price": 3117,
@@ -617,7 +617,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "62",
+      "id": 62,
       "name": "Electronics Gamma 434",
       "category": "Electronics",
       "price": 4699,
@@ -627,7 +627,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "63",
+      "id": 63,
       "name": "Safety Delta 441",
       "category": "Safety",
       "price": 1204,
@@ -637,7 +637,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "64",
+      "id": 64,
       "name": "Chemicals Sigma 448",
       "category": "Chemicals",
       "price": 1259,
@@ -647,7 +647,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "65",
+      "id": 65,
       "name": "Electronics Alpha 455",
       "category": "Electronics",
       "price": 791,
@@ -657,7 +657,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "66",
+      "id": 66,
       "name": "Tools Beta 462",
       "category": "Tools",
       "price": 2042,
@@ -667,7 +667,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "67",
+      "id": 67,
       "name": "Safety Gamma 469",
       "category": "Safety",
       "price": 3977,
@@ -677,7 +677,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "68",
+      "id": 68,
       "name": "Electronics Delta 476",
       "category": "Electronics",
       "price": 3680,
@@ -687,7 +687,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "69",
+      "id": 69,
       "name": "Industrial Sigma 483",
       "category": "Industrial",
       "price": 236,
@@ -697,7 +697,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "70",
+      "id": 70,
       "name": "Raw Materials Alpha 490",
       "category": "Raw Materials",
       "price": 4589,
@@ -708,7 +708,7 @@
       "discount": 15
     },
     {
-      "id": "71",
+      "id": 71,
       "name": "Electronics Beta 497",
       "category": "Electronics",
       "price": 3361,
@@ -718,7 +718,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "72",
+      "id": 72,
       "name": "Electronics Gamma 504",
       "category": "Electronics",
       "price": 2236,
@@ -728,7 +728,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "73",
+      "id": 73,
       "name": "Raw Materials Delta 511",
       "category": "Raw Materials",
       "price": 3186,
@@ -738,7 +738,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "74",
+      "id": 74,
       "name": "Safety Sigma 518",
       "category": "Safety",
       "price": 3050,
@@ -748,7 +748,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "75",
+      "id": 75,
       "name": "Tools Alpha 525",
       "category": "Tools",
       "price": 2169,
@@ -758,7 +758,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "76",
+      "id": 76,
       "name": "Tools Beta 532",
       "category": "Tools",
       "price": 1325,
@@ -768,7 +768,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "77",
+      "id": 77,
       "name": "Chemicals Gamma 539",
       "category": "Chemicals",
       "price": 3546,
@@ -778,7 +778,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "78",
+      "id": 78,
       "name": "Raw Materials Delta 546",
       "category": "Raw Materials",
       "price": 2650,
@@ -788,7 +788,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "79",
+      "id": 79,
       "name": "Industrial Sigma 553",
       "category": "Industrial",
       "price": 3640,
@@ -798,7 +798,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "80",
+      "id": 80,
       "name": "Electronics Alpha 560",
       "category": "Electronics",
       "price": 127,
@@ -809,7 +809,7 @@
       "discount": 15
     },
     {
-      "id": "81",
+      "id": 81,
       "name": "Safety Beta 567",
       "category": "Safety",
       "price": 1360,
@@ -819,7 +819,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "82",
+      "id": 82,
       "name": "Chemicals Gamma 574",
       "category": "Chemicals",
       "price": 4397,
@@ -829,7 +829,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "83",
+      "id": 83,
       "name": "Safety Delta 581",
       "category": "Safety",
       "price": 1574,
@@ -839,7 +839,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "84",
+      "id": 84,
       "name": "Industrial Sigma 588",
       "category": "Industrial",
       "price": 4589,
@@ -849,7 +849,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "85",
+      "id": 85,
       "name": "Electronics Alpha 595",
       "category": "Electronics",
       "price": 4881,
@@ -859,7 +859,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "86",
+      "id": 86,
       "name": "Electronics Beta 602",
       "category": "Electronics",
       "price": 4434,
@@ -869,7 +869,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "87",
+      "id": 87,
       "name": "Safety Gamma 609",
       "category": "Safety",
       "price": 2624,
@@ -879,7 +879,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "88",
+      "id": 88,
       "name": "Safety Delta 616",
       "category": "Safety",
       "price": 4804,
@@ -889,7 +889,7 @@
       "warehouseId": "WH-003"
     },
     {
-      "id": "89",
+      "id": 89,
       "name": "Chemicals Sigma 623",
       "category": "Chemicals",
       "price": 952,
@@ -899,7 +899,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "90",
+      "id": 90,
       "name": "Electronics Alpha 630",
       "category": "Electronics",
       "price": 379,
@@ -910,7 +910,7 @@
       "discount": 15
     },
     {
-      "id": "91",
+      "id": 91,
       "name": "Chemicals Beta 637",
       "category": "Chemicals",
       "price": 4031,
@@ -920,7 +920,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "92",
+      "id": 92,
       "name": "Chemicals Gamma 644",
       "category": "Chemicals",
       "price": 4613,
@@ -930,7 +930,7 @@
       "warehouseId": "WH-005"
     },
     {
-      "id": "93",
+      "id": 93,
       "name": "Tools Delta 651",
       "category": "Tools",
       "price": 4208,
@@ -940,7 +940,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "94",
+      "id": 94,
       "name": "Raw Materials Sigma 658",
       "category": "Raw Materials",
       "price": 807,
@@ -950,7 +950,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "95",
+      "id": 95,
       "name": "Safety Alpha 665",
       "category": "Safety",
       "price": 912,
@@ -960,7 +960,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "96",
+      "id": 96,
       "name": "Safety Beta 672",
       "category": "Safety",
       "price": 656,
@@ -970,7 +970,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "97",
+      "id": 97,
       "name": "Tools Gamma 679",
       "category": "Tools",
       "price": 1506,
@@ -980,7 +980,7 @@
       "warehouseId": "WH-002"
     },
     {
-      "id": "98",
+      "id": 98,
       "name": "Raw Materials Delta 686",
       "category": "Raw Materials",
       "price": 4233,
@@ -990,7 +990,7 @@
       "warehouseId": "WH-001"
     },
     {
-      "id": "99",
+      "id": 99,
       "name": "Chemicals Sigma 693",
       "category": "Chemicals",
       "price": 4661,
@@ -1000,7 +1000,7 @@
       "warehouseId": "WH-004"
     },
     {
-      "id": "100",
+      "id": 100,
       "name": "Tools Alpha 700",
       "category": "Tools",
       "price": 1633,
@@ -1758,7 +1758,7 @@
           "price": 860
         },
         {
-          "productId": "9",
+          "productId": 9,
           "name": "Chemicals Sigma 63",
           "qty": 1,
           "price": 3968
@@ -1776,13 +1776,13 @@
       "date": "2026-05-24",
       "items": [
         {
-          "productId": "1",
+          "productId": 1,
           "name": "Electronics Beta 7",
           "qty": 2,
           "price": 2145
         },
         {
-          "productId": "2",
+          "productId": 2,
           "name": "Industrial Gamma 14",
           "qty": 1,
           "price": 4162
@@ -1790,6 +1790,100 @@
       ],
       "totalAmount": 8452,
       "amount": 8452
+    },
+    {
+      "id": "ORD-6767",
+      "customer": "JRiyaz",
+      "customerName": "JRiyaz",
+      "status": "Pending",
+      "priority": false,
+      "date": "2026-05-24",
+      "items": [
+        {
+          "productId": 12,
+          "name": "Electronics Gamma 84",
+          "qty": 106,
+          "price": 1886
+        }
+      ],
+      "totalAmount": 199916,
+      "amount": 199916
+    },
+    {
+      "id": "ORD-2456",
+      "customer": "JRiyaz",
+      "customerName": "JRiyaz",
+      "status": "Pending",
+      "priority": false,
+      "date": "2026-05-24",
+      "items": [
+        {
+          "productId": 77,
+          "name": "Chemicals Gamma 539",
+          "qty": 13,
+          "price": 3546
+        }
+      ],
+      "totalAmount": 46098,
+      "amount": 46098,
+      "createdBy": "Admin"
+    },
+    {
+      "id": "ORD-5432",
+      "customer": "JRiyaz",
+      "customerName": "JRiyaz",
+      "status": "Pending",
+      "priority": false,
+      "date": "2026-05-24",
+      "items": [
+        {
+          "productId": 77,
+          "name": "Chemicals Gamma 539",
+          "qty": 13,
+          "price": 3546
+        }
+      ],
+      "totalAmount": 46098,
+      "amount": 46098,
+      "createdBy": "Admin"
+    },
+    {
+      "id": "ORD-6335",
+      "customer": "JRiyaz",
+      "customerName": "JRiyaz",
+      "status": "Pending",
+      "priority": false,
+      "date": "2026-05-24",
+      "items": [
+        {
+          "productId": 77,
+          "name": "Chemicals Gamma 539",
+          "qty": 13,
+          "price": 3546
+        }
+      ],
+      "totalAmount": 46098,
+      "amount": 46098,
+      "createdBy": "Admin"
+    },
+    {
+      "id": "ORD-8956",
+      "customer": "JRiyaz",
+      "customerName": "JRiyaz",
+      "status": "Completed",
+      "priority": false,
+      "date": "2026-05-24",
+      "items": [
+        {
+          "productId": 60,
+          "name": "Industrial Alpha 420",
+          "qty": 10,
+          "price": 3785
+        }
+      ],
+      "totalAmount": 37850,
+      "amount": 37850,
+      "createdBy": "Admin"
     }
   ],
   "customers": [
@@ -1803,8 +1897,8 @@
       "status": "Active",
       "joinDate": "2023-01-10",
       "segment": "Standard",
-      "orders": 0,
-      "spend": 0
+      "orders": 4,
+      "spend": 46259
     },
     {
       "id": "CUST-002",
@@ -1815,8 +1909,8 @@
       "phone": "+1 (555) 101-2001",
       "status": "Active",
       "joinDate": "2023-01-11",
-      "orders": 19,
-      "spend": 64118
+      "orders": 6,
+      "spend": 56907
     },
     {
       "id": "CUST-003",
@@ -1827,8 +1921,8 @@
       "phone": "+1 (555) 102-2002",
       "status": "Active",
       "joinDate": "2023-01-12",
-      "orders": 3,
-      "spend": 76789
+      "orders": 4,
+      "spend": 58659
     },
     {
       "id": "CUST-004",
@@ -1839,8 +1933,8 @@
       "phone": "+1 (555) 103-2003",
       "status": "Active",
       "joinDate": "2023-01-13",
-      "orders": 18,
-      "spend": 96414
+      "orders": 1,
+      "spend": 12202
     },
     {
       "id": "CUST-005",
@@ -1851,8 +1945,8 @@
       "phone": "+1 (555) 104-2004",
       "status": "Active",
       "joinDate": "2023-01-14",
-      "orders": 3,
-      "spend": 65504
+      "orders": 5,
+      "spend": 39333
     },
     {
       "id": "CUST-006",
@@ -1863,8 +1957,8 @@
       "phone": "+1 (555) 105-2005",
       "status": "Active",
       "joinDate": "2023-01-15",
-      "orders": 12,
-      "spend": 11052
+      "orders": 5,
+      "spend": 49867
     },
     {
       "id": "CUST-007",
@@ -1875,8 +1969,8 @@
       "phone": "+1 (555) 106-2006",
       "status": "Active",
       "joinDate": "2023-01-16",
-      "orders": 11,
-      "spend": 21711
+      "orders": 1,
+      "spend": 4793
     },
     {
       "id": "CUST-008",
@@ -1888,8 +1982,8 @@
       "status": "Active",
       "joinDate": "2023-01-17",
       "segment": "Standard",
-      "orders": 0,
-      "spend": 0
+      "orders": 5,
+      "spend": 76280
     },
     {
       "id": "CUST-9625",
@@ -1901,8 +1995,8 @@
       "status": "Active",
       "joinDate": "2026-05-23",
       "segment": "Standard",
-      "orders": 0,
-      "spend": 0
+      "orders": 1,
+      "spend": 199916
     }
   ],
   "suppliers": [
@@ -2115,16 +2209,38 @@
       "date": "2026-05-24T11:56:33.765Z",
       "items": [
         {
-          "productId": "1",
+          "productId": 1,
           "name": "Electronics Beta 7",
           "qty": 60,
           "price": 1501.5
         },
         {
-          "productId": "3",
+          "productId": 3,
           "name": "Raw Materials Delta 21",
           "qty": 60,
           "price": 2141.2999999999997
+        }
+      ]
+    },
+    {
+      "id": "PO-61377",
+      "supplierId": "SUP-002",
+      "supplierName": "Industrial Steel Co",
+      "status": "Ordered",
+      "amount": 147070,
+      "date": "2026-05-24T13:25:15.398Z",
+      "items": [
+        {
+          "productId": 25,
+          "name": "Safety Alpha 175",
+          "qty": 50,
+          "price": 1076.6
+        },
+        {
+          "productId": 31,
+          "name": "Safety Beta 217",
+          "qty": 50,
+          "price": 1864.8
         }
       ]
     }

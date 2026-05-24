@@ -893,3 +893,15 @@
 :root[data-theme="glass"] main {
   background: transparent;
 }
+
+/* Hide Chrome, Safari, Edge, Opera spin buttons globally */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide Firefox spin buttons globally */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
