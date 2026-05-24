@@ -15,7 +15,7 @@
     "run:all": "concurrently -k \"pnpm:start:*\"",
     "desktop:tauri": "tauri dev",
     "desktop:tauri:build-nonassets": "node build-nonassets.js",
-    "desktop:tauri:build-bundled": "node bundle-desktop.js && tauri build --features bundled-assets",
+    "desktop:tauri:build-bundled": "node bundle-desktop.js && tauri build --features bundled_assets",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

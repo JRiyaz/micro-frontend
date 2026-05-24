@@ -1766,6 +1766,30 @@
       ],
       "totalAmount": 16326,
       "amount": 16326
+    },
+    {
+      "id": "ORD-6792",
+      "customer": "Global Logistics Co",
+      "customerName": "Global Logistics Co",
+      "status": "Pending",
+      "priority": true,
+      "date": "2026-05-24",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Electronics Beta 7",
+          "qty": 2,
+          "price": 2145
+        },
+        {
+          "productId": "2",
+          "name": "Industrial Gamma 14",
+          "qty": 1,
+          "price": 4162
+        }
+      ],
+      "totalAmount": 8452,
+      "amount": 8452
     }
   ],
   "customers": [
@@ -2079,6 +2103,28 @@
           "name": "Product 10",
           "qty": 50,
           "price": 500
+        }
+      ]
+    },
+    {
+      "id": "PO-46434",
+      "supplierId": "SUP-001",
+      "supplierName": "TechNova Solutions",
+      "status": "Ordered",
+      "amount": 218568,
+      "date": "2026-05-24T11:56:33.765Z",
+      "items": [
+        {
+          "productId": "1",
+          "name": "Electronics Beta 7",
+          "qty": 60,
+          "price": 1501.5
+        },
+        {
+          "productId": "3",
+          "name": "Raw Materials Delta 21",
+          "qty": 60,
+          "price": 2141.2999999999997
         }
       ]
     }

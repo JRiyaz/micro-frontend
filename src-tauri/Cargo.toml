@@ -26,4 +26,4 @@ tauri-plugin-log = "2"
 
 [features]
 default = []
-bundled-assets = []
+bundled_assets = []

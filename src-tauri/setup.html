@@ -238,6 +238,35 @@
         return;
       }
 
+      // Visual feedback
+      const saveBtn = document.getElementById('save-btn');
+      const originalText = saveBtn.innerText;
+      saveBtn.innerText = "Verifying connection...";
+      saveBtn.disabled = true;
+
+      // Asynchronous Connection Validation
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500);
+
+        // Fetch to check server connectivity.
+        // We use mode: 'no-cors' so even if CORS is not yet configured on the target API,
+        // a successful HTTP handshake proves the server is online and reachable!
+        await fetch(backendVal, { 
+          method: 'GET', 
+          signal: controller.signal,
+          mode: 'no-cors',
+          cache: 'no-store'
+        });
+        
+        clearTimeout(timeoutId);
+      } catch (err) {
+        saveBtn.innerText = originalText;
+        saveBtn.disabled = false;
+        showError("Connection failed! Unable to reach backend API. Please make sure your server is running and the URL is correct.");
+        return;
+      }
+
       try {
         const invoke = window.__TAURI__.core.invoke;
         await invoke('save_app_config', { 
@@ -245,6 +274,8 @@
           backendUrl: backendVal 
         });
       } catch (err) {
+        saveBtn.innerText = originalText;
+        saveBtn.disabled = false;
         showError("Failed to save configuration: " + err);
       }
     });

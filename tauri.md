@@ -82,7 +82,7 @@ To package the application into a standalone setup wizard (`.exe` or `.msi`) for
   1. Executes `node bundle-desktop.js`.
   2. Compiles `ui-shared`, then compiles `shell`, `user-service`, `store-service`, and `inventory-hub`.
   3. Merges all build files recursively into `/dist/desktop-bundle` and copies `setup.html` into it.
-  4. Runs `tauri build --features bundled-assets` to bundle all assets (~25MB installer).
+  4. Runs `tauri build --features bundled_assets` to bundle all assets (~25MB installer).
 
 ---
 
@@ -117,8 +117,47 @@ If you need to view or edit the configurations manually on disk:
 3. Open `config.json` with a text editor.
 4. Modify the values directly and save:
    ```json
-   {
-     "frontend_url": "https://app.inventory.com",
-     "backend_url": "https://api.inventory.com"
-   }
+    {
+      "frontend_url": "https://app.inventory.com",
+      "backend_url": "https://api.inventory.com"
+    }
+    ```
+
+---
+
+## 7. Cross-Platform Builds & macOS (DMG)
+
+Because packaging a macOS application bundle (`.app`) and disk image (`.dmg`) requires native Apple developer tools and filesystem utilities, **you must compile macOS applications on a macOS operating system**. 
+
+To make this seamless, we support two methods for generating macOS installers:
+
+### Method A: Local Compilation (On a Mac)
+If you or a colleague have a Mac computer, you can compile the `.dmg` installer locally:
+1. Clone the repository and checkout the `desktop-tauri` branch.
+2. Install the Rust compiler on the Mac:
+   ```sh
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
    ```
+3. Run the standalone production build script:
+   ```sh
+   pnpm install
+   pnpm desktop:tauri:build-bundled
+   ```
+4. **Where to find the DMG installer:**
+   Tauri will automatically generate the Disk Image inside:
+   `src-tauri/target/release/bundle/dmg/inventory-desktop_0.1.0_x64.dmg` *(or `_aarch64.dmg` on Apple Silicon M1/M2/M3 Macs).*
+
+### Method B: Cloud Compilation (Automated CI/CD via GitHub)
+We have configured a professional **GitHub Actions workflow** under [`.github/workflows/release.yml`](file:///c:/Users/Riyaz%20J/work/micro-frontend/.github/workflows/release.yml) to compile installers in the cloud.
+
+To trigger the automated cloud build:
+1. Commit and push all your desktop changes to your GitHub repository.
+2. Tag a release version using Git (e.g. `v0.1.0`):
+   ```sh
+   git tag v0.1.0
+   git push origin v0.1.0
+   ```
+3. **What happens behind the scenes:**
+   * GitHub will spin up a **Windows runner** to build your `.exe`/`.msi` installers.
+   * GitHub will spin up a **macOS runner** to compile your native **`.dmg`** installer.
+   * Once finished, a **Release Draft** is automatically created on your GitHub repository page containing all installers, ready to publish to your users!

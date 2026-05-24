@@ -92,6 +92,28 @@ function main() {
   console.log(`Copying setup UI: ${setupSrc} -> ${setupDest}`);
   fs.copyFileSync(setupSrc, setupDest);
 
+  // 6. Rewrite federation.manifest.json for local relative asset resolution in production
+  const manifestPath = path.join(TARGET_DIR, 'federation.manifest.json');
+  if (fs.existsSync(manifestPath)) {
+    console.log(`Rewriting manifest paths for production standalone: ${manifestPath}`);
+    try {
+      const manifestContent = fs.readFileSync(manifestPath, 'utf8');
+      const manifest = JSON.parse(manifestContent);
+      
+      // Convert absolute dev ports to local relative paths
+      manifest['user-service'] = '/user-service/remoteEntry.json';
+      manifest['inventory-hub'] = '/inventory-hub/remoteEntry.json';
+      manifest['store-service'] = '/store-service/remoteEntry.json';
+      
+      fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
+      console.log("Manifest successfully updated to relative paths for local bundling!");
+    } catch (err) {
+      console.error("Failed to parse or rewrite federation.manifest.json:", err);
+    }
+  } else {
+    console.warn(`[Warning]: federation.manifest.json not found at: ${manifestPath}`);
+  }
+
   const duration = ((Date.now() - start) / 1000).toFixed(2);
   console.log(`\n========================================`);
   console.log(`Desktop Bundle created successfully under: ${TARGET_DIR}`);
