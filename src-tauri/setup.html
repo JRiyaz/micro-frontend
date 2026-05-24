@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setup - Inventory Hub</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --primary: #8b5cf6;
+      --primary-hover: #7c3aed;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.08);
+      --input-bg: rgba(255, 255, 255, 0.04);
+      --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.12) 0px, transparent 50%);
+    }
+
+    .setup-container {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      width: 480px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group.hidden {
+      display: none;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .helper-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s ease, filter 0.2s ease;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+      margin-top: 10px;
+    }
+
+    button:hover {
+      filter: brightness(1.1);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .error-banner {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      color: #f87171;
+      font-size: 13px;
+      margin-bottom: 20px;
+      display: none;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="setup-container">
+    <div class="header">
+      <h1>Desktop Server Setup</h1>
+      <p id="sub-description">Configure your addresses to connect the client</p>
+    </div>
+
+    <div class="error-banner" id="error-banner"></div>
+
+    <form id="setup-form">
+      <div class="form-group" id="frontend-group">
+        <label for="frontend-url">Frontend Address (Web URL)</label>
+        <input type="url" id="frontend-url" placeholder="https://app.inventory.com" required>
+        <div class="helper-text">The address where your host shell web application is deployed.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="backend-url">Backend Address (API Server)</label>
+        <input type="url" id="backend-url" placeholder="https://api.inventory.com" required>
+        <div class="helper-text">The base API server endpoint for your data.</div>
+      </div>
+
+      <button type="submit" id="save-btn">Save Configurations</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('setup-form');
+    const frontendGroup = document.getElementById('frontend-group');
+    const frontendInput = document.getElementById('frontend-url');
+    const backendInput = document.getElementById('backend-url');
+    const errorBanner = document.getElementById('error-banner');
+    const subDescription = document.getElementById('sub-description');
+    
+    let isBundledAssets = false;
+
+    // Check configuration and active compile flavour on mount
+    async function loadConfig() {
+      try {
+        const invoke = window.__TAURI__.core.invoke;
+        const appInfo = await invoke('get_app_config');
+        
+        isBundledAssets = appInfo.bundled_assets;
+
+        if (isBundledAssets) {
+          // If assets are bundled inside, hide the frontend URL config input
+          frontendGroup.classList.add('hidden');
+          frontendInput.removeAttribute('required');
+          subDescription.innerText = "Provide your production backend API address";
+        }
+
+        // If there's an existing configuration, pre-fill the form inputs
+        if (appInfo.config) {
+          if (!isBundledAssets && appInfo.config.frontend_url) {
+            frontendInput.value = appInfo.config.frontend_url;
+          }
+          backendInput.value = appInfo.config.backend_url;
+        }
+      } catch (err) {
+        showError("Failed to connect to native shell: " + err);
+      }
+    }
+
+    function showError(msg) {
+      errorBanner.innerText = msg;
+      errorBanner.style.display = 'block';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBanner.style.display = 'none';
+
+      const frontendVal = isBundledAssets ? null : frontendInput.value.trim();
+      const backendVal = backendInput.value.trim();
+
+      // Basic validation
+      if (!isBundledAssets && !frontendVal) {
+        showError("Please provide a valid Frontend URL");
+        return;
+      }
+      if (!backendVal) {
+        showError("Please provide a valid Backend URL");
+        return;
+      }
+
+      try {
+        const invoke = window.__TAURI__.core.invoke;
+        await invoke('save_app_config', { 
+          frontendUrl: frontendVal, 
+          backendUrl: backendVal 
+        });
+      } catch (err) {
+        showError("Failed to save configuration: " + err);
+      }
+    });
+
+    // Run initialization
+    window.addEventListener('DOMContentLoaded', loadConfig);
+  </script>
+</body>
+</html>
