@@ -136,8 +136,34 @@ To start all three Python API services and the API Gateway concurrently (Ports 3
 pnpm start:backends
 ```
 
-### D. Start a Specific Service Individually
-*   **API Gateway** (Port 3000): `pnpm start:py-gateway`
-*   **User API** (Port 8001): `pnpm start:py-user`
-*   **Inventory API** (Port 8002): `pnpm start:py-inventory`
-*   **Store API** (Port 8003): `pnpm start:py-store`
+---
+
+## 5. Premium Integrated Enhancements (UX, Security & Logistics)
+
+We have fully implemented and integrated the following high-density enhancements across both the Angular microservices frontend layer and the Python microservice backend layers:
+
+### A. Async Backend Form Validators (Category 1.A)
+*   **Directives**: Engineered the debounced `SkuValidatorDirective` and `UsernameValidatorDirective` inside the shared UI workspace.
+*   **Debounce Guard**: Standardized on a `timer(300)` and `switchMap` RxJS flow to prevent browser keyboard events from flooding backend databases.
+*   **Username Validation**: Intercepts user registrations in the decoupeld Auth MFE to call the Gateway (`/auth/check-username?username=...`), showing reactive visual states and `Username is already taken` errors.
+*   **SKU Validation**: Intercepts product catalog drafts in the Inventory MFE to call `/products/check-sku/exists?sku=...`, preventing duplicated SKU registrations before the catalog form submission.
+
+### B. Fuzzy-Search Autocomplete in Order Checkouts (Category 1.B)
+*   **Component**: Built `AutocompleteComponent` in the shared library, implementing high-performance local fuzzy string queries that filter products concurrently by SKU and product name.
+*   **Frosted Theme-Aware Dropdown**: Adapts seamlessly to Emerald, Rose, Obsidian, and Glass styling themes. Formatted with `backdrop-filter: blur(24px) saturate(180%)`, standard glass borders, and full dark-mode compatibility (`dark:bg-dark-elevated`, `dark:border-white/10`).
+*   **Summary Quick-Add**: Nested directly inside the Checkout summary column, enabling customers to search and quick-add promo items and products directly to their carts.
+
+### C. Live Chat Connection Skeletons & Status Dots (Category 1.C)
+*   **Pulsing Skeletons**: Handled `chatService.isConnecting` signal inside `ChatViewComponent`, showing a collection of pulsing, frosted glassmorphic skeletons during the WebSocket handshake.
+*   **Reactive Status Badges**: Configured a dynamic state indicator on the header avatar:
+    *   `bg-amber-400 animate-pulse` when establishing connection.
+    *   `bg-emerald-400` when live WebSocket secure chat is active on `ws://localhost:8001/api/v1/chat/ws`.
+    *   `bg-rose-400` when offline, falling back to local simulated mock chat channels.
+
+### D. HttpOnly secure cookies & IP Banning (Category 3.A/B)
+*   **XSS Protection (OWASP Guard)**: Intercepts successful authentications inside the API Gateway, strips tokens from public JSON payloads, and sets them as `HttpOnly`, `SameSite=Strict`, `/` session cookies.
+*   **IP Banning Gatekeeper**: If any client IP triggers more than `BAN_THRESHOLD=5` rate limit HTTP 429 violations, the gateway blocklists the IP address, dropping subsequent attempts immediately with `403 Forbidden` for a duration of 15 minutes.
+
+### E. Auto-Replenishment & Embedded Invoice Receipts (Category 4.A/B)
+*   **Auto-Draft POs**: The Inventory Service scans stock levels, aggregates shortages, groups them by primary supplier, drafts new wholesale purchase orders, and issues alert flags.
+*   **Direct Iframe Receipts**: Captured checkout payments launch asynchronous background SMTP outboxes to dispatch receipts. The Checkout success page automatically sanitizes and embeds the live HTML invoice in a frosted `<iframe src="http://localhost:8003/api/v1/orders/{orderId}/invoice">` element for immediate customer print layout!

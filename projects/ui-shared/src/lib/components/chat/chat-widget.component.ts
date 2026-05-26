@@ -27,7 +27,14 @@ import { ChatViewComponent } from './chat-view.component';
                   isCustomer() ? 'S' : 'C'
                 }}</span>
                 <div
-                  class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-primary rounded-full"
+                  [class]="
+                    chatService.isConnecting()
+                      ? 'bg-amber-400 animate-pulse'
+                      : chatService.isSocketActive()
+                      ? 'bg-emerald-400'
+                      : 'bg-rose-400'
+                  "
+                  class="absolute bottom-0 right-0 w-2.5 h-2.5 border-2 border-primary rounded-full"
                 ></div>
               </div>
               <div>
@@ -35,9 +42,15 @@ import { ChatViewComponent } from './chat-view.component';
                   {{ isCustomer() ? 'Support Team' : 'Customer Support' }}
                 </h3>
                 <p
-                  class="text-[10px] opacity-80 font-bold uppercase tracking-widest"
+                  class="text-[9px] opacity-90 font-bold uppercase tracking-widest"
                 >
-                  Always Active
+                  {{
+                    chatService.isConnecting()
+                      ? 'Connecting...'
+                      : chatService.isSocketActive()
+                      ? 'Live Support (Secure)'
+                      : 'Simulated Local Support'
+                  }}
                 </p>
               </div>
             </div>

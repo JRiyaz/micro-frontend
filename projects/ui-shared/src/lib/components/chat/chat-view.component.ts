@@ -15,7 +15,23 @@ import { ChatService } from '../../services/chat.service';
         [class]="isCompact() ? 'p-4 space-y-3' : 'p-6 space-y-6'"
         class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50/30 dark:bg-black/10"
       >
-        @if (chatService.allMessages().length === 0) {
+        @if (chatService.isConnecting()) {
+          <!-- Premium Pulsing Chat Loading Skeletons -->
+          <div class="space-y-4 animate-pulse">
+            <div class="flex items-end gap-2">
+              <div class="w-8 h-8 rounded-lg bg-slate-200 dark:bg-white/10"></div>
+              <div class="bg-slate-200/50 dark:bg-white/5 h-10 w-2/3 rounded-xl rounded-tl-none border border-slate-200/20 dark:border-white/5"></div>
+            </div>
+            <div class="flex items-end gap-2 flex-row-reverse">
+              <div class="w-8 h-8 rounded-lg bg-slate-200 dark:bg-white/10"></div>
+              <div class="bg-primary/20 h-12 w-1/2 rounded-xl rounded-tr-none"></div>
+            </div>
+            <div class="flex items-end gap-2">
+              <div class="w-8 h-8 rounded-lg bg-slate-200 dark:bg-white/10"></div>
+              <div class="bg-slate-200/50 dark:bg-white/5 h-8 w-3/4 rounded-xl rounded-tl-none border border-slate-200/20 dark:border-white/5"></div>
+            </div>
+          </div>
+        } @else if (chatService.allMessages().length === 0) {
           <div
             class="flex flex-col items-center justify-center h-full text-center p-8 animate-fade-in"
           >

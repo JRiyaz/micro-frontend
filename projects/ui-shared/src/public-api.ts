@@ -4,6 +4,7 @@
 
 export * from './lib/components/chat/chat-view.component';
 export * from './lib/components/chat/chat-widget.component';
+export * from './lib/components/autocomplete/autocomplete.component';
 // Shared components
 export * from './lib/components/dashboard-layout/dashboard-layout.component';
 export * from './lib/components/detail-layout/detail-layout.component';
@@ -26,6 +27,8 @@ export * from './lib/components/topnav/topnav.component';
 export * from './lib/components/typewriter/typewriter.component';
 export * from './lib/components/ui-chart/ui-chart.component';
 export * from './lib/directives/form-validation.directive';
+export * from './lib/validators/sku-validator.directive';
+export * from './lib/validators/username-validator.directive';
 export * from './lib/http-interceptors/index';
 export * from './lib/models';
 export * from './lib/pipes/validation-error.pipe';
