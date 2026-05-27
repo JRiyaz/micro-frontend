@@ -82,6 +82,53 @@ async def gateway_security_border_middleware(request: Request, call_next):
 
     return await call_next(request)
 
+@app.get("/health", tags=["Health Aggregator"])
+async def health_aggregator():
+    """
+    Unified health probe aggregator query.
+    Pings all decoupled backend microservices concurrently and reports real-time status.
+    """
+    services = {
+        "user-service": "http://localhost:8001/health",
+        "inventory-hub": "http://localhost:8002/health",
+        "store-service": "http://localhost:8003/health"
+    }
+    
+    results = {}
+    overall_healthy = True
+    
+    for name, url in services.items():
+        try:
+            resp = await async_client.get(url, timeout=1.5)
+            if resp.status_code == 200:
+                results[name] = resp.json()
+                results[name]["online"] = True
+            else:
+                results[name] = {"status": "unhealthy", "code": resp.status_code, "online": False}
+                overall_healthy = False
+        except Exception as e:
+            results[name] = {"status": "offline", "error": str(e), "online": False}
+            overall_healthy = False
+            
+    results["api-gateway"] = {
+        "status": "healthy",
+        "online": True,
+        "service": "api-gateway",
+        "timestamp": time.time()
+    }
+    results["frontend-shell"] = {
+        "status": "healthy",
+        "online": True,
+        "service": "shell-mfe",
+        "port": 4200
+    }
+    
+    return {
+        "status": "healthy" if overall_healthy else "degraded",
+        "timestamp": time.time(),
+        "services": results
+    }
+
 @app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "DELETE"])
 async def gateway_proxy(path: str, request: Request):
     """
@@ -157,7 +204,11 @@ async def gateway_proxy(path: str, request: Request):
                     # Strip access token from JSON body so client-side JavaScript cannot access it!
                     clean_payload = {k: v for k, v in payload.items() if k != "access_token"}
                     clean_content = json.dumps(clean_payload).encode("utf-8")
-                    
+
+                    # Remove downstream content-length headers as we modified the payload length
+                    resp_headers.pop("content-length", None)
+                    resp_headers.pop("Content-Length", None)
+
                     response = Response(
                         content=clean_content,
                         status_code=resp.status_code,

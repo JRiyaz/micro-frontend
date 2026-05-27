@@ -27,6 +27,7 @@ export * from './lib/components/topnav/topnav.component';
 export * from './lib/components/typewriter/typewriter.component';
 export * from './lib/components/ui-chart/ui-chart.component';
 export * from './lib/directives/form-validation.directive';
+export * from './lib/directives/has-permission.directive';
 export * from './lib/validators/sku-validator.directive';
 export * from './lib/validators/username-validator.directive';
 export * from './lib/http-interceptors/index';
@@ -44,7 +45,10 @@ export * from './lib/services/search.service';
 export * from './lib/services/theme.service';
 export * from './lib/services/display-image.service';
 export * from './lib/services/workspace.service';
+export * from './lib/services/user-settings.service';
 export * from './lib/ui-shared.component';
 export * from './lib/ui-shared.service';
 export * from './lib/utils/drag-drop';
 export * from './lib/utils/safe-html.pipe';
+export * from './lib/guards/auth.guard';
+

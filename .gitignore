@@ -5,7 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
-
+__pycache__/
+inventory/
 # Node
 /node_modules
 npm-debug.log

@@ -45,6 +45,7 @@ export interface Order {
 
 export interface Customer {
   id: string;
+  avatarUrl?: string;
   name: string;
   email: string;
   company: string;

@@ -1,28 +1,51 @@
 import { computed, Injectable, signal } from '@angular/core';
 
 export interface UserProfile {
+  id?: number;
   name: string;
   email: string;
+  username?: string;
   roles: string[];
   avatarUrl: string;
 }
+
+export interface UserPermissions {
+  can_read: boolean;
+  can_write: boolean;
+  can_update: boolean;
+  can_delete: boolean;
+}
+
+/** Default permissions: admins get full access, others get read-only */
+const ADMIN_PERMISSIONS: UserPermissions = {
+  can_read: true,
+  can_write: true,
+  can_update: true,
+  can_delete: true,
+};
+
+const DEFAULT_PERMISSIONS: UserPermissions = {
+  can_read: true,
+  can_write: false,
+  can_update: false,
+  can_delete: false,
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthStateService {
-  private readonly _isLoggedIn = signal(true);
-  private readonly _availableRoles = signal<string[]>(['Admin', 'User']);
-  private readonly _user = signal<UserProfile | null>({
-    name: 'Riyaz Khan',
-    email: 'riyaz@company.com',
-    roles: ['Admin'],
-    avatarUrl: '',
-  });
+  private readonly _isLoggedIn = signal(false);
+  private readonly _availableRoles = signal<string[]>(['Admin', 'Agent', 'Customer']);
+  private readonly _user = signal<UserProfile | null>(null);
+
+  /** RBAC permission flags loaded from backend (or defaults) */
+  private readonly _permissions = signal<UserPermissions>(ADMIN_PERMISSIONS);
 
   readonly isLoggedIn = this._isLoggedIn.asReadonly();
   readonly user = this._user.asReadonly();
   readonly availableRoles = this._availableRoles.asReadonly();
+  readonly permissions = this._permissions.asReadonly();
 
   /** Current roles assigned to the user */
   readonly userRoles = computed(() => this._user()?.roles || []);
@@ -69,6 +92,27 @@ export class AuthStateService {
 
   hasRole(role: string): boolean {
     return (this._user()?.roles || []).includes(role);
+  }
+
+  /** Update RBAC permission flags (called after backend load) */
+  updatePermissions(perms: UserPermissions): void {
+    this._permissions.set(perms);
+  }
+
+  /** Set user profile (used after real login response) */
+  setUser(user: UserProfile): void {
+    this._user.set(user);
+    // Admins get full permissions by default until backend load
+    if (user.roles.includes('Admin')) {
+      this._permissions.set(ADMIN_PERMISSIONS);
+    } else {
+      this._permissions.set(DEFAULT_PERMISSIONS);
+    }
+  }
+
+  /** Set the full list of available system roles */
+  setAvailableRoles(roles: string[]): void {
+    this._availableRoles.set(roles);
   }
   readonly userInitials = computed(() => {
     const u = this._user();

@@ -11,5 +11,11 @@
   "terminal.integrated.commandsToSkipShell": [
     "workbench.action.terminal.copySelection",
     "workbench.action.terminal.paste"
-  ]
+  ],
+  "files.exclude": {
+    "**/__pycache__": true
+  },
+  "search.exclude": {
+    "**/__pycache__": true
+  }
 }
